@@ -1,0 +1,144 @@
+# Max Payne 3, disc 1 (0.0.0.6, Media ID 1DFE6863) with the user's Title Update 6 (default.xexp -> 0.0.6.6): ReXGlue
+# v0.10.0 codegen configuration for the PS4 port (scripts/build-mp3.sh codegen passes it as CODEGEN_CONFIG).
+#
+# mp3-nx's codegen/mp3_config.toml is for another TU6 revision (0.0.9.6): its addresses do not fit this executable.
+# The analysis settings are the same; the function entries are found again in this image.
+
+[analysis]
+max_jump_extension = 65536
+data_region_threshold = 16
+large_function_threshold = 1048576
+
+[functions]
+
+# Targets of branches the codegen left as traps that tools/patch_branch_traps.py cannot place (first codegen of 0.0.6.6): function entries, so the branches become tail calls.
+"0x821F4CE8" = {}   # from 0x827516D8
+"0x8220D60C" = {}   # from 0x8220D8D4
+"0x826830C8" = {}   # from 0x8273A660
+"0x829070A8" = {}   # from 0x824AAEA0
+"0x82A6BB10" = {}   # from 0x8289F93C
+"0x82CB105C" = {}   # from 0x82CB112C
+"0x82CE4E30" = {}   # from 0x82CE4EC0
+"0x82D7921C" = {}   # from 0x82D7930C
+"0x82DADB64" = {}   # from 0x82DADD3C
+"0x82DF5C8C" = {}   # from 0x82DF5ED8, 0x82DF5EE4, 0x82DF5EF0
+"0x82E24C68" = {}   # from 0x830D62A0, 0x830D62B0, 0x830D62C0, 0x830D62E0
+"0x82E66948" = {}   # from 0x82E63348
+"0x82E66958" = {}   # from 0x82E64268
+"0x82E934B8" = {}   # from 0x82E93548
+"0x82FBAD7C" = {}   # from 0x82FBAFF8
+"0x82FD6CE8" = {}   # from 0x82FD7D90
+"0x82FD76F0" = {}   # from 0x82FD77EC
+"0x83010B4C" = {}   # from 0x83010B90
+"0x8303E7CC" = {}   # from 0x8303EF58
+"0x83080044" = {}   # from 0x830801B8
+"0x8308006C" = {}   # from 0x830801AC
+
+# Functions reached only through pointers that discovery missed (tools/scan_missed_functions.py over the image: the
+# scans mp3-nx made after its runs 3 and 14, done before the first run). Code addresses another function builds with
+# lis + addi/ori, and vtable thunks, each after a blr/bctr/b where no function started.
+"0x82276058" = {}   # address built at 822928E8
+"0x822F2E08" = {}   # address built at 822F4870
+"0x824A0C28" = {}   # address built at 824A0F9C
+"0x825F5380" = {}   # address built at 82240914
+"0x82751338" = {}   # address built at 827524AC
+"0x82766680" = {}   # address built at 82769B94
+"0x8277CE78" = {}   # address built at 82780B8C
+"0x8277D2A0" = {}   # address built at 82781428
+"0x8279B6C0" = {}   # address built at 827A3370
+"0x827D2708" = {}   # address built at 827D6F64
+"0x827DE338" = {}   # address built at 827E3560
+"0x827DEEA8" = {}   # address built at 827E4EDC
+"0x827EBBB0" = {}   # address built at 827F3274
+"0x827ECC68" = {}   # address built at 827F4800
+"0x827ECCA0" = {}   # address built at 827F4880
+"0x827ECCC0" = {}   # address built at 827F4900
+"0x827ECCF0" = {}   # address built at 827F4A00
+"0x827ECD48" = {}   # address built at 827F4A80
+"0x827ECD88" = {}   # address built at 827F4B40
+"0x827FB2C8" = {}   # address built at 827FFA90
+"0x827FB2E0" = {}   # address built at 827FFACC
+"0x82B7FC38" = {}   # address built at 822928F0
+"0x82B7FC48" = {}   # address built at 82B8A454
+"0x82B7FC58" = {}   # address built at 822928F8
+"0x82C00268" = {}   # address built at 82C00E80
+"0x82CB8240" = {}   # address built at 82C8DC90
+"0x82E63280" = {}   # address built at 82E637E4
+"0x82E77B80" = {}   # address built at 82E78068
+"0x82EAC9C8" = {}   # address built at 82EACAA4
+"0x82F8E678" = {}   # address built at 82E77D3C
+"0x82F8E698" = {}   # address built at 82F8EAFC
+"0x82F8E6A8" = {}   # address built at 82F8EAC4
+"0x82FAAD80" = {}   # address built at 82FAEB38
+"0x82FAADA0" = {}   # address built at 82FAEB98
+"0x82FFA658" = {}   # vtable thunk
+"0x830CCF90" = {}   # address built at 8308053C
+# v00.02: code pointers in the data sections (tools/scan_missed_functions.py shape 3; v00.01 on .225 called 9 of them
+# unregistered: 7 static constructors from the C runtime initializer table, then a vtable method and thunk).
+"0x8265E2F8" = {}   # pointer in data at 83123F84
+"0x82FEC768" = {}   # pointer in data at 8210C3C0
+"0x82FF3948" = {}   # pointer in data at 8210C4BC
+"0x82FF3958" = {}   # pointer in data at 8210C4B0
+"0x82FF3960" = {}   # pointer in data at 8210C4DC
+"0x82FF39B8" = {}   # pointer in data at 8210C470
+"0x82FF8AF0" = {}   # pointer in data at 8210C494
+"0x82FF8AF8" = {}   # pointer in data at 8210C47C
+"0x82FF8B00" = {}   # pointer in data at 8210C82C
+"0x82FF8B10" = {}   # pointer in data at 8210C4B8
+"0x82FF8B18" = {}   # pointer in data at 8210C478
+"0x82FF8B28" = {}   # pointer in data at 8210C7E0
+"0x82FF8B30" = {}   # pointer in data at 8210C84C
+"0x82FF9EC0" = {}   # pointer in data at 8210C8A4
+"0x82FF9ED0" = {}   # pointer in data at 8210C498
+"0x82FF9ED8" = {}   # pointer in data at 8210C810
+"0x82FF9EE8" = {}   # pointer in data at 8210C488
+"0x82FF9EF0" = {}   # pointer in data at 8210C4B4
+"0x82FF9EF8" = {}   # pointer in data at 8210C484
+"0x82FF9F00" = {}   # pointer in data at 8210C8C4
+"0x82FFB4B8" = {}   # pointer in data at 8210C964
+"0x82FFF0C8" = {}   # pointer in data at 8210CBBC
+"0x8300CB78" = {}   # pointer in data at 821109CC
+"0x8300D018" = {}   # pointer in data at 82110A1C
+"0x8300D020" = {}   # pointer in data at 82110A2C
+"0x8300E8B8" = {}   # pointer in data at 82110ACC
+"0x830A4148" = {}   # initializer table at 830F96B4
+"0x830A4168" = {}   # initializer table at 830F96B8
+"0x830A42E0" = {}   # initializer table at 830F96EC
+"0x830A4300" = {}   # initializer table at 830F96F0
+"0x830A4360" = {}   # initializer table at 830F96FC
+"0x830AA470" = {}   # initializer table at 830F9EF4
+"0x830AA748" = {}   # initializer table at 830F9F44
+# v00.03: v00.02 crashed on 0x824A9FA0 (a message handler, its lis 11 instructions before the addi: shape 4 follows
+# registers through the function), plus vtable call thunks (lwz r12,0(r3) ; lwz r11,N(r12) ; mtctr ; bctr) and 2 thunks
+# next to v00.02's entries.
+"0x82238964" = {}   # vtable thunk
+"0x822389BC" = {}   # vtable thunk
+"0x82238D3C" = {}   # vtable thunk
+"0x824A9FA0" = {}   # address built at 824ABD20 (lis at 824ABCF4)
+"0x825618EC" = {}   # vtable thunk
+"0x82675774" = {}   # vtable thunk
+"0x82693A00" = {}   # vtable thunk
+"0x82695ADC" = {}   # vtable thunk
+"0x826CFF6C" = {}   # vtable thunk
+"0x828709E0" = {}   # vtable thunk
+"0x82871618" = {}   # vtable thunk
+"0x82941D64" = {}   # vtable thunk
+"0x82A4A800" = {}   # vtable thunk
+"0x82A4A824" = {}   # vtable thunk
+"0x82A4A834" = {}   # vtable thunk
+"0x82C17C80" = {}   # vtable thunk
+"0x82C6549C" = {}   # vtable thunk
+"0x82C654B4" = {}   # vtable thunk
+"0x82D79CD0" = {}   # vtable thunk
+"0x82D88FCC" = {}   # vtable thunk
+"0x82D99EE0" = {}   # vtable thunk
+"0x82DA1E4C" = {}   # vtable thunk
+"0x82F3F16C" = {}   # vtable thunk
+"0x82F3F1DC" = {}   # vtable thunk
+"0x82F57C14" = {}   # vtable thunk
+"0x82F8E658" = {}   # vtable thunk
+"0x82F8E668" = {}   # vtable thunk
+"0x82F8E688" = {}   # vtable thunk
+"0x82FB06AC" = {}   # vtable thunk
+"0x82FF8B20" = {}   # pointer in data at 8210C48C
+"0x82FF9EE0" = {}   # pointer in data at 8210C490

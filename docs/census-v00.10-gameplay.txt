@@ -1,0 +1,127 @@
+﻿> census 30
+census of 30 frames: 2312 draws, 54.6 resolves a frame
+    822.0/frame  draw msaa1 depth=kD24FS8
+    631.2/frame  tex ps type2 k_DXT1 256x256 frac exp0 signs00 tiled
+    578.0/frame  draw msaa1 c0=k_8_8_8_8 c1=k_8_8_8_8 c2=k_8_8_8_8 c3=k_8_8_8_8 depth=kD24FS8
+    429.6/frame  draw msaa1 (no targets)
+    429.0/frame  tex ps type2 k_8_8_8_8 1280x720 frac exp0 signs00 tiled
+    285.0/frame  tex ps type2 k_24_8_FLOAT 800x2400 int exp0 signs00 tiled
+    235.4/frame  tex ps type2 k_DXT1 128x128 frac exp0 signs00 tiled
+    211.1/frame  tex ps type2 k_DXT4_5 256x256 frac exp0 signs00 tiled
+    159.5/frame  draw msaa4 c0=k_8_8_8_8_GAMMA depth=kD24FS8
+    154.0/frame  draw msaa1 c0=k_2_10_10_10_FLOAT_AS_16_16_16_16(bias2) depth=kD24FS8
+    132.6/frame  tex ps type2 k_DXT1 512x512 frac exp0 signs00 tiled
+    125.0/frame  tex ps type2 k_24_8_FLOAT 1280x720 int exp0 signs00 tiled
+     92.0/frame  tex ps type2 k_8_8_8_8 256x1 frac exp0 signs00 tiled
+     74.9/frame  tex ps type2 k_DXT1 64x64 frac exp0 signs00 tiled
+     66.2/frame  tex ps type2 k_DXT4_5 512x512 frac exp0 signs00 tiled
+     58.8/frame  tex ps type2 k_8_8_8_8 128x128 frac exp0 signs3F tiled
+     57.7/frame  tex ps type2 k_8_8_8_8 256x256 frac exp0 signs00 tiled
+     46.8/frame  tex ps type2 k_DXT5A 256x256 frac exp0 signs00 tiled
+     46.6/frame  tex ps type2 k_DXT4_5 128x128 frac exp0 signs00 tiled
+     46.0/frame  tex ps type2 k_5_6_5 6208x7696 frac exp0 signs00 tiled
+     41.7/frame  tex ps type2 k_DXT1 32x32 frac exp0 signs00 tiled
+     39.9/frame  tex ps type2 k_DXT1 512x256 frac exp0 signs00 tiled
+     39.6/frame  tex ps type2 k_DXT5A 128x128 frac exp0 signs00 tiled
+     32.0/frame  tex ps type2 k_32_FLOAT 4x4 int exp0 signs55 tiled
+     32.0/frame  tex ps type2 k_32_FLOAT 16x16 int exp0 signs55 tiled
+     32.0/frame  tex ps type2 k_32_FLOAT 64x64 int exp0 signs55 tiled
+     30.0/frame  draw msaa1 c0=k_8_8_8_8_GAMMA depth=kD24FS8
+     24.0/frame  tex ps type2 k_16_16_FLOAT 512x512 int exp0 signs55 tiled
+     23.2/frame  draw msaa4 (no targets)
+     20.0/frame  tex ps type2 k_32_FLOAT 640x360 int exp0 signs55 tiled
+     19.9/frame  tex ps type2 k_DXT1 1024x1024 frac exp0 signs00 tiled
+     19.0/frame  tex ps type2 k_8_8_8_8 2x2 frac exp0 signs00 tiled
+     18.0/frame  tex ps type2 k_24_8_FLOAT 256x256 int exp0 signs00 tiled
+     17.0/frame  tex ps type2 k_16_16_16_16 320x180 int exp-11 signs00 tiled
+     17.0/frame  tex ps type2 k_16_16_16_16 320x180 int exp-13 signs00 tiled
+     16.0/frame  tex ps type2 k_8 320x180 frac exp0 signs00 tiled
+     16.0/frame  tex ps type2 k_8_8_8_8 640x360 frac exp0 signs3F tiled
+     16.0/frame  tex ps type2 k_DXT4_5 512x256 frac exp0 signs00 tiled
+     15.9/frame  draw msaa1 c0=k_8_8_8_8
+     15.0/frame  draw msaa1 c0=k_16_16_FLOAT depth=kD24FS8
+     14.8/frame  tex ps type2 k_DXT4_5 256x128 frac exp0 signs00 tiled
+     14.0/frame  tex ps type2 k_16_16_16_16 640x360 int exp-13 signs00 tiled
+     13.8/frame  tex ps type2 k_DXT4_5 32x32 frac exp0 signs00 tiled
+     12.0/frame  draw msaa1 c0=k_2_10_10_10_FLOAT
+     12.0/frame  tex vs type2 k_24_8_FLOAT 1280x720 int exp0 signs00 tiled
+     12.0/frame  tex ps type2 k_8_8_8_8 320x180 frac exp0 signs3F tiled
+     11.9/frame  tex ps type2 k_DXT1 128x512 frac exp0 signs00 tiled
+     11.0/frame  tex ps type2 k_8 640x360 frac exp0 signs00 tiled
+     10.0/frame  draw msaa1 c0=k_2_10_10_10_FLOAT_AS_16_16_16_16
+     10.0/frame  draw msaa1 c0=k_32_FLOAT
+     10.0/frame  tex ps type2 k_DXT4_5 64x64 frac exp0 signs00 tiled
+      8.9/frame  tex ps type2 k_DXT1 128x256 frac exp0 signs00 tiled
+      8.0/frame  draw msaa1 c0=k_2_10_10_10_FLOAT(bias2) depth=kD24FS8
+      8.0/frame  tex ps type2 k_DXT4_5 128x64 frac exp0 signs00 tiled
+      8.0/frame  draw msaa1 c0=k_8_8_8_8 c2=k_8_8_8_8 c3=k_8_8_8_8 depth=kD24FS8
+      8.0/frame  draw msaa1 c0=k_8_8_8_8 depth=kD24FS8
+      7.9/frame  tex ps type2 k_DXT1 256x512 frac exp0 signs00 tiled
+      7.0/frame  tex ps type2 k_DXT1 256x128 frac exp0 signs00 tiled
+      6.9/frame  tex ps type2 k_DXT2_3 64x64 frac exp0 signs00 tiled
+      6.8/frame  tex ps type2 k_DXT5A 256x128 frac exp0 signs00 tiled
+      6.0/frame  tex ps type2 k_DXT4_5 1024x2048 frac exp0 signs00 tiled
+      6.0/frame  tex ps type2 k_DXT1 128x64 frac exp0 signs00 tiled
+      6.0/frame  tex ps type2 k_DXT1 64x128 frac exp0 signs00 tiled
+      5.9/frame  tex ps type2 k_DXT4_5 256x512 frac exp0 signs00 tiled
+      5.9/frame  tex ps type2 k_DXT5A 128x512 frac exp0 signs00 tiled
+      5.0/frame  tex ps type2 k_DXT4_5 64x128 frac exp0 signs00 tiled
+      4.9/frame  draw msaa4 depth=kD24FS8
+      4.8/frame  draw msaa4 c0=k_8_8_8_8_GAMMA c1=k_8_8_8_8 c2=k_8_8_8_8 c3=k_8_8_8_8 depth=kD24FS8
+      4.8/frame  draw msaa4 c0=k_8_8_8_8_GAMMA
+      4.0/frame  tex ps type2 k_16_16_16_16 1280x720 int exp-13 signs00 tiled
+      4.0/frame  tex ps type2 k_32_FLOAT 1x1 int exp0 signs55 tiled
+      4.0/frame  tex ps type2 k_DXT5A 512x512 frac exp0 signs00 tiled
+      4.0/frame  resolve c0 k_2_10_10_10_FLOAT msaa1 -> k_16_16_16_16 number2 bias11 320x180
+      4.0/frame  draw msaa4 depth=kD24S8
+      4.0/frame  tex ps type2 k_DXT4_5 32x64 frac exp0 signs00 tiled
+      3.9/frame  tex ps type2 k_8_8_8_8 512x512 frac exp0 signs00 tiled
+      3.0/frame  tex ps type2 k_DXT5A 64x64 frac exp0 signs00 tiled
+      3.0/frame  resolve c0 k_8_8_8_8 msaa1 -> k_8 number0 bias0 320x180
+      3.0/frame  resolve c0 k_8_8_8_8 msaa1 -> k_8 number0 bias0 640x360
+      3.0/frame  draw msaa1 c0=k_2_10_10_10_FLOAT(bias2)
+      3.0/frame  resolve c0 k_32_FLOAT msaa1 -> k_32_FLOAT number7 bias0 32x1
+      3.0/frame  draw msaa1 c0=k_8_8_8_8 c1=k_8_8_8_8 c2=k_8_8_8_8 c3=k_8_8_8_8
+      3.0/frame  resolve depth kD24FS8 msaa1 -> k_8_8_8_8 number2 bias0 1280x720
+      3.0/frame  tex ps type2 k_DXT1 32x64 frac exp0 signs00 tiled
+      2.0/frame  tex ps type2 k_DXT2_3 4x512 frac exp0 signs00 tiled
+      2.0/frame  resolve c0 k_32_FLOAT msaa1 -> k_32_FLOAT number7 bias0 32x16
+      2.0/frame  tex ps type2 k_DXT1 1024x128 frac exp0 signs00 tiled
+      2.0/frame  resolve c0 k_32_FLOAT msaa1 -> k_32_FLOAT number7 bias0 32x4
+      2.0/frame  resolve c0 k_32_FLOAT msaa1 -> k_32_FLOAT number7 bias0 64x64
+      2.0/frame  resolve c3 k_8_8_8_8 msaa1 -> k_8_8_8_8 number0 bias0 1280x720 +clear color
+      2.0/frame  resolve c2 k_8_8_8_8 msaa1 -> k_8_8_8_8 number0 bias0 1280x720 +clear color
+      2.0/frame  resolve c1 k_8_8_8_8 msaa1 -> k_8_8_8_8 number0 bias0 1280x720 +clear color
+      2.0/frame  resolve c0 k_2_10_10_10_FLOAT(bias2) msaa1 -> k_16_16_16_16 number2 bias11 640x360
+      2.0/frame  resolve c0 k_8_8_8_8 msaa1 -> k_8_8_8_8 number0 bias0 1280x720
+      2.0/frame  resolve c0 k_8_8_8_8 msaa1 -> k_8_8_8_8 number0 bias0 1280x720 +clear color +clear depth
+      2.0/frame  tex ps type2 k_8_8_8_8 128x128 frac exp0 signs00 tiled
+      2.0/frame  tex ps type2 k_DXT4_5 1024x1024 frac exp0 signs00 tiled
+      2.0/frame  tex ps type2 k_DXT5A 32x32 frac exp0 signs00 tiled
+      1.0/frame  resolve c0 k_2_10_10_10_FLOAT(bias2) msaa1 -> k_16_16_16_16 number2 bias11 320x180
+      1.0/frame  draw msaa1 c0=k_2_10_10_10_FLOAT c1=k_8_8_8_8 c2=k_8_8_8_8 c3=k_8_8_8_8
+      1.0/frame  resolve c0 k_2_10_10_10_FLOAT(bias2) msaa1 -> k_16_16_16_16 number2 bias11 1280x720
+      1.0/frame  draw msaa1 c0=k_2_10_10_10_FLOAT_AS_16_16_16_16(bias2)
+      1.0/frame  resolve c0 k_2_10_10_10_FLOAT msaa4 -> k_16_16_16_16 number2 bias11 640x360
+      1.0/frame  tex ps type2 k_16_16_16_16 1280x720 int exp-11 signs00 tiled
+      1.0/frame  tex ps type2 k_DXT4_5 1024x128 frac exp0 signs00 tiled
+      1.0/frame  resolve c0 k_32_FLOAT msaa1 -> k_32_FLOAT number7 bias0 640x360
+      1.0/frame  draw msaa4 c0=k_8_8_8_8 c1=k_8_8_8_8 c2=k_8_8_8_8 c3=k_8_8_8_8 depth=kD24FS8
+      1.0/frame  resolve c0 k_16_16_FLOAT msaa1 -> k_16_16_FLOAT number7 bias0 512x512
+      1.0/frame  resolve c0 k_8_8_8_8 msaa1 -> k_8_8_8_8 number0 bias0 128x128
+      1.0/frame  resolve c0 k_2_10_10_10_FLOAT_AS_16_16_16_16 msaa1 -> k_8_8_8_8 number0 bias0 1280x720
+      1.0/frame  resolve c0 k_2_10_10_10_FLOAT_AS_16_16_16_16(bias2) msaa1 -> k_16_16_16_16 number2 bias11 1280x720
+      1.0/frame  resolve c0 k_8_8_8_8 msaa1 -> k_8_8_8_8 number0 bias0 1280x720 +clear color
+      1.0/frame  resolve c0 k_2_10_10_10_FLOAT_AS_16_16_16_16 msaa1 -> k_16_16_16_16 number2 bias11 1280x720
+      1.0/frame  resolve c0 k_8_8_8_8 msaa4 -> k_8_8_8_8 number0 bias0 32x32 +clear color
+      1.0/frame  resolve c0 k_8_8_8_8 msaa4 -> k_8_8_8_8 number0 bias0 64x64 +clear color
+      1.0/frame  resolve c0 k_8_8_8_8 msaa4 -> k_8_8_8_8 number0 bias0 640x360
+      1.0/frame  resolve c0 k_8_8_8_8 msaa1 -> k_8_8_8_8 number0 bias0 256x256
+      1.0/frame  resolve c0 k_8_8_8_8 msaa1 -> k_8_8_8_8 number0 bias0 320x180
+      1.0/frame  resolve c0 k_8_8_8_8 msaa1 -> k_8_8_8_8 number0 bias0 32x32
+      1.0/frame  resolve depth kD24FS8 msaa1 -> k_8_8_8_8 number2 bias0 800x1600
+      1.0/frame  resolve depth kD24FS8 msaa1 -> k_8_8_8_8 number2 bias0 800x2400
+      1.0/frame  resolve c0 k_8_8_8_8 msaa4 -> k_8_8_8_8 number0 bias0 32x8 +clear color
+      1.0/frame  resolve c0 k_8_8_8_8 msaa4 -> k_8_8_8_8 number0 bias0 128x128 +clear color
+      1.0/frame  resolve c0 k_8_8_8_8 msaa4 -> k_8_8_8_8 number0 bias0 32x16 +clear color
+      1.0/frame  draw msaa1 c0=k_8_8_8_8_GAMMA c1=k_8_8_8_8 c2=k_8_8_8_8 c3=k_8_8_8_8 depth=kD24FS8

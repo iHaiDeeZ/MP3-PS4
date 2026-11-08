@@ -1,0 +1,20 @@
+# Your game and everything made from it: never commit
+data/
+out/
+*.pkg
+*.rar
+*.7z
+*.iso
+*.xex
+*.xexp
+
+# Your package's art (scripts/build-mp3.sh puts sce_sys/ in your own package and makes an icon when there is none)
+sce_sys/
+# The game's own button icons, dumped from the console for tools/ps_icons.py
+icons/
+
+# Console logs, profiles, clips and the development log
+logs/
+clips/
+DESIGN.md
+__pycache__/

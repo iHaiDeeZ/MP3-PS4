@@ -1,0 +1,22 @@
+diff --git a/thirdparty/CMakeLists.txt b/thirdparty/CMakeLists.txt
+index f102b56..a626914 100644
+--- a/thirdparty/CMakeLists.txt
++++ b/thirdparty/CMakeLists.txt
+@@ -290,7 +290,16 @@ set(SDL_DUMMYVIDEO OFF CACHE BOOL "" FORCE)
+ 
+ # Linux video and audio backends. Both video drivers are always built so the
+ # one in use stays a runtime choice.
+-if(UNIX AND NOT APPLE)
++# mp3-ps4: the code generator built on WSL without X11/Wayland/audio packages: SDL3 with its dummy drivers only.
++option(REXGLUE_SDL_HEADLESS "Build SDL3 with dummy video/audio drivers only" OFF)
++if(REXGLUE_SDL_HEADLESS)
++    foreach(_sdl_backend X11 WAYLAND KMSDRM ALSA PULSEAUDIO PIPEWIRE JACK SNDIO HIDAPI LIBUDEV DBUS IBUS)
++        set(SDL_${_sdl_backend} OFF CACHE BOOL "" FORCE)
++    endforeach()
++    set(SDL_DUMMYVIDEO ON CACHE BOOL "" FORCE)
++    set(SDL_DUMMYAUDIO ON CACHE BOOL "" FORCE)
++    set(SDL_VULKAN OFF CACHE BOOL "" FORCE)
++elseif(UNIX AND NOT APPLE)
+     set(SDL_X11               ON  CACHE BOOL "" FORCE)
+     set(SDL_WAYLAND           ON  CACHE BOOL "" FORCE)
+     set(SDL_ALSA              ON  CACHE BOOL "" FORCE)

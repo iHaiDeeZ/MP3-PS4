@@ -1,0 +1,34 @@
+# MGR (XDK 21173) -> MP3 0.0.6.6 (XDK 21076): Renut's Direct3D functions, matched by instruction shape (match_mp3.py, 2026-11-07)
+# name	mgr	mp3	score	same_offsets	differ
+Direct3D_CreateDevice	826B2418	8304AA58	1.0	10	0
+InitializePresentationParameters	826C0C48	830614E8	1.0	39	0
+InitializeApiState	826C0278	83060B18	1.0	57	0
+XenonGpu_Initialize	826C0930	830611D0	1.0	8	0
+HardwareDeviceSetup_reference	826C0EC8	83061768	1.0	48	0
+KickOff	826B5688	83055798	1.0	19	0
+KickOffSegment	826B5348	83055410	1.0	38	0
+BeginRingBig	826B58C0	830559D0	1.0	7	0
+RingBufferDeviceAllocate	826B4078	830540E0	1.0	42	0
+AllocateInlineData	826B44C0	83054588	1.0	19	0
+NewSegment	826B45A8	83054670	1.0	39	0
+SetRingBufferParameters	826B5A08	83055B18	1.0	95	0
+BlockOnFence	826B42A8	83054310	1.0	10	0
+CBlocker_Check	826B1C88	8304A1E0	1.0	17	0
+IsFencePending	826B57C8	830558D8	1.0	5	0
+InsertCallback	826B59B0	83055AC0	1.0	3	0
+SynchronizeToPresentationInterval	826B3050	830589E8	1.0	51	0
+Swap_shared	826B3510	83058EA8	1.0	137	0
+DrawVertices_shared	826BC928	8304B000	1.0	74	0
+DrawIndexedVertices_shared	826BCD40	8304B418	1.0	83	0
+BeginVertices	826BC468	8304AB40	1.0	104	0
+ClearF	826BC260	8304C9D0	1.0	20	0
+Resolve	826BB0D0	8304F300	1.0	2	0
+XGRegisterVertexShader	826ACD00	83053808	1.0	27	0
+XGRegisterPixelShader	826AC3D8	83052950	1.0	12	0
+CreateVertexDeclaration	826AC938	83052EB0	1.0	6	0
+D3DResource_Destroy	826AAF80	8305C968	1.0	41	0
+WindowScissor	826B5FC8	83046A00	1.0	71	0
+EngineSwapProgress_reference	826B2FC0	83058958	1.0	7	0
+CreatePixelShader	826ACC10	83053718	1.0	15	0
+CreateVertexShader	826ACDF8	83053900	1.0	11	0
+draw_state_setup	826CB580	8305E978	1.0	200	0

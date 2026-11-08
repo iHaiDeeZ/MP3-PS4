@@ -1,0 +1,26 @@
+# Names for the functions the PS4 build hooks, for the 0.0.6.6 executable (disc 1 + the user's TU6). Each name turns
+# on its hook (MP3_TIENE_<name>), as mp3-nx's codegen/names.toml does for its 0.0.9.6 executable; a name goes in only
+# once its function is found in this image and checked against mp3-nx's description of it.
+
+# Direct3D's swap callback (r3 = front buffer | present interval << 8 | late threshold %): queued by the swap at
+# 0x83058B14 with the interval from device+0x36B0, it sets the swap's target vblank (device+0x4240 + interval).
+# ps4/mp3_ps4_fps.cpp makes an interval of 2 one of 1: the 60 fps mode. Found by disassembly (tools/dis.py,
+# DESIGN.md "60 fps").
+[functions."0x83058080"]
+name = "mp3_D3D_SwapCallback"
+
+# v00.04, found in 0.0.6.6 by disassembly (mp3-nx's src/mp3_perf_hooks.cpp hooks them; their addresses are 0.0.9.6's).
+# The game's spin lock: InterlockedCompareExchange(lock, 1, 0) through sub_82C939D8, between tries an empty count from 8
+# doubling to 1024 (cmplwi 0x400 at 0x821FD924), lwsync after. The hook yields, then sleeps, instead of spinning.
+[functions."0x821FD8D0"]
+name = "mp3_SpinLockAcquire"
+
+# Direct3D's frames-in-flight query: [r4+0] = 0, [r4+4] = device+0x4248 (submitted), [r4+8] = +0x4248 - +0x4250
+# (submitted - retired). The XDK's code is laid out as in mp3-nx's executable: their 0x830853E8 here, and their
+# WaitStep, Create*Shader and BeginTiling at the same distances (each checked: BeginTiling stores its count at +0x3344).
+[functions."0x83058958"]
+name = "mp3_D3D_QueryFramesInFlight"
+
+# One step of Direct3D's waits for the GPU (the 360's "mr r31,r31" low-priority spins, r3 = 1 while waiting).
+[functions."0x8304A1E0"]
+name = "mp3_D3D_WaitStep"
