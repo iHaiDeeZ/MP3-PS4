@@ -14,12 +14,12 @@
 <h3 align="center">Max Payne 3, recompiled to run natively on the PS4.</h3>
 
 <p align="center">
-  <a href="https://github.com/iHaiDeeZ/MP3-PS4/releases/latest"><b>⬇ Get the latest release</b></a> ·
-  <a href="#getting-started">Getting started</a> ·
-  <a href="#controls">Controls</a> ·
-  <a href="#the-quick-menu">Quick menu</a> ·
-  <a href="#faq">FAQ</a> ·
-  <a href="https://discord.gg/fqjMs9gDJh">Discord</a> ·
+  <a href="https://github.com/iHaiDeeZ/MP3-PS4/releases/latest"><b>â¬‡ Get the latest release</b></a> Â·
+  <a href="#getting-started">Getting started</a> Â·
+  <a href="#controls">Controls</a> Â·
+  <a href="#the-quick-menu">Quick menu</a> Â·
+  <a href="#faq">FAQ</a> Â·
+  <a href="https://discord.gg/fqjMs9gDJh">Discord</a> Â·
   <a href="CREDITS.md">Credits</a>
 </p>
 
@@ -54,16 +54,33 @@ your console only.
 - The game's threads with their own priorities and cores, the busy ones spread over the PS4's seven cores.
 - The game's audio update no longer waits for its audio thread (which held busy fights at ~12 fps), and XAudio2's
   mono-to-5.1 mixer runs in SSE, bit for bit as the original.
+- Leaner converted code (v02.00): guest registers that a function never changes, the stack pointer after direct calls,
+  the link register's copies and the arguments of the hottest functions no longer go through memory. The hottest
+  code is about 8 % smaller; the game's locks are inlined (3.4 % of the main thread down to 0.1 %).
 
 **The picture**
 - Renut draws the game's Direct3D 9 calls itself on Vulkan: its HDR targets and exposure, the G-buffer the game draws
   in two tiles, its 4x-aliased resolves.
 - The game's 3,824 shaders translated to SPIR-V when you build, from the shaders your console captured.
+- No more black places: some areas (the rooftops among them) went dark at some camera angles, with only small lights'
+  circles lit. The **Lighting fix** (on by default) draws the game's base lighting there again.
+- Detail settings in the quick menu: particles, facial animation, character and car detail, view distance.
 
-**One package**
-- `MP3_PKG_GAME=1` puts your game and Title Update 6 inside the package (8.2 GB): one install, nothing to copy to the
-  console's `/data/MP3`.
+**Achievements**
+- The game's own 51 achievements (1,125 G), with their names and descriptions, in the quick menu's **ACHIEVEMENTS**
+  tab: earned ones with the date, locked ones with their gamerscore, secret ones hidden until earned.
+- A pop-up when you earn one. Your unlocks are kept in `/data/MP3/mp3/achievements/`.
+
+**Both discs, one package**
+- The story asks for disc 2 at the end of chapter 6, as on the 360: the port puts disc 2's files (and Title Update
+  6's for disc 2) in place of disc 1's, and back again when a chapter of disc 1 is chosen (since v00.52).
+- `MP3_PKG_GAME=1` puts both discs and Title Update 6 inside the package (about 16 GB): one install, nothing to copy
+  to the console's `/data/MP3`.
 - Your own `sce_sys/icon0.png` and `pic1.png`, if you make them, go into your package.
+
+**Faster on a PS4 Pro**
+- With **Boost Mode** on (Settings > System on the PS4 Pro), the CPU runs at 2.13 GHz instead of 1.6: this game is
+  held by its CPU, so busy fights gain the most. The quick menu's ABOUT tab shows the clock the cores run at.
 
 **When something goes wrong**
 - A log for every session, ps4-kit's boot trace and crash log, and a freeze report with every thread's stack, in
@@ -76,26 +93,29 @@ your console only.
 | | |
 |---|---|
 | Boots, menus, title, gameplay | yes |
-| Picture | right since v00.44 (Renut) |
-| Frame rate | menus and calm gameplay at the game's 30 fps cap; busy fights 15-25 fps |
+| Disc 2 (from the end of chapter 6) | since v00.52; up to v00.51 the game stopped there. **Not confirmed on a console yet** |
+| Picture | right since v00.44 (Renut); the black places at some camera angles fixed in v02.00 |
+| Frame rate | menus and calm gameplay at the game's 30 fps cap; busy fights 15-25 fps on a base PS4, 22-30 fps on a PS4 Pro in Boost Mode |
+| Achievements | since v02.00, in the game (not PS4 trophies) |
 | Sound | works; some crackle and distortion remain (being looked at) |
 | Known issues | Xbox Live prompts still in the menus; Xbox button icons in this build (the PlayStation icons work only in the Xenos build) |
-| Tested on | one PS4 (base model) with GoldHEN |
+| Tested on | a PS4 (base model) and a PS4 Pro, with GoldHEN |
 
 ## Getting started
 
 **You need:** a jailbroken PS4 with **GoldHEN** and an FTP connection to it; a PC with **WSL 2** (Ubuntu, 16 GB of
 RAM, about 40 GB free); the **OpenOrbis** toolchain (PacBrew); and your **own** copy of **Max Payne 3** for Xbox 360:
 
-- **Disc 1**, as the folder of its files (disc 2 isn't needed);
-- **Title Update 6**, the file `tu00000006_00000000`.
+- **Disc 1 and disc 2**, each as the folder of its files (the story asks for disc 2 at the end of chapter 6);
+- **Title Update 6**, the file `tu00000006_00000000` (it holds a folder for each disc).
 
-Together they make version **0.0.6.6** of the game: `default.xex` with SHA-1 `d36c6b8e6afc796b4c82f831aff6bf41ba494e6a`
-and Title Update 6's `default.xexp` with SHA-1 `6370fad01ff3820641888ab71918e52c11917922`. The code generator's
-configuration (`codegen/`) is made for these files; other versions aren't supported.
+Together they make version **0.0.6.6** of the game: disc 1's `default.xex` with SHA-1
+`d36c6b8e6afc796b4c82f831aff6bf41ba494e6a` and Title Update 6's disc 1 `default.xexp` with SHA-1
+`6370fad01ff3820641888ab71918e52c11917922`. The code generator's configuration (`codegen/`) is made for these files;
+other versions aren't supported.
 
 > **Note:** the build also needs **ps4-kit** in `~/ps4-kit`, the shared PS4 base of these ports (toolchain setup,
-> runtime, Mesa RADV for the PS4, VideoOut swapchain, packaging). This release was built with ps4-kit `56b3d86`;
+> runtime, Mesa RADV for the PS4, VideoOut swapchain, packaging). This release was built with ps4-kit `1e19f28`;
 > ps4-kit isn't published yet.
 
 ### Building the package
@@ -112,11 +132,13 @@ configuration (`codegen/`) is made for these files; other versions aren't suppor
    scripts/clone-mp3.sh
    ```
 
-3. Put your game in place: disc 1's files in `~/mp3-build/game`, and Title Update 6's files (with upstream's
-   extractor) in `~/mp3-build/stage-tu/update`, its `default.xexp` next to `default.xex`:
+3. Put your game in place: disc 1's files in `~/mp3-build/game` and disc 2's in `~/mp3-build/game2`, and Title
+   Update 6's files for each disc (with upstream's extractor) in `~/mp3-build/stage-tu/update` and
+   `~/mp3-build/stage-tu2/update`, disc 1's `default.xexp` next to disc 1's `default.xex`:
 
    ```bash
    python3 ~/mp3-build/src/mp3-nx/mp3/tools/stage_sd.py --tu /path/to/tu00000006_00000000 -o ~/mp3-build/stage-tu
+   python3 ~/mp3-build/src/mp3-nx/mp3/tools/stage_sd.py --tu /path/to/tu00000006_00000000 --disc-number 2 -o ~/mp3-build/stage-tu2
    cp ~/mp3-build/stage-tu/update/default.xexp ~/mp3-build/game/
    ```
 
@@ -133,7 +155,7 @@ configuration (`codegen/`) is made for these files; other versions aren't suppor
    on by default). Then fetch and translate them:
 
    ```bash
-   MP3_VERSION=00.51 scripts/build-mp3.sh app && MP3_VERSION=00.51 MP3_PKG_GAME=1 scripts/build-mp3.sh pkg
+   MP3_VERSION=02.00 scripts/build-mp3.sh app && MP3_VERSION=02.00 MP3_PKG_GAME=1 scripts/build-mp3.sh pkg
    # install it, start the game once, then:
    PS4_HOST=YOUR_PS4_IP scripts/build-mp3.sh captures
    scripts/build-mp3.sh shaders
@@ -142,16 +164,19 @@ configuration (`codegen/`) is made for these files; other versions aren't suppor
 6. The package with Renut:
 
    ```bash
-   MP3_RENUT=1 MP3_VERSION=00.51 scripts/build-mp3.sh app
-   MP3_RENUT=1 MP3_VERSION=00.51 MP3_PKG_GAME=1 scripts/build-mp3.sh pkg
+   MP3_RENUT=1 MP3_VERSION=02.00 scripts/build-mp3.sh app
+   MP3_RENUT=1 MP3_VERSION=02.00 MP3_PKG_GAME=1 scripts/build-mp3.sh pkg
    ```
 
-   `pkg` makes **`out/MP3-v00.51.pkg`** (title ID `MAXP00003`). With `MP3_PKG_GAME=1` your game and Title Update 6
-   are inside it (8.2 GB); without it the package is about 130 MB and the game goes to the console's `/data/MP3`:
+   `pkg` makes **`out/MP3-v02.00.pkg`** (title ID `MAXP00003`). With `MP3_PKG_GAME=1` both discs and Title Update 6
+   are inside it (about 16 GB); without it the package is about 130 MB and the game goes to the console's
+   `/data/MP3` (`game/`, `update/`, `game2/`, `update2/`):
 
    ```bash
    py scripts/upload-data.py --host YOUR_PS4_IP
    py scripts/upload-data.py \\wsl.localhost\Ubuntu\home\YOU\mp3-build\stage-tu\update --update --host YOUR_PS4_IP
+   py scripts/upload-data.py \\wsl.localhost\Ubuntu\home\YOU\mp3-build\game2 --dest /data/MP3/game2 --host YOUR_PS4_IP
+   py scripts/upload-data.py \\wsl.localhost\Ubuntu\home\YOU\mp3-build\stage-tu2\update --update --dest /data/MP3/update2 --host YOUR_PS4_IP
    ```
 
 7. Copy the package to the console (FTP to `/data/pkg`) and install it with GoldHEN's **Package Installer**.
@@ -184,6 +209,12 @@ running behind the menu.
 
 | Tab | Row | Choices |
 |---|---|---|
+| VIDEO | Frame rate, 60 FPS method, Light occlusion, GPU particle readback | the Xenos emulation's settings: no effect in the Renut package |
+| | Particles | **On**, Off: smoke, sparks, blood and glass neither drawn nor updated |
+| | Facial animation | **On**, Off: faces keep their rest pose |
+| | Character detail, Car detail | **Full**, 75 %, 50 %: how far the detailed models reach |
+| | Lighting fix | **On**, Off: the base lighting in the places that went black at some camera angles |
+| | View distance | **Full**, 75 %, 50 %: how far the scene reaches |
 | OVERLAY | Frame counter | **Off**, FPS, Detailed (frame times and a graph of the last 120 frames) |
 | | Position | **Top left**, Top right |
 | DIAGNOSTICS | Long-wait log | **On**, Off: game threads waiting 2 s or more, in the log |
@@ -192,8 +223,11 @@ running behind the menu.
 | | Capture shaders | **On**, Off, in the Xenos build: every shader the game makes, to `/data/MP3/shader_capture/` (the Renut package writes there by itself the ones its library lacks) |
 | | Freeze report | **On**, Off: every thread's stack in `/data/MP3/hang.log` when no frame comes for 15 s |
 | | Renderer HDR log | On, **Off**: what the tonemap and luminance passes read, for picture reports |
-| VIDEO | Frame rate, 60 FPS method, Light occlusion, GPU particle readback | the Xenos emulation's settings: no effect in the Renut package |
-| ABOUT | | the build, the game, the CPU and GPU paths |
+| ACHIEVEMENTS | Unlocked | how many you've earned, and their gamerscore |
+| | Unlock pop-ups | **On**, Off |
+| | Test pop-up | shows what an unlock looks like (unlocks nothing) |
+| | the game's achievements | each with its trophy (gold 50 G and up, silver 20 G and up, bronze), the date earned or its gamerscore, and its description when selected |
+| ABOUT | | the build, the game, the CPU (and the clock its cores run at), the GPU path, and which discs are there |
 
 The defaults are in bold.
 
@@ -201,8 +235,9 @@ The defaults are in bold.
 
 Everything sits in **`/data/MP3/`**:
 
-- `game/`, `update/`: your game and Title Update 6, if they aren't in the package
-- `mp3/`: the Xbox 360 profile and your saves
+- `game/`, `update/`, `game2/`, `update2/`: your two discs and Title Update 6's files for each, if they aren't in the
+  package
+- `mp3/`: the Xbox 360 profile and your saves; `mp3/achievements/` your unlocked achievements
 - `mp3.toml`: the settings (the quick menu writes it)
 - `logs/mp3_NNN.log`: one log for every session
 - `boot-trace.log`, `crash.log`, `hang.log`: ps4-kit's start-up trace, crash record and freeze reports
@@ -219,6 +254,16 @@ itself. You build it from your own copy; the releases are source only.
 **Which version of the game works?**
 Disc 1 with Title Update 6 (version 0.0.6.6), with the hashes above: the recompiled code is made for them.
 
+**The game stopped at the end of chapter 6.**
+That's where the story asks for disc 2. Up to v00.51 the port answered the request without a disc and the game
+waited forever. From v00.52 it puts disc 2 in: build the package with both discs (or copy `game2/` and `update2/` to
+`/data/MP3`), then load your save again. The quick menu's ABOUT tab says whether disc 2 is there.
+
+**Does it run faster on a PS4 Pro?**
+Turn on **Boost Mode** (Settings > System): the CPU runs at 2.13 GHz instead of 1.6, and the CPU is what holds the
+busy fights. The package doesn't ask for the Pro's own mode, which also switches its GPU to a layout the renderer's
+driver doesn't know yet; Boost Mode keeps the GPU as on a base PS4 and raises the clocks.
+
 **Why 30 fps?**
 The game caps itself at 30, on the 360 too, and the renderer keeps that pace.
 
@@ -227,8 +272,17 @@ The PS4's CPU is the limit there: the game's main thread updates the world (phys
 Jaguar core, spread over hundreds of functions with no single hot spot. The renderer and the GPU have time to spare.
 
 **What's in the one-file package?**
-With `MP3_PKG_GAME=1`, disc 1's files (without the dashboard extras) as `game/` and Title Update 6's as `update/`.
-The app reads them from the package before `/data/MP3`; a package without them uses `/data/MP3` as before.
+With `MP3_PKG_GAME=1`, disc 1's files (without the dashboard extras) as `game/`, disc 2's as `game2/`, and Title
+Update 6's for each disc as `update/` and `update2/`. The app reads them from the package before `/data/MP3`; a
+package without them uses `/data/MP3` as before.
+
+**Are there trophies?**
+The game's Xbox 360 achievements, inside the game: the quick menu's ACHIEVEMENTS tab lists them, and a pop-up shows
+each one you earn. They aren't PS4 trophies, and they don't show in the PS4's own trophy list.
+
+**Some places turned black when I moved the camera.**
+Fixed in v02.00 by the VIDEO tab's **Lighting fix** (on by default): there the game's base lighting was skipped and
+only the small lights' circles were drawn.
 
 **How do I report a bug?**
 On [Discord](https://discord.gg/fqjMs9gDJh) or in an [issue](https://github.com/iHaiDeeZ/MP3-PS4/issues). Attach the
@@ -246,7 +300,7 @@ the version, what you were doing, your PS4 model and firmware.
 | Shaders | XenosRecomp turns the game's 3,824 shader containers into SPIR-V at build time; RADV's pipelines are cached in `/data/MP3` |
 | Sound | `sceAudioOut`; XMA decoded with FFmpeg on a worker thread |
 | Pad | `scePad` (DualShock 4); the same pad drives the quick menu through ImGui |
-| Files | the game from the package (`/app0`) or `/data/MP3`; the 360's storage is `/data/MP3/mp3` |
+| Files | the game from the package (`/app0`) or `/data/MP3`; the disc the story asks for (`XamSwapDisc`) put in place of the other; the 360's storage is `/data/MP3/mp3` |
 
 Findings on the way that matter for other ports of this SDK:
 
@@ -262,13 +316,21 @@ Findings on the way that matter for other ports of this SDK:
   of rectangles: the tiles are kept, with targets of the full size.
 - **The physical window's offset.** With 64 KB granularity the `0xE0000000` view sits 4 KB higher on the PS4, as on
   Windows: hooks must read guest memory through `GuestPtr`, never `base + address`.
+- **A disc swap that never ended.** The SDK answered `XamSwapDisc` with success and no disc, and never set the event
+  the game then waits on without a timeout: any multi-disc game stops at its swap. The disc's device has to be
+  replaced where it stands in the file system's order (a catch-all device registered after it would otherwise take
+  its paths), the old one kept alive for the files still open on it, and caches keyed by the file on the host, not by
+  the path inside the disc: both discs hold different `common.rpf`s.
 
 More in **[docs/DEVELOPMENT.md](docs/DEVELOPMENT.md)**.
 
 ## Good to know
 
-- Busy fights run at 15-25 fps: the main thread's own work, measured above.
-- The VIDEO tab's settings belong to the Xenos emulation build; the Renut package ignores them.
+- Busy fights run at 15-25 fps on a base PS4: the main thread's own work, measured above. A PS4 Pro in Boost Mode
+  runs the cores a third faster.
+- The swap to disc 2 (v00.52) hasn't been confirmed on a console yet.
+- The VIDEO tab's first four settings belong to the Xenos emulation build; the Renut package ignores them.
+- The detail settings gain little (about 1 fps each in busy fights): the main thread's world update is the limit.
 - The live console (a TCP port for the PC's tools) and the task hooks are kept in the source but left out of the
   build since v00.51 (`mp3/ps4/mp3_ps4_switches.h`).
 - Save in the game; there are no save states. Your saves carry over to new versions.

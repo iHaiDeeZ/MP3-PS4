@@ -1,9 +1,9 @@
 diff --git a/mp3/ps4/CMakeLists.txt b/mp3/ps4/CMakeLists.txt
 new file mode 100644
-index 0000000..f97563d
+index 0000000..7e7802d
 --- /dev/null
 +++ b/mp3/ps4/CMakeLists.txt
-@@ -0,0 +1,153 @@
+@@ -0,0 +1,155 @@
 +# mp3-ps4 - Max Payne 3 (Xbox 360, Title Update 6) on the PS4 (ps4-kit: clang 21, OpenOrbis, x86-64 Jaguar).
 +#
 +# The MGR port's way (iHaiDeeZ/MGR-PS4), not the Switch build's: the game's PowerPC code recompiled to C++ and built
@@ -84,6 +84,8 @@ index 0000000..f97563d
 +    mp3_ps4_live.cpp
 +    mp3_ps4_icons.cpp
 +    mp3_ps4_audio.cpp  # v00.46: the audio update without waits, XAudio2's mixer in SSE
++    mp3_ps4_detail.cpp  # v00.55: the game's detail settings (particles, cloth, faces, LOD distances), live
++    mp3_ps4_achievements.cpp  # v00.71: the game's achievements in the quick menu, the unlock pop-up
 +    mp3_ps4_tasks.cpp  # v00.48: RAGE's task workers' priority, the waits for tasks
 +    # Portable parts of the Switch build (src/): the Games on Demand package, the per-thread interrupt locks,
 +    # the recompiled code's diagnostics, the game's spin-lock and Direct3D wait hooks (each only when
@@ -13830,1543 +13832,3077 @@ HcmV?d00001
 
 diff --git a/mp3/ps4/hot_functions.txt b/mp3/ps4/hot_functions.txt
 new file mode 100644
-index 0000000..7b918c5
+index 0000000..4e43413
 --- /dev/null
 +++ b/mp3/ps4/hot_functions.txt
-@@ -0,0 +1,1534 @@
+@@ -0,0 +1,3068 @@
++__fast__sub_8307A400
 +__imp__sub_8307A400
++__fast__sub_82C866E0
 +__imp__sub_82C866E0
++__fast__sub_8300B1C8
 +__imp__sub_8300B1C8
++__fast__sub_8300C7F8
 +__imp__sub_8300C7F8
++__fast__sub_8300C630
 +__imp__sub_8300C630
++__fast__sub_83026BA8
 +__imp__sub_83026BA8
++__fast__sub_821E5380
 +__imp__sub_821E5380
++__fast__sub_821E0250
 +__imp__sub_821E0250
++__fast__sub_821E07F0
 +__imp__sub_821E07F0
++__fast__sub_82C83C88
 +__imp__sub_82C83C88
++__fast__sub_8300B258
 +__imp__sub_8300B258
++__fast__sub_821EEB10
 +__imp__sub_821EEB10
++__fast__sub_821EA708
 +__imp__sub_821EA708
++__fast__sub_83027290
 +__imp__sub_83027290
++__fast__sub_82225528
 +__imp__sub_82225528
++__fast__sub_822AFB20
 +__imp__sub_822AFB20
++__fast__sub_824AA590
 +__imp__sub_824AA590
++__fast__sub_82D80E78
 +__imp__sub_82D80E78
++__fast__sub_821F0828
 +__imp__sub_821F0828
++__fast__sub_824ADBC8
 +__imp__sub_824ADBC8
++__fast__sub_821EFB38
 +__imp__sub_821EFB38
++__fast__sub_82D77400
 +__imp__sub_82D77400
++__fast__sub_82D9AA00
 +__imp__sub_82D9AA00
++__fast__sub_82D9A5B8
 +__imp__sub_82D9A5B8
++__fast__sub_82D9ACB0
 +__imp__sub_82D9ACB0
++__fast__sub_82D9AAC8
 +__imp__sub_82D9AAC8
++__fast__sub_823FD248
 +__imp__sub_823FD248
++__fast__sub_82C83F70
 +__imp__sub_82C83F70
++__fast__sub_82C99180
 +__imp__sub_82C99180
++__fast__sub_82C49750
 +__imp__sub_82C49750
++__fast__sub_83029170
 +__imp__sub_83029170
++__fast__sub_822160C0
 +__imp__sub_822160C0
++__fast__sub_82C46B28
 +__imp__sub_82C46B28
++__fast__sub_83012270
 +__imp__sub_83012270
++__fast__sub_822AF468
 +__imp__sub_822AF468
++__fast__sub_82FEE438
 +__imp__sub_82FEE438
++__fast__sub_823A1B68
 +__imp__sub_823A1B68
++__fast__sub_82D69278
 +__imp__sub_82D69278
++__fast__sub_82F82890
 +__imp__sub_82F82890
++__fast__sub_82F2BC88
 +__imp__sub_82F2BC88
++__fast__sub_82D5A138
 +__imp__sub_82D5A138
++__fast__sub_82F2B7B8
 +__imp__sub_82F2B7B8
++__fast__sub_82F2F910
 +__imp__sub_82F2F910
++__fast__sub_82D83220
 +__imp__sub_82D83220
++__fast__sub_82C4A340
 +__imp__sub_82C4A340
++__fast__sub_82C27D88
 +__imp__sub_82C27D88
++__fast__sub_82D534A0
 +__imp__sub_82D534A0
++__fast__sub_830285B0
 +__imp__sub_830285B0
++__fast__sub_8300B108
 +__imp__sub_8300B108
++__fast__sub_82F31848
 +__imp__sub_82F31848
++__fast__sub_82C47AF0
 +__imp__sub_82C47AF0
++__fast__sub_82F31658
 +__imp__sub_82F31658
++__fast__sub_82FFD520
 +__imp__sub_82FFD520
++__fast__sub_83028F60
 +__imp__sub_83028F60
++__fast__sub_830126C0
 +__imp__sub_830126C0
++__fast__sub_8298B700
 +__imp__sub_8298B700
++__fast__sub_82FFBDA8
 +__imp__sub_82FFBDA8
++__fast__sub_822AB530
 +__imp__sub_822AB530
++__fast__sub_82C47340
 +__imp__sub_82C47340
++__fast__sub_82D1B6F0
 +__imp__sub_82D1B6F0
++__fast__sub_82C34CD0
 +__imp__sub_82C34CD0
++__fast__sub_82C4CA68
 +__imp__sub_82C4CA68
++__fast__sub_82202DA0
 +__imp__sub_82202DA0
++__fast__sub_82D6AE50
 +__imp__sub_82D6AE50
++__fast__sub_82FF74B8
 +__imp__sub_82FF74B8
++__fast__sub_82D6BC30
 +__imp__sub_82D6BC30
++__fast__sub_82C4ABB0
 +__imp__sub_82C4ABB0
++__fast__sub_8298BAF0
 +__imp__sub_8298BAF0
++__fast__sub_82523B98
 +__imp__sub_82523B98
++__fast__sub_82D82B50
 +__imp__sub_82D82B50
++__fast__sub_82C4A768
 +__imp__sub_82C4A768
++__fast__sub_82475B60
 +__imp__sub_82475B60
++__fast__sub_82202C98
 +__imp__sub_82202C98
++__fast__sub_82F81E08
 +__imp__sub_82F81E08
++__fast__sub_8298B5F8
 +__imp__sub_8298B5F8
++__fast__sub_8306EE28
 +__imp__sub_8306EE28
++__fast__sub_82F8EEC8
 +__imp__sub_82F8EEC8
++__fast__sub_82D3B0F8
 +__imp__sub_82D3B0F8
++__fast__sub_82587FE8
 +__imp__sub_82587FE8
++__fast__sub_82F27C08
 +__imp__sub_82F27C08
++__fast__sub_82DC34A0
 +__imp__sub_82DC34A0
++__fast__sub_82DD7570
 +__imp__sub_82DD7570
++__fast__sub_8292B2F0
 +__imp__sub_8292B2F0
++__fast__sub_82F2C080
 +__imp__sub_82F2C080
++__fast__sub_82C48438
 +__imp__sub_82C48438
++__fast__sub_82F312A0
 +__imp__sub_82F312A0
++__fast__sub_82F344F8
 +__imp__sub_82F344F8
++__fast__sub_82351FA8
 +__imp__sub_82351FA8
++__fast__sub_82B80E08
 +__imp__sub_82B80E08
++__fast__sub_82F8E6B8
 +__imp__sub_82F8E6B8
++__fast__sub_82D83798
 +__imp__sub_82D83798
++__fast__sub_82FAB578
 +__imp__sub_82FAB578
++__fast__sub_82C4C770
 +__imp__sub_82C4C770
++__fast__sub_82C4C808
 +__imp__sub_82C4C808
++__fast__sub_82D6A990
 +__imp__sub_82D6A990
++__fast__sub_82D587B0
 +__imp__sub_82D587B0
++__fast__sub_82FF75C8
 +__imp__sub_82FF75C8
++__fast__sub_82C4B238
 +__imp__sub_82C4B238
++__fast__sub_824ACAF8
 +__imp__sub_824ACAF8
++__fast__sub_82C60430
 +__imp__sub_82C60430
++__fast__sub_8265C5C8
 +__imp__sub_8265C5C8
++__fast__sub_822ACC68
 +__imp__sub_822ACC68
++__fast__sub_82DD2D30
 +__imp__sub_82DD2D30
++__fast__sub_82F8E888
 +__imp__sub_82F8E888
++__fast__sub_82C0C5F0
 +__imp__sub_82C0C5F0
++__fast__sub_82BE2590
 +__imp__sub_82BE2590
++__fast__sub_82F80DC0
 +__imp__sub_82F80DC0
++__fast__sub_82DCD2C8
 +__imp__sub_82DCD2C8
++__fast__sub_82F297B8
 +__imp__sub_82F297B8
++__fast__sub_82D585B0
 +__imp__sub_82D585B0
++__fast__sub_82526728
 +__imp__sub_82526728
++__fast__sub_82387F98
 +__imp__sub_82387F98
++__fast__sub_82DCC490
 +__imp__sub_82DCC490
++__fast__sub_82F3ABB8
 +__imp__sub_82F3ABB8
++__fast__sub_82DBEA30
 +__imp__sub_82DBEA30
++__fast__sub_82524A38
 +__imp__sub_82524A38
++__fast__sub_82D87240
 +__imp__sub_82D87240
++__fast__sub_82D8A6B8
 +__imp__sub_82D8A6B8
++__fast__sub_82DCBE48
 +__imp__sub_82DCBE48
++__fast__sub_82657A20
 +__imp__sub_82657A20
++__fast__sub_8238DB18
 +__imp__sub_8238DB18
++__fast__sub_82DCEB18
 +__imp__sub_82DCEB18
++__fast__sub_82DB9CD0
 +__imp__sub_82DB9CD0
++__fast__sub_82387450
 +__imp__sub_82387450
++__fast__sub_82817550
 +__imp__sub_82817550
++__fast__sub_8264E580
 +__imp__sub_8264E580
++__fast__sub_82607318
 +__imp__sub_82607318
++__fast__sub_82D58358
 +__imp__sub_82D58358
++__fast__sub_821E6350
 +__imp__sub_821E6350
++__fast__sub_821EF800
 +__imp__sub_821EF800
++__fast__sub_822ABD98
 +__imp__sub_822ABD98
++__fast__sub_82F825D8
 +__imp__sub_82F825D8
++__fast__sub_821FF268
 +__imp__sub_821FF268
++__fast__sub_82F3AA98
 +__imp__sub_82F3AA98
++__fast__sub_82B9E778
 +__imp__sub_82B9E778
++__fast__sub_82DCD450
 +__imp__sub_82DCD450
++__fast__sub_82DC0F60
 +__imp__sub_82DC0F60
++__fast__sub_82F3A5A0
 +__imp__sub_82F3A5A0
++__fast__sub_82F22C20
 +__imp__sub_82F22C20
++__fast__sub_822AF028
 +__imp__sub_822AF028
++__fast__sub_824277B0
 +__imp__sub_824277B0
++__fast__sub_82C0E9A0
 +__imp__sub_82C0E9A0
++__fast__sub_82C0D308
 +__imp__sub_82C0D308
++__fast__sub_8225E1A8
 +__imp__sub_8225E1A8
++__fast__sub_83052818
 +__imp__sub_83052818
++__fast__sub_82DBD2E8
 +__imp__sub_82DBD2E8
++__fast__sub_82C4B498
 +__imp__sub_82C4B498
++__fast__sub_82FF7768
 +__imp__sub_82FF7768
++__fast__sub_82F38FD8
 +__imp__sub_82F38FD8
++__fast__sub_82351838
 +__imp__sub_82351838
++__fast__sub_82F80688
 +__imp__sub_82F80688
++__fast__sub_8298B050
 +__imp__sub_8298B050
++__fast__sub_82D827E8
 +__imp__sub_82D827E8
++__fast__sub_822CB000
 +__imp__sub_822CB000
++__fast__sub_82BB1BF0
 +__imp__sub_82BB1BF0
++__fast__sub_82BAAB40
 +__imp__sub_82BAAB40
++__fast__sub_824B5918
 +__imp__sub_824B5918
++__fast__sub_8234E640
 +__imp__sub_8234E640
++__fast__sub_82906330
 +__imp__sub_82906330
++__fast__sub_82BB1D58
 +__imp__sub_82BB1D58
++__fast__sub_82C19C48
 +__imp__sub_82C19C48
++__fast__sub_82F87D30
 +__imp__sub_82F87D30
++__fast__sub_82F57D98
 +__imp__sub_82F57D98
++__fast__sub_82F37680
 +__imp__sub_82F37680
++__fast__sub_82DD7628
 +__imp__sub_82DD7628
++__fast__sub_82F44CE0
 +__imp__sub_82F44CE0
++__fast__sub_823B10A8
 +__imp__sub_823B10A8
++__fast__sub_82BB1DF0
 +__imp__sub_82BB1DF0
++__fast__sub_824B5880
 +__imp__sub_824B5880
++__fast__sub_82D83F88
 +__imp__sub_82D83F88
++__fast__sub_82D8EEE8
 +__imp__sub_82D8EEE8
++__fast__sub_82214020
 +__imp__sub_82214020
++__fast__sub_8292A6B0
 +__imp__sub_8292A6B0
++__fast__sub_82C1AF70
 +__imp__sub_82C1AF70
++__fast__sub_82FAAA38
 +__imp__sub_82FAAA38
++__fast__sub_823E1AD0
 +__imp__sub_823E1AD0
++__fast__sub_82FAD808
 +__imp__sub_82FAD808
++__fast__sub_82F7FB90
 +__imp__sub_82F7FB90
++__fast__sub_82FEA618
 +__imp__sub_82FEA618
++__fast__sub_82FEEC40
 +__imp__sub_82FEEC40
++__fast__sub_82476488
 +__imp__sub_82476488
++__fast__sub_83001BC8
 +__imp__sub_83001BC8
++__fast__sub_82F998B8
 +__imp__sub_82F998B8
++__fast__sub_82F7F6B0
 +__imp__sub_82F7F6B0
++__fast__sub_8238DAB8
 +__imp__sub_8238DAB8
++__fast__sub_82398E20
 +__imp__sub_82398E20
++__fast__sub_82451218
 +__imp__sub_82451218
++__fast__sub_82D5A418
 +__imp__sub_82D5A418
++__fast__sub_82CE2A28
 +__imp__sub_82CE2A28
++__fast__sub_82D8A510
 +__imp__sub_82D8A510
++__fast__sub_82C1AE18
 +__imp__sub_82C1AE18
++__fast__sub_82DF15C8
 +__imp__sub_82DF15C8
++__fast__sub_82D23F68
 +__imp__sub_82D23F68
++__fast__sub_82D55060
 +__imp__sub_82D55060
++__fast__sub_82D1C908
 +__imp__sub_82D1C908
++__fast__sub_825245C0
 +__imp__sub_825245C0
++__fast__sub_8298B468
 +__imp__sub_8298B468
++__fast__sub_82F18490
 +__imp__sub_82F18490
++__fast__sub_82215410
 +__imp__sub_82215410
++__fast__sub_83001680
 +__imp__sub_83001680
++__fast__sub_82F80418
 +__imp__sub_82F80418
++__fast__sub_82578090
 +__imp__sub_82578090
++__fast__sub_82D90208
 +__imp__sub_82D90208
++__fast__sub_8241EFD0
 +__imp__sub_8241EFD0
++__fast__sub_82C4BDD8
 +__imp__sub_82C4BDD8
++__fast__sub_82BFAA00
 +__imp__sub_82BFAA00
++__fast__sub_82F61DE0
 +__imp__sub_82F61DE0
++__fast__sub_82C3F798
 +__imp__sub_82C3F798
++__fast__sub_8298B568
 +__imp__sub_8298B568
++__fast__sub_82C4C338
 +__imp__sub_82C4C338
++__fast__sub_82FFB588
 +__imp__sub_82FFB588
++__fast__sub_82F7F268
 +__imp__sub_82F7F268
++__fast__sub_82C0EED8
 +__imp__sub_82C0EED8
++__fast__sub_82BFF188
 +__imp__sub_82BFF188
++__fast__sub_82CA0270
 +__imp__sub_82CA0270
++__fast__sub_82422060
 +__imp__sub_82422060
++__fast__sub_82D80F80
 +__imp__sub_82D80F80
++__fast__sub_82F5B238
 +__imp__sub_82F5B238
++__fast__sub_82499C60
 +__imp__sub_82499C60
++__fast__sub_82CE72B8
 +__imp__sub_82CE72B8
++__fast__sub_82D9A938
 +__imp__sub_82D9A938
++__fast__sub_825231F0
 +__imp__sub_825231F0
++__fast__sub_828100E8
 +__imp__sub_828100E8
++__fast__sub_8266C0A0
 +__imp__sub_8266C0A0
++__fast__sub_8266D360
 +__imp__sub_8266D360
++__fast__sub_82810750
 +__imp__sub_82810750
++__fast__sub_82DD89C8
 +__imp__sub_82DD89C8
++__fast__sub_82F44E28
 +__imp__sub_82F44E28
++__fast__sub_82974C58
 +__imp__sub_82974C58
++__fast__sub_8241C348
 +__imp__sub_8241C348
++__fast__sub_82B809D8
 +__imp__sub_82B809D8
++__fast__sub_823B08B8
 +__imp__sub_823B08B8
++__fast__sub_82E667B8
 +__imp__sub_82E667B8
++__fast__sub_82C995E0
 +__imp__sub_82C995E0
++__fast__sub_82F87070
 +__imp__sub_82F87070
++__fast__sub_82676BD8
 +__imp__sub_82676BD8
++__fast__sub_824A23B8
 +__imp__sub_824A23B8
++__fast__sub_82F7FCF0
 +__imp__sub_82F7FCF0
++__fast__sub_8258DAA8
 +__imp__sub_8258DAA8
++__fast__sub_82D54C38
 +__imp__sub_82D54C38
++__fast__sub_82D81978
 +__imp__sub_82D81978
++__fast__sub_82D94040
 +__imp__sub_82D94040
++__fast__sub_82426038
 +__imp__sub_82426038
++__fast__sub_82D6C3D0
 +__imp__sub_82D6C3D0
++__fast__sub_82DBD028
 +__imp__sub_82DBD028
++__fast__sub_82C60EA0
 +__imp__sub_82C60EA0
++__fast__sub_82925C28
 +__imp__sub_82925C28
++__fast__sub_82F35258
 +__imp__sub_82F35258
++__fast__sub_82DF1A80
 +__imp__sub_82DF1A80
++__fast__sub_82220320
 +__imp__sub_82220320
++__fast__sub_8221FB18
 +__imp__sub_8221FB18
++__fast__sub_82F7EED8
 +__imp__sub_82F7EED8
++__fast__sub_82475A28
 +__imp__sub_82475A28
++__fast__sub_82D772C8
 +__imp__sub_82D772C8
++__fast__sub_8220C810
 +__imp__sub_8220C810
++__fast__sub_82480038
 +__imp__sub_82480038
++__fast__sub_82DD7910
 +__imp__sub_82DD7910
++__fast__sub_82C44F98
 +__imp__sub_82C44F98
++__fast__sub_823AFBD0
 +__imp__sub_823AFBD0
++__fast__sub_82BF7C58
 +__imp__sub_82BF7C58
++__fast__sub_82C0C270
 +__imp__sub_82C0C270
++__fast__sub_82F448B8
 +__imp__sub_82F448B8
++__fast__sub_821E5190
 +__imp__sub_821E5190
++__fast__sub_82992870
 +__imp__sub_82992870
++__fast__sub_83000358
 +__imp__sub_83000358
++__fast__sub_82DBD258
 +__imp__sub_82DBD258
++__fast__sub_82DF1A58
 +__imp__sub_82DF1A58
++__fast__sub_82F2B3E0
 +__imp__sub_82F2B3E0
++__fast__sub_82978728
 +__imp__sub_82978728
++__fast__sub_823D5B60
 +__imp__sub_823D5B60
++__fast__sub_82FF5DE8
 +__imp__sub_82FF5DE8
++__fast__sub_82DB9D88
 +__imp__sub_82DB9D88
++__fast__sub_82DC3788
 +__imp__sub_82DC3788
++__fast__sub_8220CE68
 +__imp__sub_8220CE68
++__fast__sub_83052F30
 +__imp__sub_83052F30
++__fast__sub_8266C370
 +__imp__sub_8266C370
++__fast__sub_82FF65B8
 +__imp__sub_82FF65B8
++__fast__sub_8249AF78
 +__imp__sub_8249AF78
++__fast__sub_82E6C700
 +__imp__sub_82E6C700
++__fast__sub_822B0A58
 +__imp__sub_822B0A58
++__fast__sub_82CE0C68
 +__imp__sub_82CE0C68
++__fast__sub_82BAC098
 +__imp__sub_82BAC098
++__fast__sub_82B9F120
 +__imp__sub_82B9F120
++__fast__sub_82BE1930
 +__imp__sub_82BE1930
++__fast__sub_82FF96C8
 +__imp__sub_82FF96C8
++__fast__sub_82FF5B58
 +__imp__sub_82FF5B58
++__fast__sub_8238D998
 +__imp__sub_8238D998
++__fast__sub_82F3C5F8
 +__imp__sub_82F3C5F8
++__fast__sub_82DD2C48
 +__imp__sub_82DD2C48
++__fast__sub_82C86508
 +__imp__sub_82C86508
++__fast__sub_82FF6740
 +__imp__sub_82FF6740
++__fast__sub_825797E0
 +__imp__sub_825797E0
++__fast__sub_82D58E70
 +__imp__sub_82D58E70
++__fast__sub_82D594B8
 +__imp__sub_82D594B8
++__fast__sub_82DA23A0
 +__imp__sub_82DA23A0
++__fast__sub_82536C48
 +__imp__sub_82536C48
++__fast__sub_8265E5F0
 +__imp__sub_8265E5F0
++__fast__sub_82605E50
 +__imp__sub_82605E50
++__fast__sub_82BFCA70
 +__imp__sub_82BFCA70
++__fast__sub_82C4FE28
 +__imp__sub_82C4FE28
++__fast__sub_8221A2F8
 +__imp__sub_8221A2F8
++__fast__sub_82DD5848
 +__imp__sub_82DD5848
++__fast__sub_830425B0
 +__imp__sub_830425B0
++__fast__sub_83052740
 +__imp__sub_83052740
++__fast__sub_82D6CC78
 +__imp__sub_82D6CC78
++__fast__sub_82F5E0F0
 +__imp__sub_82F5E0F0
++__fast__sub_82F5D400
 +__imp__sub_82F5D400
++__fast__sub_82F58DC0
 +__imp__sub_82F58DC0
++__fast__sub_82DD2DB0
 +__imp__sub_82DD2DB0
++__fast__sub_82FF9558
 +__imp__sub_82FF9558
++__fast__sub_82427B20
 +__imp__sub_82427B20
++__fast__sub_822CB250
 +__imp__sub_822CB250
++__fast__sub_8300E500
 +__imp__sub_8300E500
++__fast__sub_82DC7420
 +__imp__sub_82DC7420
++__fast__sub_829911A8
 +__imp__sub_829911A8
++__fast__sub_82DDA5C0
 +__imp__sub_82DDA5C0
++__fast__sub_823E6130
 +__imp__sub_823E6130
++__fast__sub_82FE9BD0
 +__imp__sub_82FE9BD0
++__fast__sub_82F9F738
 +__imp__sub_82F9F738
++__fast__sub_83027050
 +__imp__sub_83027050
++__fast__sub_82C20F38
 +__imp__sub_82C20F38
++__fast__sub_8264C470
 +__imp__sub_8264C470
++__fast__sub_82F87E20
 +__imp__sub_82F87E20
++__fast__sub_82F32910
 +__imp__sub_82F32910
++__fast__sub_82BA0808
 +__imp__sub_82BA0808
++__fast__sub_824A20E0
 +__imp__sub_824A20E0
++__fast__sub_82485D70
 +__imp__sub_82485D70
++__fast__sub_82BB1C90
 +__imp__sub_82BB1C90
++__fast__sub_82D8E1B8
 +__imp__sub_82D8E1B8
++__fast__sub_82C0D290
 +__imp__sub_82C0D290
++__fast__sub_82DCD028
 +__imp__sub_82DCD028
++__fast__sub_8257A588
 +__imp__sub_8257A588
++__fast__sub_82992640
 +__imp__sub_82992640
++__fast__sub_82D3CBF0
 +__imp__sub_82D3CBF0
++__fast__sub_8238D8E0
 +__imp__sub_8238D8E0
++__fast__sub_824802F8
 +__imp__sub_824802F8
++__fast__sub_82DD8A58
 +__imp__sub_82DD8A58
++__fast__sub_82F988A8
 +__imp__sub_82F988A8
++__fast__sub_82D3B4C0
 +__imp__sub_82D3B4C0
++__fast__sub_82FFA4A0
 +__imp__sub_82FFA4A0
++__fast__sub_8300CD48
 +__imp__sub_8300CD48
++__fast__sub_82DD6900
 +__imp__sub_82DD6900
++__fast__sub_828B3E20
 +__imp__sub_828B3E20
++__fast__sub_82929CB0
 +__imp__sub_82929CB0
++__fast__sub_82F9DBC0
 +__imp__sub_82F9DBC0
++__fast__sub_82D58538
 +__imp__sub_82D58538
++__fast__sub_82D53E80
 +__imp__sub_82D53E80
++__fast__sub_82D54250
 +__imp__sub_82D54250
++__fast__sub_8227FCD0
 +__imp__sub_8227FCD0
++__fast__sub_824B2A88
 +__imp__sub_824B2A88
++__fast__sub_82FF25F0
 +__imp__sub_82FF25F0
++__fast__sub_82F71238
 +__imp__sub_82F71238
++__fast__sub_82830340
 +__imp__sub_82830340
++__fast__sub_824D5E98
 +__imp__sub_824D5E98
++__fast__sub_824A4DB0
 +__imp__sub_824A4DB0
++__fast__sub_82F353E0
 +__imp__sub_82F353E0
++__fast__sub_82F35478
 +__imp__sub_82F35478
++__fast__sub_82F5AB60
 +__imp__sub_82F5AB60
++__fast__sub_82F9B508
 +__imp__sub_82F9B508
++__fast__sub_82D34628
 +__imp__sub_82D34628
++__fast__sub_82C42518
 +__imp__sub_82C42518
++__fast__sub_82424EA0
 +__imp__sub_82424EA0
++__fast__sub_821F0DB8
 +__imp__sub_821F0DB8
++__fast__sub_82F286C0
 +__imp__sub_82F286C0
++__fast__sub_82C3CD68
 +__imp__sub_82C3CD68
++__fast__sub_824AE140
 +__imp__sub_824AE140
++__fast__sub_829921F8
 +__imp__sub_829921F8
++__fast__sub_82C4E3D0
 +__imp__sub_82C4E3D0
++__fast__sub_83049640
 +__imp__sub_83049640
++__fast__sub_82C60818
 +__imp__sub_82C60818
++__fast__sub_82D6C1D0
 +__imp__sub_82D6C1D0
++__fast__sub_8298ADF0
 +__imp__sub_8298ADF0
++__fast__sub_82C17FC8
 +__imp__sub_82C17FC8
++__fast__sub_82C1CE18
 +__imp__sub_82C1CE18
++__fast__sub_82BFDBD8
 +__imp__sub_82BFDBD8
++__fast__sub_82BFD690
 +__imp__sub_82BFD690
++__fast__sub_82F64AA8
 +__imp__sub_82F64AA8
++__fast__sub_8306FFE8
 +__imp__sub_8306FFE8
++__fast__sub_8234ED08
 +__imp__sub_8234ED08
++__fast__sub_82EBA198
 +__imp__sub_82EBA198
++__fast__sub_82BCB1C8
 +__imp__sub_82BCB1C8
++__fast__sub_82BF8308
 +__imp__sub_82BF8308
++__fast__sub_82D813D8
 +__imp__sub_82D813D8
++__fast__sub_82BE57A0
 +__imp__sub_82BE57A0
++__fast__sub_82657D98
 +__imp__sub_82657D98
++__fast__sub_8298AED8
 +__imp__sub_8298AED8
++__fast__sub_82DD5928
 +__imp__sub_82DD5928
++__fast__sub_82D9A378
 +__imp__sub_82D9A378
++__fast__sub_82D9CCA8
 +__imp__sub_82D9CCA8
++__fast__sub_82D8F8D8
 +__imp__sub_82D8F8D8
++__fast__sub_82991A08
 +__imp__sub_82991A08
++__fast__sub_824FB810
 +__imp__sub_824FB810
++__fast__sub_8300D248
 +__imp__sub_8300D248
++__fast__sub_82D8DA90
 +__imp__sub_82D8DA90
++__fast__sub_825624A0
 +__imp__sub_825624A0
++__fast__sub_830273C0
 +__imp__sub_830273C0
++__fast__sub_82FEA100
 +__imp__sub_82FEA100
++__fast__sub_82D82720
 +__imp__sub_82D82720
++__fast__sub_82DC38E8
 +__imp__sub_82DC38E8
++__fast__sub_82DC0EA8
 +__imp__sub_82DC0EA8
++__fast__sub_829908F0
 +__imp__sub_829908F0
++__fast__sub_82538068
 +__imp__sub_82538068
++__fast__sub_825457C0
 +__imp__sub_825457C0
++__fast__sub_82210060
 +__imp__sub_82210060
++__fast__sub_825467A8
 +__imp__sub_825467A8
++__fast__sub_82544C58
 +__imp__sub_82544C58
++__fast__sub_8292B730
 +__imp__sub_8292B730
++__fast__sub_82928AB8
 +__imp__sub_82928AB8
++__fast__sub_82F5DEE8
 +__imp__sub_82F5DEE8
++__fast__sub_82D22958
 +__imp__sub_82D22958
++__fast__sub_82D8E9F0
 +__imp__sub_82D8E9F0
++__fast__sub_824B52E0
 +__imp__sub_824B52E0
++__fast__sub_8239B1A8
 +__imp__sub_8239B1A8
++__fast__sub_82213CA8
 +__imp__sub_82213CA8
++__fast__sub_82215228
 +__imp__sub_82215228
++__fast__sub_824DD308
 +__imp__sub_824DD308
++__fast__sub_82872018
 +__imp__sub_82872018
++__fast__sub_8304E1A8
 +__imp__sub_8304E1A8
++__fast__sub_83056128
 +__imp__sub_83056128
++__fast__sub_83042C70
 +__imp__sub_83042C70
++__fast__sub_82F4FE78
 +__imp__sub_82F4FE78
++__fast__sub_82F5C6F8
 +__imp__sub_82F5C6F8
++__fast__sub_82F61800
 +__imp__sub_82F61800
++__fast__sub_82F547D8
 +__imp__sub_82F547D8
++__fast__sub_825F7D20
 +__imp__sub_825F7D20
++__fast__sub_829671E8
 +__imp__sub_829671E8
++__fast__sub_824F3AF0
 +__imp__sub_824F3AF0
++__fast__sub_82884AD0
 +__imp__sub_82884AD0
++__fast__sub_82F58898
 +__imp__sub_82F58898
++__fast__sub_8266D0B8
 +__imp__sub_8266D0B8
++__fast__sub_82F5DD50
 +__imp__sub_82F5DD50
++__fast__sub_82F35CE8
 +__imp__sub_82F35CE8
++__fast__sub_82F35D68
 +__imp__sub_82F35D68
++__fast__sub_82FEBED8
 +__imp__sub_82FEBED8
++__fast__sub_82424040
 +__imp__sub_82424040
++__fast__sub_824E0DA0
 +__imp__sub_824E0DA0
++__fast__sub_822B1D08
 +__imp__sub_822B1D08
++__fast__sub_824E0C60
 +__imp__sub_824E0C60
++__fast__sub_82486760
 +__imp__sub_82486760
++__fast__sub_82CAF530
 +__imp__sub_82CAF530
++__fast__sub_83000580
 +__imp__sub_83000580
++__fast__sub_82C5EDC8
 +__imp__sub_82C5EDC8
++__fast__sub_82C82040
 +__imp__sub_82C82040
++__fast__sub_82DBFE90
 +__imp__sub_82DBFE90
++__fast__sub_82F361A0
 +__imp__sub_82F361A0
++__fast__sub_82E655E8
 +__imp__sub_82E655E8
++__fast__sub_82C86590
 +__imp__sub_82C86590
++__fast__sub_829A1BC8
 +__imp__sub_829A1BC8
++__fast__sub_82523A20
 +__imp__sub_82523A20
++__fast__sub_82F6FD78
 +__imp__sub_82F6FD78
++__fast__sub_82DDA830
 +__imp__sub_82DDA830
++__fast__sub_82C42108
 +__imp__sub_82C42108
++__fast__sub_82C34470
 +__imp__sub_82C34470
++__fast__sub_82C4EB08
 +__imp__sub_82C4EB08
++__fast__sub_82DCD338
 +__imp__sub_82DCD338
++__fast__sub_82DBF6C0
 +__imp__sub_82DBF6C0
++__fast__sub_822B04C0
 +__imp__sub_822B04C0
++__fast__sub_82CAC578
 +__imp__sub_82CAC578
++__fast__sub_8298AD60
 +__imp__sub_8298AD60
++__fast__sub_823D9860
 +__imp__sub_823D9860
++__fast__sub_82565E78
 +__imp__sub_82565E78
++__fast__sub_82F90B28
 +__imp__sub_82F90B28
++__fast__sub_82D5A540
 +__imp__sub_82D5A540
++__fast__sub_82FF7AC0
 +__imp__sub_82FF7AC0
++__fast__sub_82FEB900
 +__imp__sub_82FEB900
++__fast__sub_82D81F30
 +__imp__sub_82D81F30
++__fast__sub_82414458
 +__imp__sub_82414458
++__fast__sub_821E0C10
 +__imp__sub_821E0C10
++__fast__sub_82F6FA68
 +__imp__sub_82F6FA68
++__fast__sub_82257860
 +__imp__sub_82257860
++__fast__sub_82DCEBA0
 +__imp__sub_82DCEBA0
++__fast__sub_82427318
 +__imp__sub_82427318
++__fast__sub_82C60AA0
 +__imp__sub_82C60AA0
++__fast__sub_82BFED60
 +__imp__sub_82BFED60
++__fast__sub_82BFEBD8
 +__imp__sub_82BFEBD8
++__fast__sub_82D78828
 +__imp__sub_82D78828
++__fast__sub_82F36770
 +__imp__sub_82F36770
++__fast__sub_82BFC648
 +__imp__sub_82BFC648
++__fast__sub_824FF1A8
 +__imp__sub_824FF1A8
++__fast__sub_8280DB20
 +__imp__sub_8280DB20
++__fast__sub_82F73948
 +__imp__sub_82F73948
++__fast__sub_82DA0880
 +__imp__sub_82DA0880
++__fast__sub_82F97A10
 +__imp__sub_82F97A10
++__fast__sub_82D8F058
 +__imp__sub_82D8F058
++__fast__sub_82395EA8
 +__imp__sub_82395EA8
++__fast__sub_83049240
 +__imp__sub_83049240
++__fast__sub_822DD298
 +__imp__sub_822DD298
++__fast__sub_8304F300
 +__imp__sub_8304F300
++__fast__sub_82D90860
 +__imp__sub_82D90860
++__fast__sub_822AD338
 +__imp__sub_822AD338
++__fast__sub_82C0F450
 +__imp__sub_82C0F450
++__fast__sub_82F98CD0
 +__imp__sub_82F98CD0
++__fast__sub_830276C0
 +__imp__sub_830276C0
++__fast__sub_82C24DC8
 +__imp__sub_82C24DC8
++__fast__sub_82F55658
 +__imp__sub_82F55658
++__fast__sub_83000F48
 +__imp__sub_83000F48
++__fast__sub_82C83DF0
 +__imp__sub_82C83DF0
++__fast__sub_82532C80
 +__imp__sub_82532C80
++__fast__sub_82D9B518
 +__imp__sub_82D9B518
++__fast__sub_82D7FC00
 +__imp__sub_82D7FC00
++__fast__sub_83057CF8
 +__imp__sub_83057CF8
++__fast__sub_82FFB1F0
 +__imp__sub_82FFB1F0
++__fast__sub_823971B0
 +__imp__sub_823971B0
++__fast__sub_82C93A10
 +__imp__sub_82C93A10
++__fast__sub_82FCF018
 +__imp__sub_82FCF018
++__fast__sub_82F1ABC8
 +__imp__sub_82F1ABC8
++__fast__sub_82928770
 +__imp__sub_82928770
++__fast__sub_828B2E00
 +__imp__sub_828B2E00
++__fast__sub_82F5D240
 +__imp__sub_82F5D240
++__fast__sub_82D6C9E0
 +__imp__sub_82D6C9E0
++__fast__sub_82D5A3B8
 +__imp__sub_82D5A3B8
++__fast__sub_82D92250
 +__imp__sub_82D92250
++__fast__sub_82280C20
 +__imp__sub_82280C20
++__fast__sub_824D94E0
 +__imp__sub_824D94E0
++__fast__sub_83056248
 +__imp__sub_83056248
++__fast__sub_8304CB08
 +__imp__sub_8304CB08
++__fast__sub_8286EB78
 +__imp__sub_8286EB78
++__fast__sub_83048FB0
 +__imp__sub_83048FB0
++__fast__sub_82DBFED0
 +__imp__sub_82DBFED0
++__fast__sub_8304C9D0
 +__imp__sub_8304C9D0
++__fast__sub_8304C350
 +__imp__sub_8304C350
++__fast__sub_8300E480
 +__imp__sub_8300E480
++__fast__sub_82F4D4F8
 +__imp__sub_82F4D4F8
++__fast__sub_82F70F18
 +__imp__sub_82F70F18
++__fast__sub_824FB470
 +__imp__sub_824FB470
++__fast__sub_825297D0
 +__imp__sub_825297D0
++__fast__sub_829AC728
 +__imp__sub_829AC728
++__fast__sub_82487ED8
 +__imp__sub_82487ED8
++__fast__sub_822954C0
 +__imp__sub_822954C0
++__fast__sub_82C28BA0
 +__imp__sub_82C28BA0
++__fast__sub_8290EB10
 +__imp__sub_8290EB10
++__fast__sub_82340DC0
 +__imp__sub_82340DC0
++__fast__sub_8252DE00
 +__imp__sub_8252DE00
++__fast__sub_82531010
 +__imp__sub_82531010
++__fast__sub_82F24CF0
 +__imp__sub_82F24CF0
++__fast__sub_830499D8
 +__imp__sub_830499D8
++__fast__sub_82F41F00
 +__imp__sub_82F41F00
++__fast__sub_82BA2B80
 +__imp__sub_82BA2B80
++__fast__sub_82FBF568
 +__imp__sub_82FBF568
++__fast__sub_82FC93E8
 +__imp__sub_82FC93E8
++__fast__sub_82FC8860
 +__imp__sub_82FC8860
++__fast__sub_822BAEA8
 +__imp__sub_822BAEA8
++__fast__sub_830498A8
 +__imp__sub_830498A8
++__fast__sub_82DC9330
 +__imp__sub_82DC9330
++__fast__sub_82881CD8
 +__imp__sub_82881CD8
++__fast__sub_82A8EF98
 +__imp__sub_82A8EF98
++__fast__sub_82475518
 +__imp__sub_82475518
++__fast__sub_821FEE08
 +__imp__sub_821FEE08
++__fast__sub_824DFB88
 +__imp__sub_824DFB88
++__fast__sub_82D60290
 +__imp__sub_82D60290
++__fast__sub_8256EFA0
 +__imp__sub_8256EFA0
++__fast__sub_82F802B0
 +__imp__sub_82F802B0
++__fast__sub_82D84550
 +__imp__sub_82D84550
++__fast__sub_8300DCE0
 +__imp__sub_8300DCE0
++__fast__sub_82FFCA48
 +__imp__sub_82FFCA48
++__fast__sub_8258DBA8
 +__imp__sub_8258DBA8
++__fast__sub_82494628
 +__imp__sub_82494628
++__fast__sub_821EF8C8
 +__imp__sub_821EF8C8
++__fast__sub_82F64AF8
 +__imp__sub_82F64AF8
++__fast__sub_82FF3A90
 +__imp__sub_82FF3A90
++__fast__sub_83001968
 +__imp__sub_83001968
++__fast__sub_82D594F0
 +__imp__sub_82D594F0
++__fast__sub_82202B90
 +__imp__sub_82202B90
++__fast__sub_82DD66D0
 +__imp__sub_82DD66D0
++__fast__sub_82324C18
 +__imp__sub_82324C18
++__fast__sub_83070020
 +__imp__sub_83070020
++__fast__sub_82F70520
 +__imp__sub_82F70520
++__fast__sub_82EB8FB8
 +__imp__sub_82EB8FB8
++__fast__sub_82B87EB8
 +__imp__sub_82B87EB8
++__fast__sub_82518EF8
 +__imp__sub_82518EF8
++__fast__sub_823AF5B8
 +__imp__sub_823AF5B8
++__fast__sub_82FA3C18
 +__imp__sub_82FA3C18
++__fast__sub_82484BF0
 +__imp__sub_82484BF0
++__fast__sub_82B9E598
 +__imp__sub_82B9E598
++__fast__sub_82BB1B08
 +__imp__sub_82BB1B08
++__fast__sub_83026EA8
 +__imp__sub_83026EA8
++__fast__sub_8300ECE0
 +__imp__sub_8300ECE0
++__fast__sub_82BFD7D0
 +__imp__sub_82BFD7D0
++__fast__sub_82D9BFA8
 +__imp__sub_82D9BFA8
++__fast__sub_82F5D080
 +__imp__sub_82F5D080
++__fast__sub_829CEFD0
 +__imp__sub_829CEFD0
++__fast__sub_82D82F20
 +__imp__sub_82D82F20
++__fast__sub_828CE5F8
 +__imp__sub_828CE5F8
++__fast__sub_82E6FD90
 +__imp__sub_82E6FD90
++__fast__sub_82D21E70
 +__imp__sub_82D21E70
++__fast__sub_82BC6450
 +__imp__sub_82BC6450
++__fast__sub_82F7EA60
 +__imp__sub_82F7EA60
++__fast__sub_82202AB0
 +__imp__sub_82202AB0
++__fast__sub_82201C80
 +__imp__sub_82201C80
++__fast__sub_82FF5A88
 +__imp__sub_82FF5A88
++__fast__sub_82FF6B08
 +__imp__sub_82FF6B08
++__fast__sub_83028948
 +__imp__sub_83028948
++__fast__sub_82561900
 +__imp__sub_82561900
++__fast__sub_822610C8
 +__imp__sub_822610C8
++__fast__sub_82BABF28
 +__imp__sub_82BABF28
++__fast__sub_82BE4708
 +__imp__sub_82BE4708
++__fast__sub_82F327B0
 +__imp__sub_82F327B0
++__fast__sub_829A5DC0
 +__imp__sub_829A5DC0
++__fast__sub_82F96A50
 +__imp__sub_82F96A50
++__fast__sub_82420740
 +__imp__sub_82420740
++__fast__sub_824133A0
 +__imp__sub_824133A0
++__fast__sub_82414100
 +__imp__sub_82414100
++__fast__sub_82C36588
 +__imp__sub_82C36588
++__fast__sub_82388680
 +__imp__sub_82388680
++__fast__sub_82FFEDA0
 +__imp__sub_82FFEDA0
++__fast__sub_82C99DC8
 +__imp__sub_82C99DC8
++__fast__sub_82DBFFB8
 +__imp__sub_82DBFFB8
++__fast__sub_82F33C00
 +__imp__sub_82F33C00
++__fast__sub_82F8D4C0
 +__imp__sub_82F8D4C0
++__fast__sub_824FEFA0
 +__imp__sub_824FEFA0
++__fast__sub_824870C8
 +__imp__sub_824870C8
++__fast__sub_8300B3D8
 +__imp__sub_8300B3D8
++__fast__sub_82512910
 +__imp__sub_82512910
++__fast__sub_82D80AD0
 +__imp__sub_82D80AD0
++__fast__sub_82F98C68
 +__imp__sub_82F98C68
++__fast__sub_824244B0
 +__imp__sub_824244B0
++__fast__sub_82F37488
 +__imp__sub_82F37488
++__fast__sub_82F37C80
 +__imp__sub_82F37C80
++__fast__sub_82F2AE00
 +__imp__sub_82F2AE00
++__fast__sub_82F2A0A8
 +__imp__sub_82F2A0A8
++__fast__sub_82FFD080
 +__imp__sub_82FFD080
++__fast__sub_82F8A4A0
 +__imp__sub_82F8A4A0
++__fast__sub_82F1B218
 +__imp__sub_82F1B218
++__fast__sub_82EBA7E0
 +__imp__sub_82EBA7E0
++__fast__sub_82C990E0
 +__imp__sub_82C990E0
++__fast__sub_82644C88
 +__imp__sub_82644C88
++__fast__sub_82D53720
 +__imp__sub_82D53720
++__fast__sub_82986B60
 +__imp__sub_82986B60
++__fast__sub_82DF1A10
 +__imp__sub_82DF1A10
++__fast__sub_82F63328
 +__imp__sub_82F63328
++__fast__sub_82F4D418
 +__imp__sub_82F4D418
++__fast__sub_82BAA250
 +__imp__sub_82BAA250
++__fast__sub_82BAC2E8
 +__imp__sub_82BAC2E8
++__fast__sub_824AAEA8
 +__imp__sub_824AAEA8
++__fast__sub_82C89648
 +__imp__sub_82C89648
++__fast__sub_82FCEE30
 +__imp__sub_82FCEE30
++__fast__sub_8241F5D0
 +__imp__sub_8241F5D0
++__fast__sub_82956330
 +__imp__sub_82956330
++__fast__sub_8304BDB0
 +__imp__sub_8304BDB0
++__fast__sub_82DBF358
 +__imp__sub_82DBF358
++__fast__sub_82957D30
 +__imp__sub_82957D30
++__fast__sub_83054588
 +__imp__sub_83054588
++__fast__sub_8304BB48
 +__imp__sub_8304BB48
++__fast__sub_8300E780
 +__imp__sub_8300E780
++__fast__sub_82F70A78
 +__imp__sub_82F70A78
++__fast__sub_825F7A78
 +__imp__sub_825F7A78
++__fast__sub_82DCC3E8
 +__imp__sub_82DCC3E8
++__fast__sub_82326810
 +__imp__sub_82326810
++__fast__sub_82C404D8
 +__imp__sub_82C404D8
++__fast__sub_8221D208
 +__imp__sub_8221D208
++__fast__sub_824D9350
 +__imp__sub_824D9350
++__fast__sub_824FDFB8
 +__imp__sub_824FDFB8
++__fast__sub_822AB338
 +__imp__sub_822AB338
++__fast__sub_82D80B70
 +__imp__sub_82D80B70
++__fast__sub_8290EF88
 +__imp__sub_8290EF88
++__fast__sub_8234EF20
 +__imp__sub_8234EF20
++__fast__sub_82F638A8
 +__imp__sub_82F638A8
++__fast__sub_82F44AE0
 +__imp__sub_82F44AE0
++__fast__sub_82988A98
 +__imp__sub_82988A98
++__fast__sub_82F43B48
 +__imp__sub_82F43B48
++__fast__sub_82F43FF0
 +__imp__sub_82F43FF0
++__fast__sub_828B4158
 +__imp__sub_828B4158
++__fast__sub_829884B0
 +__imp__sub_829884B0
++__fast__sub_82F18748
 +__imp__sub_82F18748
++__fast__sub_829888B8
 +__imp__sub_829888B8
++__fast__sub_829889D8
 +__imp__sub_829889D8
++__fast__sub_825EC288
 +__imp__sub_825EC288
++__fast__sub_8240E968
 +__imp__sub_8240E968
++__fast__sub_8240C548
 +__imp__sub_8240C548
++__fast__sub_82C830B0
 +__imp__sub_82C830B0
++__fast__sub_821E0108
 +__imp__sub_821E0108
++__fast__sub_82FD00C8
 +__imp__sub_82FD00C8
++__fast__sub_8286ECA0
 +__imp__sub_8286ECA0
++__fast__sub_8295A238
 +__imp__sub_8295A238
++__fast__sub_829D4310
 +__imp__sub_829D4310
++__fast__sub_82F366D8
 +__imp__sub_82F366D8
++__fast__sub_82384180
 +__imp__sub_82384180
++__fast__sub_82F40CE0
 +__imp__sub_82F40CE0
++__fast__sub_825167D8
 +__imp__sub_825167D8
++__fast__sub_829925D8
 +__imp__sub_829925D8
++__fast__sub_824E9B58
 +__imp__sub_824E9B58
++__fast__sub_82F3C640
 +__imp__sub_82F3C640
++__fast__sub_82CAE490
 +__imp__sub_82CAE490
++__fast__sub_82F433A8
 +__imp__sub_82F433A8
++__fast__sub_8221CC90
 +__imp__sub_8221CC90
++__fast__sub_82966740
 +__imp__sub_82966740
++__fast__sub_823E39C8
 +__imp__sub_823E39C8
++__fast__sub_824E9500
 +__imp__sub_824E9500
++__fast__sub_83042938
 +__imp__sub_83042938
++__fast__sub_82C5FC30
 +__imp__sub_82C5FC30
++__fast__sub_8287EF18
 +__imp__sub_8287EF18
++__fast__sub_82219100
 +__imp__sub_82219100
++__fast__sub_82CACF60
 +__imp__sub_82CACF60
++__fast__sub_82885478
 +__imp__sub_82885478
++__fast__sub_82C2E768
 +__imp__sub_82C2E768
++__fast__sub_82C5C190
 +__imp__sub_82C5C190
++__fast__sub_82C38948
 +__imp__sub_82C38948
++__fast__sub_82352990
 +__imp__sub_82352990
++__fast__sub_8248F0F8
 +__imp__sub_8248F0F8
++__fast__sub_82DBD558
 +__imp__sub_82DBD558
++__fast__sub_828D7148
 +__imp__sub_828D7148
++__fast__sub_82FCF498
 +__imp__sub_82FCF498
++__fast__sub_824E6198
 +__imp__sub_824E6198
++__fast__sub_82D5ED78
 +__imp__sub_82D5ED78
++__fast__sub_82F5C1E0
 +__imp__sub_82F5C1E0
++__fast__sub_829459C8
 +__imp__sub_829459C8
++__fast__sub_82C9FF28
 +__imp__sub_82C9FF28
++__fast__sub_8256A370
 +__imp__sub_8256A370
++__fast__sub_82475ED0
 +__imp__sub_82475ED0
++__fast__sub_823DD638
 +__imp__sub_823DD638
++__fast__sub_82DC7738
 +__imp__sub_82DC7738
++__fast__sub_82B9B578
 +__imp__sub_82B9B578
++__fast__sub_822DF1F0
 +__imp__sub_822DF1F0
++__fast__sub_824A2D18
 +__imp__sub_824A2D18
++__fast__sub_82C174A8
 +__imp__sub_82C174A8
++__fast__sub_82D9A508
 +__imp__sub_82D9A508
++__fast__sub_8227F330
 +__imp__sub_8227F330
++__fast__sub_82F92558
 +__imp__sub_82F92558
++__fast__sub_8259F480
 +__imp__sub_8259F480
++__fast__sub_8259D8E0
 +__imp__sub_8259D8E0
++__fast__sub_8264ED28
 +__imp__sub_8264ED28
++__fast__sub_82F92868
 +__imp__sub_82F92868
++__fast__sub_822B56F8
 +__imp__sub_822B56F8
++__fast__sub_82518BC8
 +__imp__sub_82518BC8
++__fast__sub_83001390
 +__imp__sub_83001390
++__fast__sub_82F66290
 +__imp__sub_82F66290
++__fast__sub_82D542B8
 +__imp__sub_82D542B8
++__fast__sub_82D58818
 +__imp__sub_82D58818
++__fast__sub_82D5BF20
 +__imp__sub_82D5BF20
++__fast__sub_82D549C0
 +__imp__sub_82D549C0
++__fast__sub_82FD0488
 +__imp__sub_82FD0488
++__fast__sub_822000D8
 +__imp__sub_822000D8
++__fast__sub_821FFA90
 +__imp__sub_821FFA90
++__fast__sub_82DD7868
 +__imp__sub_82DD7868
++__fast__sub_82B80848
 +__imp__sub_82B80848
++__fast__sub_82F712B8
 +__imp__sub_82F712B8
++__fast__sub_82D65D28
 +__imp__sub_82D65D28
++__fast__sub_82D62E70
 +__imp__sub_82D62E70
++__fast__sub_82FCCC60
 +__imp__sub_82FCCC60
++__fast__sub_82971DA0
 +__imp__sub_82971DA0
++__fast__sub_828D70B0
 +__imp__sub_828D70B0
++__fast__sub_828D7900
 +__imp__sub_828D7900
++__fast__sub_82D62C48
 +__imp__sub_82D62C48
++__fast__sub_825D8300
 +__imp__sub_825D8300
++__fast__sub_82EBD060
 +__imp__sub_82EBD060
++__fast__sub_827186A0
 +__imp__sub_827186A0
++__fast__sub_82500688
 +__imp__sub_82500688
++__fast__sub_825856A0
 +__imp__sub_825856A0
++__fast__sub_82F737C8
 +__imp__sub_82F737C8
++__fast__sub_82FB3948
 +__imp__sub_82FB3948
++__fast__sub_82F96EC8
 +__imp__sub_82F96EC8
++__fast__sub_82480F50
 +__imp__sub_82480F50
++__fast__sub_82D6EC00
 +__imp__sub_82D6EC00
++__fast__sub_8305BF18
 +__imp__sub_8305BF18
++__fast__sub_82223CC0
 +__imp__sub_82223CC0
++__fast__sub_82BE1E98
 +__imp__sub_82BE1E98
++__fast__sub_82DBF9A0
 +__imp__sub_82DBF9A0
++__fast__sub_82C4CBE8
 +__imp__sub_82C4CBE8
++__fast__sub_82BFDCF0
 +__imp__sub_82BFDCF0
++__fast__sub_82BF4AE0
 +__imp__sub_82BF4AE0
++__fast__sub_82D21AE0
 +__imp__sub_82D21AE0
++__fast__sub_82DA0720
 +__imp__sub_82DA0720
++__fast__sub_82D80C70
 +__imp__sub_82D80C70
++__fast__sub_82E64B28
 +__imp__sub_82E64B28
++__fast__sub_8253C9C8
 +__imp__sub_8253C9C8
++__fast__sub_8307B4A0
 +__imp__sub_8307B4A0
++__fast__sub_823D32C0
 +__imp__sub_823D32C0
++__fast__sub_824EEEA8
 +__imp__sub_824EEEA8
++__fast__sub_821FE458
 +__imp__sub_821FE458
++__fast__sub_82F8E3C0
 +__imp__sub_82F8E3C0
++__fast__sub_82D76678
 +__imp__sub_82D76678
++__fast__sub_82F88740
 +__imp__sub_82F88740
++__fast__sub_82F54658
 +__imp__sub_82F54658
++__fast__sub_82874A78
 +__imp__sub_82874A78
++__fast__sub_825256D8
 +__imp__sub_825256D8
++__fast__sub_82874C28
 +__imp__sub_82874C28
++__fast__sub_8236E9F0
 +__imp__sub_8236E9F0
++__fast__sub_82973600
 +__imp__sub_82973600
++__fast__sub_8241C230
 +__imp__sub_8241C230
++__fast__sub_8236DA18
 +__imp__sub_8236DA18
++__fast__sub_82487DD8
 +__imp__sub_82487DD8
++__fast__sub_824FD818
 +__imp__sub_824FD818
++__fast__sub_82DF1498
 +__imp__sub_82DF1498
++__fast__sub_8244F690
 +__imp__sub_8244F690
++__fast__sub_82FCE580
 +__imp__sub_82FCE580
++__fast__sub_82618E98
 +__imp__sub_82618E98
++__fast__sub_82FFD1C0
 +__imp__sub_82FFD1C0
++__fast__sub_82B7D100
 +__imp__sub_82B7D100
++__fast__sub_823F9680
 +__imp__sub_823F9680
++__fast__sub_82925258
 +__imp__sub_82925258
++__fast__sub_8266A7C8
 +__imp__sub_8266A7C8
++__fast__sub_82D9B168
 +__imp__sub_82D9B168
++__fast__sub_82984A58
 +__imp__sub_82984A58
++__fast__sub_82DCC1C0
 +__imp__sub_82DCC1C0
++__fast__sub_82389308
 +__imp__sub_82389308
++__fast__sub_824AA040
 +__imp__sub_824AA040
++__fast__sub_824FBB60
 +__imp__sub_824FBB60
++__fast__sub_82C0CCC0
 +__imp__sub_82C0CCC0
++__fast__sub_8258D890
 +__imp__sub_8258D890
++__fast__sub_82F7DB30
 +__imp__sub_82F7DB30
++__fast__sub_82F987C8
 +__imp__sub_82F987C8
++__fast__sub_8256D508
 +__imp__sub_8256D508
++__fast__sub_8248C070
 +__imp__sub_8248C070
++__fast__sub_8266F7A8
 +__imp__sub_8266F7A8
++__fast__sub_82273200
 +__imp__sub_82273200
++__fast__sub_82278E48
 +__imp__sub_82278E48
++__fast__sub_829D06E0
 +__imp__sub_829D06E0
++__fast__sub_829C7370
 +__imp__sub_829C7370
++__fast__sub_82207858
 +__imp__sub_82207858
++__fast__sub_82C40D00
 +__imp__sub_82C40D00
++__fast__sub_82C43650
 +__imp__sub_82C43650
++__fast__sub_82F434E8
 +__imp__sub_82F434E8
++__fast__sub_82C407C8
 +__imp__sub_82C407C8
++__fast__sub_82C4FA40
 +__imp__sub_82C4FA40
++__fast__sub_82C41E18
 +__imp__sub_82C41E18
++__fast__sub_825EAB40
 +__imp__sub_825EAB40
++__fast__sub_825E5E38
 +__imp__sub_825E5E38
++__fast__sub_828B3C10
 +__imp__sub_828B3C10
++__fast__sub_8240B890
 +__imp__sub_8240B890
++__fast__sub_822A9AE8
 +__imp__sub_822A9AE8
++__fast__sub_82276410
 +__imp__sub_82276410
++__fast__sub_82422D38
 +__imp__sub_82422D38
++__fast__sub_82676680
 +__imp__sub_82676680
++__fast__sub_824545A0
 +__imp__sub_824545A0
++__fast__sub_82C0F748
 +__imp__sub_82C0F748
++__fast__sub_82BE4FF8
 +__imp__sub_82BE4FF8
++__fast__sub_82BFA5A0
 +__imp__sub_82BFA5A0
++__fast__sub_8238D350
 +__imp__sub_8238D350
++__fast__sub_82522668
 +__imp__sub_82522668
++__fast__sub_82C3C328
 +__imp__sub_82C3C328
++__fast__sub_82F32AC0
 +__imp__sub_82F32AC0
++__fast__sub_82C4B640
 +__imp__sub_82C4B640
++__fast__sub_82FCF0F8
 +__imp__sub_82FCF0F8
++__fast__sub_824B2120
 +__imp__sub_824B2120
++__fast__sub_82FE7EA8
 +__imp__sub_82FE7EA8
++__fast__sub_83027670
 +__imp__sub_83027670
++__fast__sub_8300CC00
 +__imp__sub_8300CC00
++__fast__sub_82FFE618
 +__imp__sub_82FFE618
++__fast__sub_83027348
 +__imp__sub_83027348
++__fast__sub_83029588
 +__imp__sub_83029588
++__fast__sub_82F1B988
 +__imp__sub_82F1B988
++__fast__sub_824F4F68
 +__imp__sub_824F4F68
++__fast__sub_824AC308
 +__imp__sub_824AC308
++__fast__sub_82609180
 +__imp__sub_82609180
++__fast__sub_8258C9B8
 +__imp__sub_8258C9B8
++__fast__sub_82318A98
 +__imp__sub_82318A98
++__fast__sub_830492D0
 +__imp__sub_830492D0
++__fast__sub_82389BA0
 +__imp__sub_82389BA0
++__fast__sub_822F4258
 +__imp__sub_822F4258
++__fast__sub_82A6D288
 +__imp__sub_82A6D288
++__fast__sub_82408F98
 +__imp__sub_82408F98
++__fast__sub_82220138
 +__imp__sub_82220138
++__fast__sub_8240EDD8
 +__imp__sub_8240EDD8
++__fast__sub_82408AB0
 +__imp__sub_82408AB0
++__fast__sub_825D29B8
 +__imp__sub_825D29B8
++__fast__sub_825D3390
 +__imp__sub_825D3390
++__fast__sub_825D3610
 +__imp__sub_825D3610
++__fast__sub_82585838
 +__imp__sub_82585838
++__fast__sub_82C27C00
 +__imp__sub_82C27C00
++__fast__sub_82588848
 +__imp__sub_82588848
++__fast__sub_8260EF08
 +__imp__sub_8260EF08
++__fast__sub_829D1028
 +__imp__sub_829D1028
++__fast__sub_824513B0
 +__imp__sub_824513B0
++__fast__sub_8235DE30
 +__imp__sub_8235DE30
++__fast__sub_830274A0
 +__imp__sub_830274A0
++__fast__sub_82375DC8
 +__imp__sub_82375DC8
++__fast__sub_824FE540
 +__imp__sub_824FE540
++__fast__sub_82875278
 +__imp__sub_82875278
++__fast__sub_824AC0D0
 +__imp__sub_824AC0D0
++__fast__sub_82DC9590
 +__imp__sub_82DC9590
++__fast__sub_82D9AB70
 +__imp__sub_82D9AB70
++__fast__sub_82971238
 +__imp__sub_82971238
++__fast__sub_82D68F48
 +__imp__sub_82D68F48
++__fast__sub_82DC7290
 +__imp__sub_82DC7290
++__fast__sub_822DEF90
 +__imp__sub_822DEF90
++__fast__sub_82C99498
 +__imp__sub_82C99498
++__fast__sub_82C2C298
 +__imp__sub_82C2C298
++__fast__sub_82C83FE0
 +__imp__sub_82C83FE0
++__fast__sub_82B7CA58
 +__imp__sub_82B7CA58
++__fast__sub_82BFB2D0
 +__imp__sub_82BFB2D0
++__fast__sub_82BFF900
 +__imp__sub_82BFF900
++__fast__sub_82200D40
 +__imp__sub_82200D40
++__fast__sub_82F7FA40
 +__imp__sub_82F7FA40
++__fast__sub_82D61E88
 +__imp__sub_82D61E88
++__fast__sub_82DC3010
 +__imp__sub_82DC3010
++__fast__sub_822A9540
 +__imp__sub_822A9540
++__fast__sub_83049120
 +__imp__sub_83049120
++__fast__sub_82FFBCB8
 +__imp__sub_82FFBCB8
++__fast__sub_82F3D830
 +__imp__sub_82F3D830
++__fast__sub_822024C8
 +__imp__sub_822024C8
++__fast__sub_82F8BF98
 +__imp__sub_82F8BF98
++__fast__sub_82420020
 +__imp__sub_82420020
++__fast__sub_8236A148
 +__imp__sub_8236A148
++__fast__sub_824F61B0
 +__imp__sub_824F61B0
++__fast__sub_8305D4B8
 +__imp__sub_8305D4B8
++__fast__sub_82BF5538
 +__imp__sub_82BF5538
++__fast__sub_825637D0
 +__imp__sub_825637D0
++__fast__sub_822146A0
 +__imp__sub_822146A0
++__fast__sub_82D56FB8
 +__imp__sub_82D56FB8
++__fast__sub_82FAA698
 +__imp__sub_82FAA698
++__fast__sub_82C487E8
 +__imp__sub_82C487E8
++__fast__sub_82FFE790
 +__imp__sub_82FFE790
++__fast__sub_82617C78
 +__imp__sub_82617C78
++__fast__sub_82475660
 +__imp__sub_82475660
++__fast__sub_82527198
 +__imp__sub_82527198
++__fast__sub_828B2D30
 +__imp__sub_828B2D30
++__fast__sub_8257A4B0
 +__imp__sub_8257A4B0
++__fast__sub_82D623B0
 +__imp__sub_82D623B0
++__fast__sub_82F73460
 +__imp__sub_82F73460
++__fast__sub_82268B28
 +__imp__sub_82268B28
++__fast__sub_82531DB8
 +__imp__sub_82531DB8
++__fast__sub_82C93A60
 +__imp__sub_82C93A60
++__fast__sub_82D9B990
 +__imp__sub_82D9B990
++__fast__sub_82D833D8
 +__imp__sub_82D833D8
++__fast__sub_82D77AC0
 +__imp__sub_82D77AC0
++__fast__sub_8240AF50
 +__imp__sub_8240AF50
++__fast__sub_82DC0030
 +__imp__sub_82DC0030
++__fast__sub_82421808
 +__imp__sub_82421808
++__fast__sub_82FD1EE0
 +__imp__sub_82FD1EE0
++__fast__sub_82F98838
 +__imp__sub_82F98838
++__fast__sub_82F3B6D8
 +__imp__sub_82F3B6D8
++__fast__sub_82FA9660
 +__imp__sub_82FA9660
++__fast__sub_82424F70
 +__imp__sub_82424F70
++__fast__sub_821E01E8
 +__imp__sub_821E01E8
++__fast__sub_82422B40
 +__imp__sub_82422B40
++__fast__sub_8234BDA0
 +__imp__sub_8234BDA0
++__fast__sub_82F861B0
 +__imp__sub_82F861B0
++__fast__sub_821F4D60
 +__imp__sub_821F4D60
++__fast__sub_821E51F8
 +__imp__sub_821E51F8
++__fast__sub_821F5340
 +__imp__sub_821F5340
++__fast__sub_822AE7E8
 +__imp__sub_822AE7E8
++__fast__sub_824E00D8
 +__imp__sub_824E00D8
++__fast__sub_82A4E308
 +__imp__sub_82A4E308
++__fast__sub_8298AAB8
 +__imp__sub_8298AAB8
++__fast__sub_82CB1848
 +__imp__sub_82CB1848
++__fast__sub_82C3B7D0
 +__imp__sub_82C3B7D0
++__fast__sub_82E68888
 +__imp__sub_82E68888
++__fast__sub_82C57CC8
 +__imp__sub_82C57CC8
++__fast__sub_824E52E0
 +__imp__sub_824E52E0
++__fast__sub_824A7EC8
 +__imp__sub_824A7EC8
++__fast__sub_82F57BB8
 +__imp__sub_82F57BB8
++__fast__sub_82F82530
 +__imp__sub_82F82530
++__fast__sub_83028508
 +__imp__sub_83028508
++__fast__sub_82FA34C0
 +__imp__sub_82FA34C0
++__fast__sub_82607BC8
 +__imp__sub_82607BC8
++__fast__sub_829A3200
 +__imp__sub_829A3200
++__fast__sub_82FC34A8
 +__imp__sub_82FC34A8
++__fast__sub_830004E0
 +__imp__sub_830004E0
++__fast__sub_82D5C100
 +__imp__sub_82D5C100
++__fast__sub_82FFE650
 +__imp__sub_82FFE650
++__fast__sub_823EE568
 +__imp__sub_823EE568
++__fast__sub_823ECDB0
 +__imp__sub_823ECDB0
++__fast__sub_82522EE8
 +__imp__sub_82522EE8
++__fast__sub_82576BF0
 +__imp__sub_82576BF0
++__fast__sub_824E6F98
 +__imp__sub_824E6F98
++__fast__sub_82525110
 +__imp__sub_82525110
++__fast__sub_829B2860
 +__imp__sub_829B2860
++__fast__sub_82F5A790
 +__imp__sub_82F5A790
++__fast__sub_83048730
 +__imp__sub_83048730
++__fast__sub_82B9E3C0
 +__imp__sub_82B9E3C0
++__fast__sub_82FFA890
 +__imp__sub_82FFA890
++__fast__sub_823D4878
 +__imp__sub_823D4878
++__fast__sub_824F8C48
 +__imp__sub_824F8C48
++__fast__sub_82CACC00
 +__imp__sub_82CACC00
++__fast__sub_82DE0D88
 +__imp__sub_82DE0D88
++__fast__sub_8300BB30
 +__imp__sub_8300BB30
++__fast__sub_8258CC30
 +__imp__sub_8258CC30
++__fast__sub_82F42F98
 +__imp__sub_82F42F98
++__fast__sub_828D7A28
 +__imp__sub_828D7A28
++__fast__sub_82494690
 +__imp__sub_82494690
++__fast__sub_82443F78
 +__imp__sub_82443F78
++__fast__sub_828F0AE8
 +__imp__sub_828F0AE8
++__fast__sub_82F185A8
 +__imp__sub_82F185A8
++__fast__sub_82208550
 +__imp__sub_82208550
++__fast__sub_82582BB0
 +__imp__sub_82582BB0
++__fast__sub_83027D88
 +__imp__sub_83027D88
++__fast__sub_82380EA0
 +__imp__sub_82380EA0
++__fast__sub_82EC7C50
 +__imp__sub_82EC7C50
++__fast__sub_825354F0
 +__imp__sub_825354F0
++__fast__sub_828AD6E8
 +__imp__sub_828AD6E8
++__fast__sub_82324B88
 +__imp__sub_82324B88
++__fast__sub_82F703D8
 +__imp__sub_82F703D8
++__fast__sub_82F678C8
 +__imp__sub_82F678C8
++__fast__sub_8288AEB0
 +__imp__sub_8288AEB0
++__fast__sub_82F099A0
 +__imp__sub_82F099A0
++__fast__sub_82300038
 +__imp__sub_82300038
++__fast__sub_8251BB18
 +__imp__sub_8251BB18
++__fast__sub_82F683F8
 +__imp__sub_82F683F8
++__fast__sub_821F3788
 +__imp__sub_821F3788
++__fast__sub_82208C88
 +__imp__sub_82208C88
++__fast__sub_825E61F8
 +__imp__sub_825E61F8
++__fast__sub_82991130
 +__imp__sub_82991130
++__fast__sub_82FD07E0
 +__imp__sub_82FD07E0
++__fast__sub_82D9D4D8
 +__imp__sub_82D9D4D8
++__fast__sub_821FDF38
 +__imp__sub_821FDF38
++__fast__sub_82C2D8F8
 +__imp__sub_82C2D8F8
++__fast__sub_82C33680
 +__imp__sub_82C33680
++__fast__sub_8266EFB0
 +__imp__sub_8266EFB0
++__fast__sub_82F63740
 +__imp__sub_82F63740
++__fast__sub_82F3D390
 +__imp__sub_82F3D390
++__fast__sub_82CE2D68
 +__imp__sub_82CE2D68
++__fast__sub_82BF4B50
 +__imp__sub_82BF4B50
++__fast__sub_82BF9E98
 +__imp__sub_82BF9E98
++__fast__sub_83052988
 +__imp__sub_83052988
++__fast__sub_82FFB680
 +__imp__sub_82FFB680
++__fast__sub_82F8CE08
 +__imp__sub_82F8CE08
++__fast__sub_822FD8D8
 +__imp__sub_822FD8D8
++__fast__sub_82D629B8
 +__imp__sub_82D629B8
++__fast__sub_82987910
 +__imp__sub_82987910
++__fast__sub_82BB1328
 +__imp__sub_82BB1328
++__fast__sub_82F9D6B0
 +__imp__sub_82F9D6B0
++__fast__sub_82399E10
 +__imp__sub_82399E10
++__fast__sub_82383CA0
 +__imp__sub_82383CA0
++__fast__sub_82743230
 +__imp__sub_82743230
++__fast__sub_827432D8
 +__imp__sub_827432D8
++__fast__sub_8237A280
 +__imp__sub_8237A280
++__fast__sub_8245A2E0
 +__imp__sub_8245A2E0
++__fast__sub_822D32E0
 +__imp__sub_822D32E0
++__fast__sub_82C899D8
 +__imp__sub_82C899D8
++__fast__sub_821FA4B0
 +__imp__sub_821FA4B0
++__fast__sub_82433B50
 +__imp__sub_82433B50
++__fast__sub_8304B890
 +__imp__sub_8304B890
++__fast__sub_82486D70
 +__imp__sub_82486D70
++__fast__sub_824D59E8
 +__imp__sub_824D59E8
++__fast__sub_82919260
 +__imp__sub_82919260
++__fast__sub_824A44B0
 +__imp__sub_824A44B0
++__fast__sub_824A2618
 +__imp__sub_824A2618
++__fast__sub_82831B10
 +__imp__sub_82831B10
++__fast__sub_828324B0
 +__imp__sub_828324B0
++__fast__sub_82832068
 +__imp__sub_82832068
++__fast__sub_824F9568
 +__imp__sub_824F9568
++__fast__sub_8237DAB8
 +__imp__sub_8237DAB8
++__fast__sub_822AB1E0
 +__imp__sub_822AB1E0
++__fast__sub_82D80E10
 +__imp__sub_82D80E10
++__fast__sub_82F3D168
 +__imp__sub_82F3D168
++__fast__sub_82F3CF00
 +__imp__sub_82F3CF00
++__fast__sub_82CAEAD0
 +__imp__sub_82CAEAD0
++__fast__sub_82F43608
 +__imp__sub_82F43608
++__fast__sub_825EBC58
 +__imp__sub_825EBC58
++__fast__sub_82970C98
 +__imp__sub_82970C98
++__fast__sub_82514D88
 +__imp__sub_82514D88
++__fast__sub_829707E8
 +__imp__sub_829707E8
++__fast__sub_82970A98
 +__imp__sub_82970A98
++__fast__sub_8240AAF0
 +__imp__sub_8240AAF0
++__fast__sub_822AABF8
 +__imp__sub_822AABF8
++__fast__sub_82518340
 +__imp__sub_82518340
++__fast__sub_825187E8
 +__imp__sub_825187E8
++__fast__sub_82F8F0B0
 +__imp__sub_82F8F0B0
++__fast__sub_82577700
 +__imp__sub_82577700
++__fast__sub_82C57C28
 +__imp__sub_82C57C28
++__fast__sub_82C587A8
 +__imp__sub_82C587A8
++__fast__sub_82C504C0
 +__imp__sub_82C504C0
++__fast__sub_82C3E0E0
 +__imp__sub_82C3E0E0
++__fast__sub_82C50508
 +__imp__sub_82C50508
++__fast__sub_82C33AD0
 +__imp__sub_82C33AD0
++__fast__sub_82C4D408
 +__imp__sub_82C4D408
++__fast__sub_82C4EE60
 +__imp__sub_82C4EE60
++__fast__sub_82DBD958
 +__imp__sub_82DBD958
++__fast__sub_82998C70
 +__imp__sub_82998C70
++__fast__sub_8300DEC8
 +__imp__sub_8300DEC8
++__fast__sub_83000828
 +__imp__sub_83000828
++__fast__sub_82F25B88
 +__imp__sub_82F25B88
++__fast__sub_829DD038
 +__imp__sub_829DD038
++__fast__sub_82F1E7A0
 +__imp__sub_82F1E7A0
++__fast__sub_82F212A8
 +__imp__sub_82F212A8
++__fast__sub_823A2A20
 +__imp__sub_823A2A20
++__fast__sub_828879F0
 +__imp__sub_828879F0
++__fast__sub_829DD808
 +__imp__sub_829DD808
++__fast__sub_82C2DDE0
 +__imp__sub_82C2DDE0
++__fast__sub_82C5AE48
 +__imp__sub_82C5AE48
++__fast__sub_82C5D7F0
 +__imp__sub_82C5D7F0
++__fast__sub_82353F38
 +__imp__sub_82353F38
++__fast__sub_82355050
 +__imp__sub_82355050
++__fast__sub_8272DB30
 +__imp__sub_8272DB30
++__fast__sub_828E4500
 +__imp__sub_828E4500
++__fast__sub_824D5060
 +__imp__sub_824D5060
++__fast__sub_824D2E88
 +__imp__sub_824D2E88
++__fast__sub_824D37E0
 +__imp__sub_824D37E0
++__fast__sub_828E8290
 +__imp__sub_828E8290
++__fast__sub_82D5FEC0
 +__imp__sub_82D5FEC0
++__fast__sub_82F63078
 +__imp__sub_82F63078
++__fast__sub_82F5D5F0
 +__imp__sub_82F5D5F0
++__fast__sub_82F5D9F8
 +__imp__sub_82F5D9F8
++__fast__sub_82948F98
 +__imp__sub_82948F98
++__fast__sub_82597458
 +__imp__sub_82597458
++__fast__sub_8266CCA8
 +__imp__sub_8266CCA8
++__fast__sub_82945848
 +__imp__sub_82945848
++__fast__sub_8296BA48
 +__imp__sub_8296BA48
++__fast__sub_8296BD30
 +__imp__sub_8296BD30
++__fast__sub_823E42A8
 +__imp__sub_823E42A8
++__fast__sub_82B9B990
 +__imp__sub_82B9B990
++__fast__sub_82278380
 +__imp__sub_82278380
++__fast__sub_82C1A510
 +__imp__sub_82C1A510
++__fast__sub_8227F938
 +__imp__sub_8227F938
++__fast__sub_82295890
 +__imp__sub_82295890
++__fast__sub_82293310
 +__imp__sub_82293310
++__fast__sub_82C19F28
 +__imp__sub_82C19F28
++__fast__sub_82273A68
 +__imp__sub_82273A68
++__fast__sub_82273D08
 +__imp__sub_82273D08
++__fast__sub_82C211E8
 +__imp__sub_82C211E8
++__fast__sub_82D7C440
 +__imp__sub_82D7C440
++__fast__sub_82278DC0
 +__imp__sub_82278DC0
++__fast__sub_822724C8
 +__imp__sub_822724C8
++__fast__sub_822726E8
 +__imp__sub_822726E8
++__fast__sub_82273AA0
 +__imp__sub_82273AA0
++__fast__sub_82272560
 +__imp__sub_82272560
++__fast__sub_8300D098
 +__imp__sub_8300D098
++__fast__sub_83029058
 +__imp__sub_83029058
++__fast__sub_8249B8F0
 +__imp__sub_8249B8F0
++__fast__sub_8257F480
 +__imp__sub_8257F480
++__fast__sub_8257CED0
 +__imp__sub_8257CED0
++__fast__sub_82581CE0
 +__imp__sub_82581CE0
++__fast__sub_825D4C30
 +__imp__sub_825D4C30
++__fast__sub_82200580
 +__imp__sub_82200580
++__fast__sub_824EC5F0
 +__imp__sub_824EC5F0
++__fast__sub_824EC6E0
 +__imp__sub_824EC6E0
++__fast__sub_82D64660
 +__imp__sub_82D64660
++__fast__sub_829D3CB8
 +__imp__sub_829D3CB8
++__fast__sub_82972460
 +__imp__sub_82972460
++__fast__sub_82D82918
 +__imp__sub_82D82918
++__fast__sub_82D83130
 +__imp__sub_82D83130
++__fast__sub_82CE08D8
 +__imp__sub_82CE08D8
++__fast__sub_825DCE78
 +__imp__sub_825DCE78
++__fast__sub_82C3CC58
 +__imp__sub_82C3CC58
++__fast__sub_825DA060
 +__imp__sub_825DA060
++__fast__sub_82EB92C8
 +__imp__sub_82EB92C8
++__fast__sub_82719270
 +__imp__sub_82719270
++__fast__sub_8292EF78
 +__imp__sub_8292EF78
++__fast__sub_827193C0
 +__imp__sub_827193C0
++__fast__sub_82718EB8
 +__imp__sub_82718EB8
++__fast__sub_824F0F80
 +__imp__sub_824F0F80
++__fast__sub_82269398
 +__imp__sub_82269398
++__fast__sub_82266778
 +__imp__sub_82266778
++__fast__sub_82F63BC0
 +__imp__sub_82F63BC0
++__fast__sub_82213410
 +__imp__sub_82213410
++__fast__sub_82F17048
 +__imp__sub_82F17048
++__fast__sub_82F7B050
 +__imp__sub_82F7B050
++__fast__sub_82F7B180
 +__imp__sub_82F7B180
++__fast__sub_82B9C960
 +__imp__sub_82B9C960
++__fast__sub_82F17368
 +__imp__sub_82F17368
++__fast__sub_82F17420
 +__imp__sub_82F17420
++__fast__sub_82B9C178
 +__imp__sub_82B9C178
++__fast__sub_82F7A750
 +__imp__sub_82F7A750
++__fast__sub_82FB4120
 +__imp__sub_82FB4120
++__fast__sub_82D5A358
 +__imp__sub_82D5A358
++__fast__sub_82D6F290
 +__imp__sub_82D6F290
++__fast__sub_82950600
 +__imp__sub_82950600
++__fast__sub_82DBDA58
 +__imp__sub_82DBDA58
++__fast__sub_824FEAD8
 +__imp__sub_824FEAD8
++__fast__sub_82BCDC38
 +__imp__sub_82BCDC38
++__fast__sub_83049318
 +__imp__sub_83049318
++__fast__sub_82222A98
 +__imp__sub_82222A98
++__fast__sub_82DBF968
 +__imp__sub_82DBF968
++__fast__sub_82B9AE60
 +__imp__sub_82B9AE60
++__fast__sub_822CB470
 +__imp__sub_822CB470
++__fast__sub_823DDB08
 +__imp__sub_823DDB08
++__fast__sub_82BDE448
 +__imp__sub_82BDE448
++__fast__sub_82C99848
 +__imp__sub_82C99848
++__fast__sub_82433DD8
 +__imp__sub_82433DD8
++__fast__sub_823D8AF0
 +__imp__sub_823D8AF0
++__fast__sub_82D83710
 +__imp__sub_82D83710
++__fast__sub_82DA07B8
 +__imp__sub_82DA07B8
++__fast__sub_829CD078
 +__imp__sub_829CD078
++__fast__sub_82CC1A48
 +__imp__sub_82CC1A48
++__fast__sub_82C92498
 +__imp__sub_82C92498
++__fast__sub_8307B0F0
 +__imp__sub_8307B0F0
++__fast__sub_8307A510
 +__imp__sub_8307A510
++__fast__sub_8307AA88
 +__imp__sub_8307AA88
++__fast__sub_82C91A00
 +__imp__sub_82C91A00
++__fast__sub_83079D10
 +__imp__sub_83079D10
++__fast__sub_82D8DC58
 +__imp__sub_82D8DC58
++__fast__sub_82BC8FE8
 +__imp__sub_82BC8FE8
++__fast__sub_8266F1F8
 +__imp__sub_8266F1F8
++__fast__sub_82526B88
 +__imp__sub_82526B88
++__fast__sub_82526880
 +__imp__sub_82526880
++__fast__sub_82D76498
 +__imp__sub_82D76498
++__fast__sub_82F35C48
 +__imp__sub_82F35C48
++__fast__sub_82F3C338
 +__imp__sub_82F3C338
++__fast__sub_82F3D640
 +__imp__sub_82F3D640
++__fast__sub_824FB368
 +__imp__sub_824FB368
++__fast__sub_822250E0
 +__imp__sub_822250E0
++__fast__sub_8236E7D0
 +__imp__sub_8236E7D0
++__fast__sub_83073230
 +__imp__sub_83073230
++__fast__sub_8251B638
 +__imp__sub_8251B638
++__fast__sub_82EC2CE8
 +__imp__sub_82EC2CE8
++__fast__sub_82386160
 +__imp__sub_82386160
++__fast__sub_82584F78
 +__imp__sub_82584F78
++__fast__sub_82EC6898
 +__imp__sub_82EC6898
++__fast__sub_8234EFB8
 +__imp__sub_8234EFB8
++__fast__sub_82420B00
 +__imp__sub_82420B00
++__fast__sub_8300DC00
 +__imp__sub_8300DC00
++__fast__sub_8300E5A0
 +__imp__sub_8300E5A0
++__fast__sub_8300E600
 +__imp__sub_8300E600
++__fast__sub_82C07B48
 +__imp__sub_82C07B48
++__fast__sub_82BBA380
 +__imp__sub_82BBA380
++__fast__sub_82C07990
 +__imp__sub_82C07990
++__fast__sub_82FA83A0
 +__imp__sub_82FA83A0
++__fast__sub_82B79B38
 +__imp__sub_82B79B38
++__fast__sub_82BB8B18
 +__imp__sub_82BB8B18
++__fast__sub_829844E8
 +__imp__sub_829844E8
++__fast__sub_823EC2B8
 +__imp__sub_823EC2B8
++__fast__sub_82A2C778
 +__imp__sub_82A2C778
++__fast__sub_82A30118
 +__imp__sub_82A30118
++__fast__sub_82A30590
 +__imp__sub_82A30590
++__fast__sub_8280FCB8
 +__imp__sub_8280FCB8
++__fast__sub_82A2D890
 +__imp__sub_82A2D890
++__fast__sub_8254F728
 +__imp__sub_8254F728
++__fast__sub_82A32658
 +__imp__sub_82A32658
++__fast__sub_8238DC18
 +__imp__sub_8238DC18
++__fast__sub_8266FFE8
 +__imp__sub_8266FFE8
++__fast__sub_82670708
 +__imp__sub_82670708
++__fast__sub_82A31D00
 +__imp__sub_82A31D00
++__fast__sub_82272C98
 +__imp__sub_82272C98
++__fast__sub_82C1B750
 +__imp__sub_82C1B750
++__fast__sub_8227EFB8
 +__imp__sub_8227EFB8
++__fast__sub_829CAB50
 +__imp__sub_829CAB50
++__fast__sub_829C7788
 +__imp__sub_829C7788
++__fast__sub_8280FDC0
 +__imp__sub_8280FDC0
++__fast__sub_829CC2F8
 +__imp__sub_829CC2F8
++__fast__sub_822611B8
 +__imp__sub_822611B8
++__fast__sub_829CA728
 +__imp__sub_829CA728
++__fast__sub_8227F140
 +__imp__sub_8227F140
++__fast__sub_82272D38
 +__imp__sub_82272D38
++__fast__sub_82645380
 +__imp__sub_82645380
++__fast__sub_82482660
 +__imp__sub_82482660
++__fast__sub_82983450
 +__imp__sub_82983450
++__fast__sub_82810F98
 +__imp__sub_82810F98
++__fast__sub_82207FC8
 +__imp__sub_82207FC8
++__fast__sub_82333ED8
 +__imp__sub_82333ED8
++__fast__sub_8294FC28
 +__imp__sub_8294FC28
++__fast__sub_823EC360
 +__imp__sub_823EC360
++__fast__sub_82905918
 +__imp__sub_82905918
++__fast__sub_824598D8
 +__imp__sub_824598D8
++__fast__sub_82458800
 +__imp__sub_82458800
++__fast__sub_82BFC468
 +__imp__sub_82BFC468
++__fast__sub_824A1E20
 +__imp__sub_824A1E20
++__fast__sub_824A3B70
 +__imp__sub_824A3B70
++__fast__sub_82F54530
 +__imp__sub_82F54530
++__fast__sub_82F61EE8
 +__imp__sub_82F61EE8
++__fast__sub_82F2ABD8
 +__imp__sub_82F2ABD8
++__fast__sub_828B2C18
 +__imp__sub_828B2C18
++__fast__sub_82929330
 +__imp__sub_82929330
++__fast__sub_82FF3658
 +__imp__sub_82FF3658
++__fast__sub_82FF5D08
 +__imp__sub_82FF5D08
++__fast__sub_8236D050
 +__imp__sub_8236D050
++__fast__sub_8236B7E8
 +__imp__sub_8236B7E8
++__fast__sub_8260AC88
 +__imp__sub_8260AC88
++__fast__sub_824E4420
 +__imp__sub_824E4420
++__fast__sub_822B76E8
 +__imp__sub_822B76E8
++__fast__sub_824D2FA8
 +__imp__sub_824D2FA8
++__fast__sub_824839E8
 +__imp__sub_824839E8
++__fast__sub_829854A8
 +__imp__sub_829854A8
++__fast__sub_822F4420
 +__imp__sub_822F4420
++__fast__sub_82FBDDA8
 +__imp__sub_82FBDDA8
++__fast__sub_8241F118
 +__imp__sub_8241F118
++__fast__sub_82D800E0
 +__imp__sub_82D800E0
++__fast__sub_82D6C2D8
 +__imp__sub_82D6C2D8
++__fast__sub_825D30C0
 +__imp__sub_825D30C0
++__fast__sub_8268E1F8
 +__imp__sub_8268E1F8
++__fast__sub_8221E128
 +__imp__sub_8221E128
++__fast__sub_82C42610
 +__imp__sub_82C42610
++__fast__sub_82603970
 +__imp__sub_82603970
++__fast__sub_82FF9868
 +__imp__sub_82FF9868
++__fast__sub_8256EEE8
 +__imp__sub_8256EEE8
++__fast__sub_8280C860
 +__imp__sub_8280C860
++__fast__sub_82FCD290
 +__imp__sub_82FCD290
++__fast__sub_82569530
 +__imp__sub_82569530
++__fast__sub_82FCD1B8
 +__imp__sub_82FCD1B8
++__fast__sub_8256E6A8
 +__imp__sub_8256E6A8
++__fast__sub_824E62E8
 +__imp__sub_824E62E8
++__fast__sub_83065538
 +__imp__sub_83065538
++__fast__sub_82395CB8
 +__imp__sub_82395CB8
++__fast__sub_824FAB48
 +__imp__sub_824FAB48
++__fast__sub_824844E0
 +__imp__sub_824844E0
++__fast__sub_82484E28
 +__imp__sub_82484E28
++__fast__sub_82D92728
 +__imp__sub_82D92728
++__fast__sub_82CA9170
 +__imp__sub_82CA9170
++__fast__sub_82F29908
 +__imp__sub_82F29908
++__fast__sub_82D59480
 +__imp__sub_82D59480
++__fast__sub_82B7CE28
 +__imp__sub_82B7CE28
++__fast__sub_82DE48B0
 +__imp__sub_82DE48B0
++__fast__sub_82B7CD90
 +__imp__sub_82B7CD90
++__fast__sub_82E668E8
 +__imp__sub_82E668E8
++__fast__sub_82E641F8
 +__imp__sub_82E641F8
++__fast__sub_82561458
 +__imp__sub_82561458
++__fast__sub_82566588
 +__imp__sub_82566588
++__fast__sub_82494758
 +__imp__sub_82494758
++__fast__sub_82562C80
 +__imp__sub_82562C80
++__fast__sub_8265E110
 +__imp__sub_8265E110
++__fast__sub_8249B6C0
 +__imp__sub_8249B6C0
++__fast__sub_8259CF80
 +__imp__sub_8259CF80
++__fast__sub_82272A20
 +__imp__sub_82272A20
++__fast__sub_822984F0
 +__imp__sub_822984F0
++__fast__sub_82645B28
 +__imp__sub_82645B28
++__fast__sub_82C45050
 +__imp__sub_82C45050
++__fast__sub_82C4C6B0
 +__imp__sub_82C4C6B0
++__fast__sub_82421C78
 +__imp__sub_82421C78
++__fast__sub_82BE6A00
 +__imp__sub_82BE6A00
++__fast__sub_82486640
 +__imp__sub_82486640
++__fast__sub_8236A450
 +__imp__sub_8236A450
++__fast__sub_8236E3D8
 +__imp__sub_8236E3D8
++__fast__sub_821FDE38
 +__imp__sub_821FDE38
++__fast__sub_82486DE0
 +__imp__sub_82486DE0
++__fast__sub_824885E8
 +__imp__sub_824885E8
++__fast__sub_824E6E78
 +__imp__sub_824E6E78
++__fast__sub_82F7F450
 +__imp__sub_82F7F450
++__fast__sub_82564B00
 +__imp__sub_82564B00
++__fast__sub_82499BA8
 +__imp__sub_82499BA8
++__fast__sub_82C48A88
 +__imp__sub_82C48A88
++__fast__sub_824D5620
 +__imp__sub_824D5620
++__fast__sub_824D61D0
 +__imp__sub_824D61D0
++__fast__sub_8230DE40
 +__imp__sub_8230DE40
++__fast__sub_824D3FC8
 +__imp__sub_824D3FC8
++__fast__sub_82394A00
 +__imp__sub_82394A00
++__fast__sub_824F2AA0
 +__imp__sub_824F2AA0
++__fast__sub_82398938
 +__imp__sub_82398938
++__fast__sub_82525870
 +__imp__sub_82525870
++__fast__sub_829A27E8
 +__imp__sub_829A27E8
++__fast__sub_82523478
 +__imp__sub_82523478
++__fast__sub_82928820
 +__imp__sub_82928820
++__fast__sub_822B7000
 +__imp__sub_822B7000
++__fast__sub_8243A028
 +__imp__sub_8243A028
++__fast__sub_828C6E28
 +__imp__sub_828C6E28
++__fast__sub_828C5948
 +__imp__sub_828C5948
++__fast__sub_824364E8
 +__imp__sub_824364E8
++__fast__sub_82C43868
 +__imp__sub_82C43868
++__fast__sub_8243A498
 +__imp__sub_8243A498
++__fast__sub_828C9010
 +__imp__sub_828C9010
++__fast__sub_82C897B0
 +__imp__sub_82C897B0
++__fast__sub_8298AB60
 +__imp__sub_8298AB60
++__fast__sub_82D58698
 +__imp__sub_82D58698
++__fast__sub_82D55488
 +__imp__sub_82D55488
++__fast__sub_82D9B408
 +__imp__sub_82D9B408
++__fast__sub_82CE7FF0
 +__imp__sub_82CE7FF0
++__fast__sub_82D86940
 +__imp__sub_82D86940
++__fast__sub_82D9B880
 +__imp__sub_82D9B880
++__fast__sub_82972568
 +__imp__sub_82972568
++__fast__sub_82273E48
 +__imp__sub_82273E48
++__fast__sub_82299CF0
 +__imp__sub_82299CF0
++__fast__sub_82DBCF40
 +__imp__sub_82DBCF40
++__fast__sub_82420280
 +__imp__sub_82420280
++__fast__sub_824E3290
 +__imp__sub_824E3290
++__fast__sub_824A8240
 +__imp__sub_824A8240
++__fast__sub_82F80C28
 +__imp__sub_82F80C28
++__fast__sub_82F3CDB8
 +__imp__sub_82F3CDB8
++__fast__sub_82F2AB18
 +__imp__sub_82F2AB18
++__fast__sub_82F3BCA8
 +__imp__sub_82F3BCA8
++__fast__sub_82480FD0
 +__imp__sub_82480FD0
++__fast__sub_822CB4C8
 +__imp__sub_822CB4C8
++__fast__sub_82304A30
 +__imp__sub_82304A30
++__fast__sub_82304AB8
 +__imp__sub_82304AB8
++__fast__sub_82255ED8
 +__imp__sub_82255ED8
++__fast__sub_82257240
 +__imp__sub_82257240
++__fast__sub_82FF8D30
 +__imp__sub_82FF8D30
++__fast__sub_82FF78C8
 +__imp__sub_82FF78C8
++__fast__sub_82FF99D0
 +__imp__sub_82FF99D0
++__fast__sub_82D530A8
 +__imp__sub_82D530A8
++__fast__sub_82F3A170
 +__imp__sub_82F3A170
++__fast__sub_82DBCA78
 +__imp__sub_82DBCA78
++__fast__sub_82BC9550
 +__imp__sub_82BC9550
++__fast__sub_82C0E828
 +__imp__sub_82C0E828
++__fast__sub_8224B6F8
 +__imp__sub_8224B6F8
++__fast__sub_8224A8E8
 +__imp__sub_8224A8E8
++__fast__sub_8224ABA8
 +__imp__sub_8224ABA8
++__fast__sub_8225DDC0
 +__imp__sub_8225DDC0
++__fast__sub_821FE7E8
 +__imp__sub_821FE7E8
++__fast__sub_82CB1598
 +__imp__sub_82CB1598
++__fast__sub_82396EC8
 +__imp__sub_82396EC8
++__fast__sub_82CA9028
 +__imp__sub_82CA9028
++__fast__sub_824384B0
 +__imp__sub_824384B0
++__fast__sub_8266A828
 +__imp__sub_8266A828
++__fast__sub_82E6B4A8
 +__imp__sub_82E6B4A8
++__fast__sub_82558D18
 +__imp__sub_82558D18
++__fast__sub_82CB2108
 +__imp__sub_82CB2108
++__fast__sub_826AD9A8
 +__imp__sub_826AD9A8
++__fast__sub_82556238
 +__imp__sub_82556238
++__fast__sub_826AD930
 +__imp__sub_826AD930
++__fast__sub_826ACDA8
 +__imp__sub_826ACDA8
++__fast__sub_828106C0
 +__imp__sub_828106C0
++__fast__sub_8286F660
 +__imp__sub_8286F660
++__fast__sub_82924FB8
 +__imp__sub_82924FB8
++__fast__sub_826B1370
 +__imp__sub_826B1370
++__fast__sub_826B3108
 +__imp__sub_826B3108
++__fast__sub_826B1750
 +__imp__sub_826B1750
++__fast__sub_82E66880
 +__imp__sub_82E66880
++__fast__sub_8266B0C8
 +__imp__sub_8266B0C8
++__fast__sub_82583DC0
 +__imp__sub_82583DC0
++__fast__sub_82568920
 +__imp__sub_82568920
++__fast__sub_8256E250
 +__imp__sub_8256E250
++__fast__sub_8256E410
 +__imp__sub_8256E410
++__fast__sub_82CA36E8
 +__imp__sub_82CA36E8
++__fast__sub_82C42CA0
 +__imp__sub_82C42CA0
++__fast__sub_825EB438
 +__imp__sub_825EB438
++__fast__sub_8221E0B8
 +__imp__sub_8221E0B8
++__fast__sub_8255FCD0
 +__imp__sub_8255FCD0
++__fast__sub_825593A0
 +__imp__sub_825593A0
++__fast__sub_82DD92D8
 +__imp__sub_82DD92D8
++__fast__sub_82E6A780
 +__imp__sub_82E6A780
++__fast__sub_82E68040
 +__imp__sub_82E68040
++__fast__sub_82E64310
 +__imp__sub_82E64310
++__fast__sub_8251D780
 +__imp__sub_8251D780
++__fast__sub_824F9C48
 +__imp__sub_824F9C48
++__fast__sub_823D9850
 +__imp__sub_823D9850
++__fast__sub_823E3DE0
 +__imp__sub_823E3DE0
++__fast__sub_82C59860
 +__imp__sub_82C59860
++__fast__sub_82FFE4D0
 +__imp__sub_82FFE4D0
++__fast__sub_82480928
 +__imp__sub_82480928
++__fast__sub_82480880
 +__imp__sub_82480880
++__fast__sub_8260A758
 +__imp__sub_8260A758
++__fast__sub_8260A280
 +__imp__sub_8260A280
++__fast__sub_82FC1C98
 +__imp__sub_82FC1C98
++__fast__sub_828D2A18
 +__imp__sub_828D2A18
++__fast__sub_82FBF6C0
 +__imp__sub_82FBF6C0
++__fast__sub_82FC20A0
 +__imp__sub_82FC20A0
++__fast__sub_830279F8
 +__imp__sub_830279F8
++__fast__sub_830009D0
 +__imp__sub_830009D0
++__fast__sub_82FF2418
 +__imp__sub_82FF2418
++__fast__sub_82576F30
 +__imp__sub_82576F30
++__fast__sub_82576FF0
 +__imp__sub_82576FF0
++__fast__sub_82586890
 +__imp__sub_82586890
++__fast__sub_829C6188
 +__imp__sub_829C6188
++__fast__sub_8238F110
 +__imp__sub_8238F110
++__fast__sub_82EBA490
 +__imp__sub_82EBA490
++__fast__sub_829D98A8
 +__imp__sub_829D98A8
++__fast__sub_82817C48
 +__imp__sub_82817C48
++__fast__sub_8259B688
 +__imp__sub_8259B688
++__fast__sub_829D05F8
 +__imp__sub_829D05F8
++__fast__sub_8259C4A0
 +__imp__sub_8259C4A0
++__fast__sub_8259BE98
 +__imp__sub_8259BE98
++__fast__sub_829D0408
 +__imp__sub_829D0408
++__fast__sub_82F5DBB8
 +__imp__sub_82F5DBB8
++__fast__sub_82DC3020
 +__imp__sub_82DC3020
++__fast__sub_82FFB170
 +__imp__sub_82FFB170
++__fast__sub_82BB68F8
 +__imp__sub_82BB68F8
++__fast__sub_82F5EA38
 +__imp__sub_82F5EA38
++__fast__sub_824540F8
 +__imp__sub_824540F8
++__fast__sub_82453B98
 +__imp__sub_82453B98
++__fast__sub_82FB4020
 +__imp__sub_82FB4020
++__fast__sub_82BE0690
 +__imp__sub_82BE0690
++__fast__sub_82B99188
 +__imp__sub_82B99188
++__fast__sub_82DE14B8
 +__imp__sub_82DE14B8
++__fast__sub_8265E4C8
 +__imp__sub_8265E4C8
++__fast__sub_8300ED40
 +__imp__sub_8300ED40
++__fast__sub_824EB978
 +__imp__sub_824EB978
++__fast__sub_828D92B8
 +__imp__sub_828D92B8
++__fast__sub_822EDC50
 +__imp__sub_822EDC50
++__fast__sub_828D8298
 +__imp__sub_828D8298
++__fast__sub_82425BE8
 +__imp__sub_82425BE8
++__fast__sub_8249C020
 +__imp__sub_8249C020
++__fast__sub_82D9AAF8
 +__imp__sub_82D9AAF8
++__fast__sub_829283B0
 +__imp__sub_829283B0
++__fast__sub_824373F0
 +__imp__sub_824373F0
++__fast__sub_82927870
 +__imp__sub_82927870
++__fast__sub_826BC458
 +__imp__sub_826BC458
++__fast__sub_826BCB18
 +__imp__sub_826BCB18
++__fast__sub_826BA4A0
 +__imp__sub_826BA4A0
++__fast__sub_82927F48
 +__imp__sub_82927F48
++__fast__sub_829312C8
 +__imp__sub_829312C8
++__fast__sub_826B8F48
 +__imp__sub_826B8F48
++__fast__sub_8243A7E0
 +__imp__sub_8243A7E0
++__fast__sub_8280BB10
 +__imp__sub_8280BB10
++__fast__sub_82437168
 +__imp__sub_82437168
++__fast__sub_8280E740
 +__imp__sub_8280E740
++__fast__sub_82C27210
 +__imp__sub_82C27210
++__fast__sub_8243A868
 +__imp__sub_8243A868
++__fast__sub_8280D7A0
 +__imp__sub_8280D7A0
++__fast__sub_824D9598
 +__imp__sub_824D9598
++__fast__sub_82F594F0
 +__imp__sub_82F594F0
++__fast__sub_82F70230
 +__imp__sub_82F70230
++__fast__sub_82F63250
 +__imp__sub_82F63250
++__fast__sub_82F5A488
 +__imp__sub_82F5A488
++__fast__sub_8288B030
 +__imp__sub_8288B030
++__fast__sub_82263BC8
 +__imp__sub_82263BC8
++__fast__sub_8244ECD0
 +__imp__sub_8244ECD0
++__fast__sub_82380E30
 +__imp__sub_82380E30
++__fast__sub_82EDF1C0
 +__imp__sub_82EDF1C0
++__fast__sub_82EFDE60
 +__imp__sub_82EFDE60
++__fast__sub_82EDFEB0
 +__imp__sub_82EDFEB0
++__fast__sub_82C367C0
 +__imp__sub_82C367C0
++__fast__sub_82583898
 +__imp__sub_82583898
++__fast__sub_82C35410
 +__imp__sub_82C35410
++__fast__sub_825E4E40
 +__imp__sub_825E4E40
++__fast__sub_822ADF48
 +__imp__sub_822ADF48
++__fast__sub_824CB920
 +__imp__sub_824CB920
++__fast__sub_824CB318
 +__imp__sub_824CB318
++__fast__sub_823B1CB8
 +__imp__sub_823B1CB8
++__fast__sub_82423378
 +__imp__sub_82423378
++__fast__sub_823E0130
 +__imp__sub_823E0130
++__fast__sub_82501F60
 +__imp__sub_82501F60
++__fast__sub_823B1360
 +__imp__sub_823B1360
++__fast__sub_8239E780
 +__imp__sub_8239E780
++__fast__sub_83029450
 +__imp__sub_83029450
++__fast__sub_8282F140
 +__imp__sub_8282F140
++__fast__sub_82883398
 +__imp__sub_82883398
++__fast__sub_82C588D0
 +__imp__sub_82C588D0
++__fast__sub_82C460A0
 +__imp__sub_82C460A0
++__fast__sub_82C46920
 +__imp__sub_82C46920
++__fast__sub_82F2DEC8
 +__imp__sub_82F2DEC8
++__fast__sub_82C4D540
 +__imp__sub_82C4D540
++__fast__sub_82C3AFD0
 +__imp__sub_82C3AFD0
++__fast__sub_82C3C748
 +__imp__sub_82C3C748
++__fast__sub_82C40E70
 +__imp__sub_82C40E70
++__fast__sub_82C5C0D8
 +__imp__sub_82C5C0D8
++__fast__sub_82C3B240
 +__imp__sub_82C3B240
++__fast__sub_82C58088
 +__imp__sub_82C58088
++__fast__sub_82C5C008
 +__imp__sub_82C5C008
++__fast__sub_82C41DB8
 +__imp__sub_82C41DB8
++__fast__sub_82C337B0
 +__imp__sub_82C337B0
++__fast__sub_8250F330
 +__imp__sub_8250F330
++__fast__sub_82C579C0
 +__imp__sub_82C579C0
++__fast__sub_82510F60
 +__imp__sub_82510F60
++__fast__sub_82C57FB0
 +__imp__sub_82C57FB0
++__fast__sub_82C86550
 +__imp__sub_82C86550
++__fast__sub_824D8910
 +__imp__sub_824D8910
++__fast__sub_82550678
 +__imp__sub_82550678
++__fast__sub_825520E0
 +__imp__sub_825520E0
++__fast__sub_829B1F70
 +__imp__sub_829B1F70
++__fast__sub_829DBC40
 +__imp__sub_829DBC40
++__fast__sub_8254F9F8
 +__imp__sub_8254F9F8
++__fast__sub_8254F798
 +__imp__sub_8254F798
++__fast__sub_82550548
 +__imp__sub_82550548
++__fast__sub_829DB100
 +__imp__sub_829DB100
++__fast__sub_8266F128
 +__imp__sub_8266F128
++__fast__sub_829DA7E8
 +__imp__sub_829DA7E8
++__fast__sub_82F3DBB8
 +__imp__sub_82F3DBB8
++__fast__sub_82578B00
 +__imp__sub_82578B00
++__fast__sub_82FFC160
 +__imp__sub_82FFC160
++__fast__sub_82D541B8
 +__imp__sub_82D541B8
++__fast__sub_8300CBA0
 +__imp__sub_8300CBA0
++__fast__sub_82FFBA98
 +__imp__sub_82FFBA98
++__fast__sub_8300CC68
 +__imp__sub_8300CC68
++__fast__sub_82C603D0
 +__imp__sub_82C603D0
++__fast__sub_822FD9B0
 +__imp__sub_822FD9B0
++__fast__sub_825621F0
 +__imp__sub_825621F0
 diff --git a/mp3/ps4/main_ps4.cpp b/mp3/ps4/main_ps4.cpp
 new file mode 100644
@@ -15402,12 +16938,152 @@ index 0000000..a55a93b
 +extern "C" void ps4_kit_configure_heap(ps4_kit_heap_options* options) {
 +  options->log_tag = "mp3";
 +}
+diff --git a/mp3/ps4/mp3_ps4_achievements.cpp b/mp3/ps4/mp3_ps4_achievements.cpp
+new file mode 100755
+index 0000000..c000688
+--- /dev/null
++++ b/mp3/ps4/mp3_ps4_achievements.cpp
+@@ -0,0 +1,92 @@
++// mp3-ps4 (v00.71) - the game's own Xbox 360 achievements, kept on the console and shown the port's way. The user,
++// 2026-11-13: "do you think we can add achievements ... just within the game?", then "In-game achievements".
++//
++// The SDK does the bookkeeping: XGIUserWriteAchievements (the game's unlock message, 0x000B0008, sent by sub_8306F170)
++// reaches KernelState::UnlockAchievement, whose AchievementManager holds the catalog read from the executable's XDBF
++// resource (names, descriptions, gamerscore, flags) and saves the unlocks to <user data>/achievements/<title>.toml.
++// Here: a notification listener that hands each new unlock to the quick menu's pop-up (mp3_ps4_menu.cpp), the SDK's
++// own notification turned off (logros_aviso_en_pantalla) so there is one, and the list the menu's ACHIEVEMENTS tab
++// shows. Every unlock is logged ("[achievements] unlocked"), and the catalog's size at start.
++
++#include "mp3_ps4_achievements.h"
++
++#include "mp3_ps4_menu.h"
++
++#include <ctime>
++
++#include <rex/cvar.h>
++#include <rex/logging.h>
++#include <rex/runtime.h>
++#include <rex/system/achievement_manager.h>
++#include <rex/system/kernel_state.h>
++
++REXCVAR_DEFINE_BOOL(mp3_achievement_popups, true, "MP3",
++                    "A pop-up when the game unlocks one of its achievements (the quick menu's style). Live");
++
++namespace mp3::achievements {
++namespace {
++
++rex::system::KernelState* g_kernel = nullptr;
++bool g_listening = false;
++
++// XDBF achievement flags: shown in the list before it is earned.
++constexpr uint32_t kShowUnachieved = 0x8;
++
++}  // namespace
++
++void Install(rex::Runtime& runtime) {
++  g_kernel = runtime.kernel_state();
++  if (!g_kernel || g_listening) return;
++  g_listening = true;
++  rex::cvar::SetFlagByName("logros_aviso_en_pantalla", "false");  // the menu's pop-up instead
++  auto& manager = g_kernel->achievements();
++  manager.RegisterNotificationCallback([](const rex::system::AchievementEvent& event) {
++    REXLOG_INFO("[achievements] unlocked {:08X} \"{}\" ({} G)", event.achievement.id, event.achievement.label,
++                event.achievement.gamerscore);
++    if (REXCVAR_GET(mp3_achievement_popups))
++      mp3::menu::ShowAchievement(event.achievement.label, event.achievement.gamerscore);
++  });
++  const auto list = List();
++  uint32_t unlocked = 0, score = 0, total = 0;
++  for (const Entry& e : list) {
++    total += e.gamerscore;
++    if (e.unlocked) {
++      ++unlocked;
++      score += e.gamerscore;
++    }
++  }
++  REXLOG_INFO("[achievements] {} in the game's catalog, {} unlocked ({} of {} G)", list.size(), unlocked, score,
++              total);
++}
++
++std::vector<Entry> List() {
++  std::vector<Entry> out;
++  if (!g_kernel) return out;
++  const auto& manager = g_kernel->achievements();
++  for (const auto& info : manager.ListAchievements()) {
++    Entry e;
++    e.id = info.id;
++    e.name = info.label;
++    e.description = info.description;
++    e.locked_description = info.unachieved_description;
++    e.gamerscore = info.gamerscore;
++    e.secret = !(info.flags & kShowUnachieved);
++    e.unlocked = manager.IsUnlocked(info.id);
++    e.filetime = e.unlocked ? manager.GetUnlockTime(info.id) : 0;
++    out.push_back(std::move(e));
++  }
++  return out;
++}
++
++std::string DateText(uint64_t filetime) {
++  if (!filetime) return "";
++  const int64_t unix_seconds = int64_t(filetime / 10000000ull) - 11644473600ll;
++  const std::time_t t = std::time_t(unix_seconds);
++  std::tm tm{};
++  gmtime_r(&t, &tm);
++  char text[16];
++  std::strftime(text, sizeof(text), "%Y-%m-%d", &tm);
++  return text;
++}
++
++}  // namespace mp3::achievements
+diff --git a/mp3/ps4/mp3_ps4_achievements.h b/mp3/ps4/mp3_ps4_achievements.h
+new file mode 100755
+index 0000000..b737ad9
+--- /dev/null
++++ b/mp3/ps4/mp3_ps4_achievements.h
+@@ -0,0 +1,36 @@
++// mp3-ps4 - the game's achievements, in the quick menu and as pop-ups (mp3_ps4_achievements.cpp).
++
++#pragma once
++
++#include <cstdint>
++#include <string>
++#include <vector>
++
++namespace rex {
++class Runtime;
++}
++
++namespace mp3::achievements {
++
++struct Entry {
++  uint32_t id = 0;
++  std::string name;
++  std::string description;         // what it was for (shown once unlocked)
++  std::string locked_description;  // what to do (shown while locked; may be empty)
++  uint32_t gamerscore = 0;
++  bool secret = false;             // not shown while locked (the game's "show unachieved" flag clear)
++  bool unlocked = false;
++  uint64_t filetime = 0;           // when (Windows FILETIME, UTC)
++};
++
++// OnPreLaunchModule: listens to the SDK's achievement manager (its catalog comes from the game's own data, its unlocks
++// are saved under the user data folder) and turns the SDK's own notification off for the menu's pop-up.
++void Install(rex::Runtime& runtime);
++
++// The game's achievements in its order, with their unlock state (any thread).
++std::vector<Entry> List();
++
++// "2026-11-13" for an unlock time.
++std::string DateText(uint64_t filetime);
++
++}  // namespace mp3::achievements
 diff --git a/mp3/ps4/mp3_ps4_app.h b/mp3/ps4/mp3_ps4_app.h
 new file mode 100644
-index 0000000..351c305
+index 0000000..92c1e8b
 --- /dev/null
 +++ b/mp3/ps4/mp3_ps4_app.h
-@@ -0,0 +1,230 @@
+@@ -0,0 +1,347 @@
 +// mp3-ps4 - Max Payne 3 (Xbox 360, Title Update 6) on the PS4: the app.
 +//
 +// The same game folders as the Switch build (src/mp3_app.h), in the app's data folder /data/MP3 (the SDK's
@@ -15417,6 +17093,8 @@ index 0000000..351c305
 +//   update/   the files of Title Update 6's disc001/ folder (the game's update:)
 +// Since v00.51 the package itself can hold game/ and update/ (the one-file package: scripts/build-mp3.sh pkg with
 +// MP3_PKG_GAME=1); they are read from /app0 before /data/MP3.
++//   game2/    disc 2's files, update2/ Title Update 6's disc002/ files (v00.52): the story asks for disc 2 at the
++//             end of chapter 6 (XamSwapDisc), and they are put in place of game/ and update/ then.
 +//
 +// What differs from the Switch: no deko3d renderer. The game's command ring goes to the SDK's Xenos emulation, drawn
 +// by its Vulkan back end on ps4-kit's RADV (gpu_plugin "xenos"), shaders translated at run time; sound through
@@ -15431,10 +17109,15 @@ index 0000000..351c305
 +#include <rex/runtime.h>
 +#include <rex/system.h>
 +#include <rex/system/gpu_plugin.h>
++#include <rex/filesystem/devices/host_path_device.h>
++#include <rex/filesystem/vfs.h>
++#include <rex/kernel/xam/disc.h>
 +
 +#include <cstdlib>
 +#include <filesystem>
++#include <map>
 +#include <memory>
++#include <mutex>
 +#include <string>
 +#include <system_error>
 +
@@ -15444,6 +17127,9 @@ index 0000000..351c305
 +#include "mp3_ps4_icons.h"
 +#include "mp3_ps4_live.h"
 +#if defined(__PS4__)  // the PS4's quick menu and freeze report (ps4-kit); the PC build has neither
++#include <ps4_kit.h>
++#include "mp3_ps4_achievements.h"
++#include "mp3_ps4_detail.h"
 +#include "mp3_ps4_menu.h"
 +#include "mp3_ps4_watchdog.h"
 +#endif
@@ -15458,6 +17144,11 @@ index 0000000..351c305
 +REXCVAR_DECLARE(std::string, gpu_plugin);
 +
 +REXCVAR_DEFINE_STRING(mp3_game, "", "MP3", "Game folder (extracted disc 1 + default.xexp). Empty: game/ in /data/MP3.");
++REXCVAR_DEFINE_STRING(mp3_game2, "", "MP3",
++                      "Disc 2's folder (the extracted disc 2), which the story asks for at the end of chapter 6. "
++                      "Empty: game2/ in the package, then in /data/MP3.");
++REXCVAR_DEFINE_STRING(mp3_update2, "", "MP3",
++                      "Title Update 6's disc002 files, for disc 2. Empty: update2/ in the package, then in /data/MP3.");
 +#if !defined(__PS4__)
 +REXCVAR_DEFINE_STRING(mp3_gpu_backend, "vulkan", "MP3",
 +                      "PC build: the Xenos plugin's back end: vulkan (as the PS4), d3d12 or any (D3D12 first)");
@@ -15529,6 +17220,11 @@ index 0000000..351c305
 +
 +  void OnPostInitLogging() override {
 +    mp3::cpu::InformarSistema();
++#if defined(__PS4__)
++    // v00.52: a PS4 Pro in Boost Mode (Settings > System) runs the cores at 2.13 GHz instead of 1.6.
++    const unsigned mhz = ps4_kit_cpu_mhz();
++    REXLOG_INFO("mp3: the CPU cores run at {} MHz{}", mhz, mhz >= 2000 ? " (a PS4 Pro in Boost Mode)" : "");
++#endif
 +#if MP3_RENUT
 +    sa2::enh::Resolve();  // Renut's enhancement masters, before any guest thread
 +#endif
@@ -15590,20 +17286,117 @@ index 0000000..351c305
 +    }
 +    REXLOG_INFO("mp3: game at {}{}, update at {}; loading {}", root.string(), god ? " and god/" : "",
 +                update.string(), xex_image);
++    const auto disc2 = DiscFolder(2);
++    const auto update2 = UpdateFolder(2);
++    if (disc2.empty()) {
++      REXLOG_WARN("mp3: no disc 2 (game2/ in the package or in /data/MP3): the story stops at the end of chapter 6");
++    } else {
++      REXLOG_INFO("mp3: disc 2 at {}, its update at {}", disc2.string(), update2.empty() ? "(none)" : update2.string());
++    }
 +  }
 +
 +  void OnPreLaunchModule() override {
 +    mp3::cpu::Configurar();
 +    mp3::god::DespuesDeCargar(*runtime());
++    // v00.52: the disc swap (disc 2 at the end of chapter 6; disc 1 again when one of its chapters is chosen).
++    rex::kernel::xam::SetDiscSwapHandler([this](uint32_t disc) { return SwapDisc(disc); });
 +    mp3::fps::Install(*runtime());
 +    mp3::icons::Install(runtime());
 +#if defined(__PS4__)
++    mp3::detail::Install(*runtime());
++    mp3::achievements::Install(*runtime());
 +    mp3::watchdog::Start();
 +#endif
 +    mp3::live::Start(runtime(), rex::filesystem::GetExecutableFolder() / "mp3.toml");
 +  }
 +
 + private:
++  static constexpr const char* kDiscMount = "\\Device\\Harddisk0\\Partition1";        // game:, d: (SetupVfs)
++  static constexpr const char* kUpdateMount = "\\Device\\Harddisk0\\PartitionUpdate";  // update:
++
++  // v00.52: disc 2's folder and its Title Update 6 files (disc002/); empty when they are not there.
++  static std::filesystem::path DiscFolder(uint32_t disc) {
++    if (disc != 2) return {};
++    std::error_code ec;
++    const std::string flag = REXCVAR_GET(mp3_game2);
++    if (!flag.empty()) return std::filesystem::exists(flag, ec) ? std::filesystem::path(flag) : std::filesystem::path();
++    if (auto packaged = PackagedFolder("game2", "common/disc2.txt"); !packaged.empty()) return packaged;
++    const auto folder = rex::filesystem::GetExecutableFolder() / "game2";
++    return std::filesystem::is_regular_file(folder / "common" / "disc2.txt", ec) ? folder : std::filesystem::path();
++  }
++  static std::filesystem::path UpdateFolder(uint32_t disc) {
++    if (disc != 2) return {};
++    std::error_code ec;
++    const std::string flag = REXCVAR_GET(mp3_update2);
++    if (!flag.empty()) return std::filesystem::is_directory(flag, ec) ? std::filesystem::path(flag) : std::filesystem::path();
++    if (auto packaged = PackagedFolder("update2", "default.xexp"); !packaged.empty()) return packaged;
++    const auto folder = rex::filesystem::GetExecutableFolder() / "update2";
++    return std::filesystem::is_directory(folder, ec) ? folder : std::filesystem::path();
++  }
++
++  using Parked = std::map<uint32_t, std::unique_ptr<rex::filesystem::Device>>;
++  static std::unique_ptr<rex::filesystem::Device> TakeParked(Parked& parked, uint32_t disc) {
++    auto it = parked.find(disc);
++    if (it == parked.end()) return nullptr;
++    auto device = std::move(it->second);
++    parked.erase(it);
++    return device;
++  }
++
++  // v00.52: XamSwapDisc's handler. The disc's folder goes in place of the device at kDiscMount (game:, d:), its
++  // Title Update 6 files in place of update:'s; the devices taken out are kept, so the files still open on them
++  // stay valid and going back to that disc puts them back. A Games on Demand disc 1 is a device of its own:
++  // game:, d: and \Device\Cdrom0 follow the disc in.
++  bool SwapDisc(uint32_t disc) {
++    std::lock_guard<std::mutex> lock(disc_mutex_);
++    if (disc == disc_) return true;
++    auto& vfs = *runtime()->file_system();
++    auto game = TakeParked(parked_games_, disc);
++    if (!game) {
++      const auto folder = DiscFolder(disc);
++      if (folder.empty()) {
++        REXLOG_ERROR("mp3: the game asks for disc {}, which is not here: build the package with both discs "
++                     "(MP3_PKG_GAME=1 with disc 2 in ~/mp3-build/game2), or copy disc 2's files to /data/MP3/game2 "
++                     "and Title Update 6's disc002 files to /data/MP3/update2", disc);
++        return false;
++      }
++      auto device = std::make_unique<rex::filesystem::HostPathDevice>(kDiscMount, folder,
++                                                                       !REXCVAR_GET(allow_game_relative_writes));
++      if (!device->Initialize()) {
++        REXLOG_ERROR("mp3: disc {} at {} could not be mounted", disc, folder.string());
++        return false;
++      }
++      game = std::move(device);
++    }
++    parked_games_[disc_] = vfs.ReplaceDevice(kDiscMount, std::move(game));
++    auto update = TakeParked(parked_updates_, disc);
++    if (!update) {
++      if (const auto folder = UpdateFolder(disc); !folder.empty()) {
++        auto device = std::make_unique<rex::filesystem::HostPathDevice>(kUpdateMount, folder, true);
++        if (device->Initialize()) update = std::move(device);
++      }
++    }
++    if (update) {
++      parked_updates_[disc_] = vfs.ReplaceDevice(kUpdateMount, std::move(update));
++    } else {
++      REXLOG_WARN("mp3: no Title Update 6 files for disc {} (update2/): update: stays disc {}'s", disc, disc_);
++    }
++    if (mp3::god::Montado()) {
++      const char* target = disc == 1 ? "\\Device\\Mp3God" : kDiscMount;
++      for (const char* alias : {"game:", "d:", "\\Device\\Cdrom0"}) {
++        vfs.UnregisterSymbolicLink(alias);
++        vfs.RegisterSymbolicLink(alias, target);
++      }
++    }
++    REXLOG_INFO("mp3: disc {} is in, in place of disc {}", disc, disc_);
++    disc_ = disc;
++    return true;
++  }
++
++  std::mutex disc_mutex_;
++  uint32_t disc_ = 1;
++  Parked parked_games_, parked_updates_;
++
 +  // v00.51: the game came from the package (/app0/game): no Games on Demand package is mounted over it.
 +  bool packaged_game_ = false;
 +
@@ -15871,6 +17664,221 @@ index 0000000..24be237
 +    one_frame(false);
 +  }
 +}
+diff --git a/mp3/ps4/mp3_ps4_detail.cpp b/mp3/ps4/mp3_ps4_detail.cpp
+new file mode 100755
+index 0000000..c7fba78
+--- /dev/null
++++ b/mp3/ps4/mp3_ps4_detail.cpp
+@@ -0,0 +1,186 @@
++// mp3-ps4 (v00.55) - the game's own detail settings, for fewer draws and less work in busy scenes. The user,
++// 2026-11-12: "find how to reduce drawings as much as possible making the game runs better on both ps4", then
++// "remove shadows or whatever causes this issue, or make an option to remove them from settings".
++//
++// A busy fight on a PS4 Pro in Boost Mode (v00.54, live `drawlog`): 1,462 draws a frame, 774 of them the G-buffer's
++// props and scenery (most 78-726 vertices), 478 the HDR pass's lights and effects, the shadow maps ~5 %; the main
++// thread 92 % busy. The switches here are the game's own, so they cut its work as well as the draws:
++//   - RAGE command-line parameters it tests while it runs: 0x14-byte objects registered by sub_82C845B0 (+0 the
++//     name, +4 the value text, null when not given, +12 the next one); a flag is on when +4 is not null. noptfx
++//     (no particles), noclothupdate and noEnvCloth (cloth not simulated), disableBlendshapes (faces' blend shapes).
++//   - The LOD distances visualsettings.dat gives, floats the game reads once and keeps: ped.lod.distance.high
++//     (sub_82382308), car.lod.distance.high and .low (sub_824B8F38), scaled down so the simpler models come sooner.
++// mp3-nx's mp3_detail.cpp has the same ones at 0.0.9.6's addresses; these are 0.0.6.6's. Applied at every swap from
++// the quick menu's VIDEO tab (mp3_ps4_menu.cpp).
++
++#include "mp3_ps4_detail.h"
++
++#include <cstdint>
++#include <cstring>
++
++#include <rex/cvar.h>
++#include <rex/logging.h>
++#include <rex/runtime.h>
++
++REXCVAR_DEFINE_BOOL(mp3_particles, true, "MP3",
++                    "The game's particles (smoke, sparks, blood, glass); off sets its noptfx parameter. Live");
++REXCVAR_DEFINE_BOOL(mp3_cloth, true, "MP3",
++                    "Cloth simulation (clothes, flags, curtains); off sets noclothupdate and noEnvCloth: cloth stays "
++                    "still. Live");
++REXCVAR_DEFINE_BOOL(mp3_face_shapes, true, "MP3",
++                    "Faces' blend shapes; off sets disableBlendshapes (faces keep their rest pose). Live");
++REXCVAR_DEFINE_DOUBLE(mp3_ped_detail, 1.0, "MP3",
++                      "Distance of the characters' detailed models (ped.lod.distance.high) times this: 1 = the game's; "
++                      "less = the simpler models sooner. Live")
++    .range(0.25, 1.0);
++REXCVAR_DEFINE_DOUBLE(mp3_car_detail, 1.0, "MP3",
++                      "Distance of the cars' detailed models (car.lod.distance.high and .low) times this. Live")
++    .range(0.25, 1.0);
++REXCVAR_DEFINE_DOUBLE(mp3_view_distance, 1.0, "MP3",
++                      "The game's far clip (visualsettings misc.Multiplier.farClipMultiplier) times this: less = the "
++                      "scene ends nearer, fewer far objects. Live")
++    .range(0.25, 1.0);
++
++namespace mp3::detail {
++namespace {
++
++constexpr uint32_t kNoPtfx = 0x8346F890;
++constexpr uint32_t kNoClothUpdate = 0x83849800;
++constexpr uint32_t kNoEnvCloth = 0x836F680C;
++constexpr uint32_t kDisableBlendshapes = 0x8348A41C;
++constexpr uint32_t kTextOne = 0x82002900;  // "1" in the image: the value text a flag gets
++
++constexpr uint32_t kPedLodHigh = 0x83541F3C;
++constexpr uint32_t kCarLodHigh = 0x831166B0;
++constexpr uint32_t kCarLodLow = 0x831166B4;
++// v00.56: the visual-settings struct sub_82410478 fills (0x83372FF0, from its caller) keeps, from +0x21C88:
++// farClipMultiplier, nearFogMultiplier, heightStart, 1 / (heightEnd - heightStart). The frame's clip and fog setup
++// (mp3_recomp.133.cpp, reads them again every frame) does
++//   t = clamp((camera height - heightStart) * that, 0, 1)
++//   far clip = timecycle far clip * (1 + (farClipMultiplier - 1) * t), near fog the same with nearFogMultiplier,
++// so at ground level (t = 0) the multipliers do nothing. View distance below 1 puts heightStart far down (t = 1) and
++// both multipliers to the setting: the far clip and the fog's start come nearer together, the fog hiding the cut.
++constexpr uint32_t kFarClip = 0x83372FF0 + 0x21C88;
++constexpr uint32_t kNearFog = kFarClip + 4;
++constexpr uint32_t kHeightStart = kFarClip + 8;
++
++uint8_t* g_base = nullptr;
++
++uint32_t Read(uint32_t address) {
++  uint32_t v;
++  std::memcpy(&v, g_base + address, 4);
++  return __builtin_bswap32(v);
++}
++void Write(uint32_t address, uint32_t v) {
++  v = __builtin_bswap32(v);
++  std::memcpy(g_base + address, &v, 4);
++}
++float ReadF(uint32_t address) {
++  const uint32_t u = Read(address);
++  float f;
++  std::memcpy(&f, &u, 4);
++  return f;
++}
++void WriteF(uint32_t address, float f) {
++  uint32_t u;
++  std::memcpy(&u, &f, 4);
++  Write(address, u);
++}
++
++// A parameter flag to `on`; logs a change.
++void Flag(uint32_t object, bool on, const char* name) {
++  if ((Read(object + 4) != 0) == on) return;
++  Write(object + 4, on ? kTextOne : 0);
++  REXLOG_INFO("[detail] {} {}", name, on ? "on" : "off");
++}
++
++// A LOD distance: the game's value (taken again whenever the game writes another) times the scale.
++struct Lod {
++  uint32_t address;
++  const char* name;
++  float game = 0.0f;
++  float written = -1.0f;
++};
++Lod g_lods[] = {{kPedLodHigh, "ped.lod.distance.high"},
++                {kCarLodHigh, "car.lod.distance.high"},
++                {kCarLodLow, "car.lod.distance.low"}};
++
++void Scale(Lod& lod, double scale) {
++  const float now = ReadF(lod.address);
++  if (!(now > 0.0f)) return;  // not loaded yet
++  if (now != lod.written) lod.game = now;
++  const float want = float(lod.game * scale);
++  if (now != want) {
++    WriteF(lod.address, want);
++    REXLOG_INFO("[detail] {} {:.1f} (the game's {:.1f} x{:.2f})", lod.name, want, lod.game, scale);
++  }
++  lod.written = want;
++}
++
++// The view distance: the game's three words kept (taken again whenever the game writes others), ours written while
++// the setting is below 1, the game's put back at 1.
++struct View {
++  uint32_t game[3] = {};
++  uint32_t written[3] = {};
++  bool have = false;
++  bool ours = false;
++} g_view;
++
++void ViewDistance(double scale) {
++  const uint32_t addr[3] = {kFarClip, kNearFog, kHeightStart};
++  uint32_t now[3];
++  for (int i = 0; i < 3; ++i) now[i] = Read(addr[i]);
++  if (now[0] == 0) return;  // visualsettings not loaded yet
++  const bool changed_by_game = !g_view.ours || now[0] != g_view.written[0] || now[1] != g_view.written[1] ||
++                               now[2] != g_view.written[2];
++  if (changed_by_game) {
++    std::memcpy(g_view.game, now, sizeof now);
++    g_view.have = true;
++    g_view.ours = false;
++  }
++  if (scale >= 0.999) {
++    if (g_view.ours) {
++      for (int i = 0; i < 3; ++i) Write(addr[i], g_view.game[i]);
++      g_view.ours = false;
++      REXLOG_INFO("[detail] view distance: the game's");
++    }
++    return;
++  }
++  uint32_t want[3];
++  const float s = float(scale), deep = -100000.0f;
++  std::memcpy(&want[0], &s, 4);
++  std::memcpy(&want[1], &s, 4);
++  std::memcpy(&want[2], &deep, 4);
++  if (g_view.ours && std::memcmp(want, g_view.written, sizeof want) == 0) return;
++  for (int i = 0; i < 3; ++i) Write(addr[i], want[i]);
++  std::memcpy(g_view.written, want, sizeof want);
++  g_view.ours = true;
++  float gm, gf, gh;
++  std::memcpy(&gm, &g_view.game[0], 4);
++  std::memcpy(&gf, &g_view.game[1], 4);
++  std::memcpy(&gh, &g_view.game[2], 4);
++  REXLOG_INFO("[detail] view distance x{:.2f} (the game's far clip x{:.2f}, near fog x{:.2f} from height {:.1f})",
++              scale, gm, gf, gh);
++}
++
++}  // namespace
++
++void Install(rex::Runtime& runtime) {
++  g_base = runtime.memory() ? runtime.memory()->virtual_membase() : nullptr;
++}
++
++void Apply() {
++  if (!g_base) return;
++  Flag(kNoPtfx, !REXCVAR_GET(mp3_particles), "noptfx (particles off)");
++  // v00.59: cloth stays simulated whatever mp3_cloth says (off broke the characters, and v00.57 took its row out of
++  // the menu, so a saved "false" could no longer be undone there).
++  Flag(kNoClothUpdate, false, "noclothupdate");
++  Flag(kNoEnvCloth, false, "noEnvCloth");
++  Flag(kDisableBlendshapes, !REXCVAR_GET(mp3_face_shapes), "disableBlendshapes");
++  Scale(g_lods[0], REXCVAR_GET(mp3_ped_detail));
++  Scale(g_lods[1], REXCVAR_GET(mp3_car_detail));
++  Scale(g_lods[2], REXCVAR_GET(mp3_car_detail));
++  ViewDistance(REXCVAR_GET(mp3_view_distance));
++}
++
++}  // namespace mp3::detail
+diff --git a/mp3/ps4/mp3_ps4_detail.h b/mp3/ps4/mp3_ps4_detail.h
+new file mode 100755
+index 0000000..165f383
+--- /dev/null
++++ b/mp3/ps4/mp3_ps4_detail.h
+@@ -0,0 +1,17 @@
++// mp3-ps4 - the game's own detail settings (mp3_ps4_detail.cpp).
++
++#pragma once
++
++namespace rex {
++class Runtime;
++}
++
++namespace mp3::detail {
++
++// Once the executable is loaded: where guest memory is.
++void Install(rex::Runtime& runtime);
++
++// At every swap (mp3::menu::NoteSwap): the settings to the game's parameters and LOD distances.
++void Apply();
++
++}  // namespace mp3::detail
 diff --git a/mp3/ps4/mp3_ps4_fps.cpp b/mp3/ps4/mp3_ps4_fps.cpp
 new file mode 100644
 index 0000000..4b32816
@@ -17297,10 +19305,10 @@ index 0000000..3ac655c
 +}  // namespace mp3::live
 diff --git a/mp3/ps4/mp3_ps4_menu.cpp b/mp3/ps4/mp3_ps4_menu.cpp
 new file mode 100644
-index 0000000..19edd97
+index 0000000..37406e1
 --- /dev/null
 +++ b/mp3/ps4/mp3_ps4_menu.cpp
-@@ -0,0 +1,1068 @@
+@@ -0,0 +1,1305 @@
 +// mp3-ps4 - the L3+R3 quick menu and the frame counter (the user, 2026-11-06: "add quick menu similar to mgr but
 +// recreate it with better looking menu").
 +//
@@ -17322,6 +19330,8 @@ index 0000000..19edd97
 +// presenter paints from the game's thread at once, with one it paints on the UI thread (presenter.cpp's paint modes).
 +// The L3+R3 press comes from the pad driver (PS4InputDriver::TakeMenuCombo), checked at each of the game's frames.
 +
++#include "mp3_ps4_achievements.h"
++#include "mp3_ps4_detail.h"
 +#include "mp3_ps4_menu.h"
 +#include "mp3_ps4_switches.h"
 +
@@ -17332,6 +19342,9 @@ index 0000000..19edd97
 +#include <cmath>
 +#include <cstdint>
 +#include <cstdio>
++#include <deque>
++#include <mutex>
++#include <filesystem>
 +#include <functional>
 +#include <memory>
 +#include <string>
@@ -17341,6 +19354,7 @@ index 0000000..19edd97
 +
 +#include <imgui.h>
 +
++#include <ps4_kit.h>
 +#include <ps4_kit_diag.h>
 +
 +#include <rex/cvar.h>
@@ -17557,7 +19571,7 @@ index 0000000..19edd97
 +}
 +
 +struct Row {
-+  enum class Kind { kChoice, kSwitch, kAction, kInfo };
++  enum class Kind { kChoice, kSwitch, kAction, kInfo, kEntry };  // kEntry (v00.71): selectable, read-only
 +  Kind kind = Kind::kInfo;
 +  std::string label;
 +  std::string help;
@@ -17566,12 +19580,35 @@ index 0000000..19edd97
 +  std::function<int()> get;            // kChoice: the option; kSwitch: 0/1
 +  std::function<void(int)> set;
 +  std::function<void()> run;           // kAction
-+  std::string info;                    // kInfo: the value shown
++  std::string info;                    // kInfo / kEntry: the value shown
++  ImU32 trophy = 0;                    // kEntry: a trophy of this colour before the label (0: none)
++  bool earned = false;                 // kEntry: drawn bright (else dim)
 +};
 +
 +constexpr double kProfileSeconds = 8.0;
-+constexpr const char* kTabs[] = {"VIDEO", "OVERLAY", "DIAGNOSTICS", "ABOUT"};
-+constexpr int kTabCount = 4;
++constexpr const char* kTabs[] = {"VIDEO", "OVERLAY", "DIAGNOSTICS", "ACHIEVEMENTS", "ABOUT"};
++constexpr int kTabCount = 5;
++constexpr int kAboutTab = 4;
++
++// v00.71: the trophies' colours by the achievement's gamerscore (the PS4's tiers: 50+ gold, 20+ silver).
++constexpr ImU32 kGold = IM_COL32(230, 186, 74, 255);
++constexpr ImU32 kSilver = IM_COL32(196, 200, 210, 255);
++constexpr ImU32 kBronze = IM_COL32(196, 124, 72, 255);
++ImU32 TierColour(uint32_t gamerscore) {
++  return gamerscore >= 50 ? kGold : gamerscore >= 20 ? kSilver : kBronze;
++}
++
++// A trophy cup of height 2*r centred at c.
++void DrawTrophy(ImDrawList* draw, ImVec2 c, float r, ImU32 colour) {
++  const float w = r * 1.1f;
++  draw->AddRectFilled(ImVec2(c.x - w, c.y - r), ImVec2(c.x + w, c.y + r * 0.15f), colour, w * 0.9f,
++                      ImDrawFlags_RoundCornersBottom);
++  draw->AddCircle(ImVec2(c.x - w, c.y - r * 0.45f), r * 0.38f, colour, 12, r * 0.18f);
++  draw->AddCircle(ImVec2(c.x + w, c.y - r * 0.45f), r * 0.38f, colour, 12, r * 0.18f);
++  draw->AddRectFilled(ImVec2(c.x - r * 0.16f, c.y + r * 0.1f), ImVec2(c.x + r * 0.16f, c.y + r * 0.62f), colour);
++  draw->AddRectFilled(ImVec2(c.x - r * 0.62f, c.y + r * 0.62f), ImVec2(c.x + r * 0.62f, c.y + r), colour,
++                      r * 0.12f);
++}
 +
 +// The pad buttons that, held when the menu closes, would reach the game as a press.
 +constexpr ImGuiKey kHeldKeys[] = {
@@ -17610,6 +19647,8 @@ index 0000000..19edd97
 +
 +void Open();
 +void ReleaseLater();
++QuickMenu& Dialog();
++std::string DiscsText();
 +
 +class QuickMenu final : public rex::ui::ImGuiDialog {
 + public:
@@ -17625,9 +19664,14 @@ index 0000000..19edd97
 +    REXLOG_INFO("[menu] opened (L3+R3)");
 +  }
 +
++  // v00.71: an achievement's pop-up, after the ones before it (UI thread).
++  void PushAchievement(std::string name, uint32_t gamerscore) {
++    popups_.push_back({std::move(name), gamerscore});
++  }
++
 +  // Nothing left to draw: the dialog can go.
 +  bool Idle() const {
-+    return phase_ == Phase::kClosed && REXCVAR_GET(mp3_frame_counter) <= 0 && toast_left_ <= 0.0f &&
++    return phase_ == Phase::kClosed && REXCVAR_GET(mp3_frame_counter) <= 0 && toast_left_ <= 0.0f && !PopupActive() &&
 +           !start_profile_ && ps4_profile_running() == 0;
 +  }
 +
@@ -17666,7 +19710,8 @@ index 0000000..19edd97
 +    }
 +    DrawCounter(io, visible);
 +    DrawToast(io, dt);
-+    g_animating.store(phase_ != Phase::kClosed || toast_left_ > 0.0f, std::memory_order_relaxed);
++    DrawPopup(io, dt);
++    g_animating.store(phase_ != Phase::kClosed || toast_left_ > 0.0f || PopupActive(), std::memory_order_relaxed);
 +    if (Idle()) ReleaseLater();
 +  }
 +
@@ -17688,6 +19733,7 @@ index 0000000..19edd97
 +    const bool vblank_mode = rex::cvar::Query<std::string>("mp3_60fps_mode") == "vblank";
 +    switch (tab) {
 +      case 0: {
++#if !MP3_RENUT  // the Xenos emulation's own settings: nothing to them under Renut
 +        Row fps;
 +        fps.kind = Row::Kind::kChoice;
 +        fps.label = "Frame rate";
@@ -17735,6 +19781,55 @@ index 0000000..19edd97
 +            "Copies what the game's GPU shaders write to memory back to the CPU, from the previous frame so nothing "
 +            "waits. Off froze v00.04 as gameplay began.";
 +        rows.push_back(std::move(memexport));
++#endif
++        // v00.55: the game's own detail settings (mp3_ps4_detail.cpp), live: fewer draws and less of its work.
++        auto on_off = [&rows](const char* label, const char* cvar, const char* help) {
++          Row row;
++          row.kind = Row::Kind::kChoice;
++          row.label = label;
++          row.options = {"On", "Off  (faster)"};
++          row.get = [cvar] { return rex::cvar::Query<bool>(cvar) ? 0 : 1; };
++          row.set = [cvar](int v) { SetCvar(cvar, v ? "false" : "true"); };
++          row.help = help;
++          rows.push_back(std::move(row));
++        };
++        auto distance = [&rows](const char* label, const char* cvar, const char* help) {
++          Row row;
++          row.kind = Row::Kind::kChoice;
++          row.label = label;
++          row.options = {"Full", "75 %", "50 %"};
++          row.get = [cvar] {
++            const double v = rex::cvar::Query<double>(cvar);
++            return v > 0.875 ? 0 : v > 0.625 ? 1 : 2;
++          };
++          row.set = [cvar](int v) { SetCvar(cvar, v == 0 ? "1.0" : v == 1 ? "0.75" : "0.5"); };
++          row.help = help;
++          rows.push_back(std::move(row));
++        };
++        on_off("Particles", "mp3_particles",
++               "Smoke, sparks, blood and glass. Off: the game neither draws nor updates them, the busy fights' "
++               "heaviest effects.");
++        // v00.57: no Cloth row: cloth off broke the characters (a busy fight on .43) and gained nothing.
++        on_off("Facial animation", "mp3_face_shapes",
++               "The faces' blend shapes. Off: faces keep their rest pose (cutscenes look stiffer).");
++        distance("Character detail", "mp3_ped_detail",
++                 "How far characters keep their detailed models. Less: the simpler models sooner, fewer vertices "
++                 "and bones.");
++        distance("Car detail", "mp3_car_detail", "How far cars keep their detailed models.");
++        {
++          // v00.65: the base lighting without its stencil test (the black areas at some camera angles).
++          Row row;
++          row.kind = Row::Kind::kChoice;
++          row.label = "Lighting fix";
++          row.options = {"On", "Off"};
++          row.get = [] { return rex::cvar::Query<bool>("mp3_renut_lighting_fix") ? 0 : 1; };
++          row.set = [](int v) { SetCvar("mp3_renut_lighting_fix", v ? "false" : "true"); };
++          row.help = "Fixes places that turn black at some camera angles (only small lights' circles lit). Off: "
++                     "the renderer as before.";
++          rows.push_back(std::move(row));
++        }
++        distance("View distance", "mp3_view_distance",
++                 "How far the scene reaches (the game's far clip). Less: the far scenery ends sooner, fewer objects for the game to go through.");
 +        break;
 +      }
 +      case 1: {
@@ -17866,6 +19961,53 @@ index 0000000..19edd97
 +        rows.push_back(std::move(logs));
 +        break;
 +      }
++      case 3: {  // v00.71: the game's achievements (mp3_ps4_achievements.cpp)
++        const auto list = mp3::achievements::List();
++        uint32_t got = 0, score = 0, total = 0;
++        for (const auto& e : list) {
++          total += e.gamerscore;
++          if (e.unlocked) {
++            ++got;
++            score += e.gamerscore;
++          }
++        }
++        Row summary;
++        summary.label = "Unlocked";
++        summary.info = list.empty() ? "the game's list is not loaded yet"
++                                    : fmt::format("{} of {}  ·  {} of {} G", got, list.size(), score, total);
++        rows.push_back(std::move(summary));
++        Row popups;
++        popups.kind = Row::Kind::kSwitch;
++        popups.label = "Unlock pop-ups";
++        popups.get = [] { return rex::cvar::Query<bool>("mp3_achievement_popups") ? 1 : 0; };
++        popups.set = [](int v) { SetCvar("mp3_achievement_popups", v ? "true" : "false"); };
++        popups.help = "A pop-up at the top of the screen when you earn an achievement. Your achievements are "
++                      "kept on the console, in the game's data folder.";
++        rows.push_back(std::move(popups));
++        Row test;
++        test.kind = Row::Kind::kAction;
++        test.label = "Test pop-up";
++        test.run = [this] { PushAchievement("Achievement test", 50); };
++        test.help = "Shows what an unlock looks like (nothing is unlocked).";
++        rows.push_back(std::move(test));
++        for (const auto& e : list) {
++          Row row;
++          row.kind = Row::Kind::kEntry;
++          const bool hidden = e.secret && !e.unlocked;
++          row.label = hidden ? "Secret achievement" : e.name;
++          row.trophy = TierColour(e.gamerscore);
++          row.earned = e.unlocked;
++          row.info = e.unlocked ? mp3::achievements::DateText(e.filetime) : fmt::format("{} G", e.gamerscore);
++          if (hidden) {
++            row.help = "Keep playing to reveal it.";
++          } else {
++            const std::string& d = e.unlocked || e.locked_description.empty() ? e.description : e.locked_description;
++            row.help = fmt::format("{}  ({} G){}", d, e.gamerscore, e.unlocked ? "  ·  unlocked" : "");
++          }
++          rows.push_back(std::move(row));
++        }
++        break;
++      }
 +      default: {
 +        auto info = [&rows](const char* label, std::string value) {
 +          Row row;
@@ -17875,7 +20017,12 @@ index 0000000..19edd97
 +        };
 +        info("Build", fmt::format("v{}  ·  {}", MP3_VERSION, MP3_COMMIT));
 +        info("Game", "Xbox 360, Title Update 6 (0.0.6.6)");
-+        info("CPU", "PowerPC recompiled to x86-64");
++        // v00.52: the clock measured (ps4-kit): a PS4 Pro in Boost Mode runs the cores at 2.13 GHz, not 1.6.
++        const unsigned mhz = ps4_kit_cpu_mhz();
++        info("CPU", fmt::format("PowerPC recompiled to x86-64, cores at {:.2f} GHz{}", mhz / 1000.0,
++                                mhz >= 2000 ? "  (Boost Mode)" : ""));
++        if (mhz < 2000) info("PS4 Pro", "Settings > System > Boost Mode: 2.13 GHz");
++        info("Discs", DiscsText());
 +#if MP3_RENUT
 +        info("GPU", "Direct3D-level renderer (Renut) on Vulkan (RADV)");
 +#else
@@ -17888,7 +20035,7 @@ index 0000000..19edd97
 +    return rows;
 +  }
 +
-+  static bool Selectable(const Row& row) { return row.kind != Row::Kind::kInfo; }
++  static bool Selectable(const Row& row) { return row.kind != Row::Kind::kInfo; }  // kEntry is
 +
 +  void MoveSelection(const std::vector<Row>& rows, int step) {
 +    if (rows.empty()) return;
@@ -17906,6 +20053,7 @@ index 0000000..19edd97
 +    if (ImGui::IsKeyPressed(ImGuiKey_GamepadR1, false) || ImGui::IsKeyPressed(ImGuiKey_GamepadL1, false)) {
 +      tab_ = (tab_ + (ImGui::IsKeyPressed(ImGuiKey_GamepadR1, false) ? 1 : kTabCount - 1)) % kTabCount;
 +      selected_ = -1;
++      first_ = 0;
 +      jump_ = true;
 +      rows = BuildRows(tab_);
 +    }
@@ -17948,6 +20096,7 @@ index 0000000..19edd97
 +        if (cross && row.run) row.run();
 +        break;
 +      case Row::Kind::kInfo:
++      case Row::Kind::kEntry:
 +        break;
 +    }
 +  }
@@ -18011,8 +20160,15 @@ index 0000000..19edd97
 +    // Rows.
 +    const float row_h = 54.0f * u;
 +    const float rows_top = y;
++    // v00.71: as many rows as fit above the description and the hints; the list scrolls with the selection.
++    const int visible = std::max(3, int((H - 44.0f * u - 16.0f * u - 120.0f * u - rows_top) / row_h));
 +    if (selected_ >= 0) {
-+      const float target = rows_top + float(selected_) * row_h;
++      if (selected_ < first_) first_ = selected_;
++      if (selected_ >= first_ + visible) first_ = selected_ - visible + 1;
++    }
++    first_ = std::clamp(first_, 0, std::max(0, int(rows.size()) - visible));
++    if (selected_ >= 0) {
++      const float target = rows_top + float(selected_ - first_) * row_h;
 +      highlight_y_ = highlight_y_ < 0.0f || jump_
 +                         ? target
 +                         : highlight_y_ + (target - highlight_y_) * std::min(1.0f, dt * 18.0f);
@@ -18026,14 +20182,23 @@ index 0000000..19edd97
 +    }
 +    nudge_ *= std::max(0.0f, 1.0f - dt * 12.0f);
 +    for (size_t i = 0; i < rows.size(); ++i) {
++      if (int(i) < first_ || int(i) >= first_ + visible) continue;
 +      const Row& row = rows[i];
 +      const bool sel = int(i) == selected_;
-+      const float ry = rows_top + float(i) * row_h;
++      const float ry = rows_top + float(int(i) - first_) * row_h;
 +      const float mid = ry + row_h * 0.5f;
 +      const ImVec2 lsize = TextSize(g_fonts.row, row.label.c_str());
-+      Text(draw, g_fonts.row, ImVec2(x0 + pad, mid - lsize.y * 0.5f),
-+           sel ? kText : (row.kind == Row::Kind::kInfo ? kDim : IM_COL32(200, 200, 204, 255)), row.label.c_str());
-+      if (i + 1 < rows.size()) {
++      float lx = x0 + pad;
++      if (row.kind == Row::Kind::kEntry && row.trophy) {
++        DrawTrophy(draw, ImVec2(lx + 9.0f * u, mid), 9.0f * u, row.earned ? row.trophy : kFaint);
++        lx += 28.0f * u;
++      }
++      const ImU32 lc = sel ? kText
++                       : row.kind == Row::Kind::kInfo ? kDim
++                       : row.kind == Row::Kind::kEntry && !row.earned ? kDim
++                                                                     : IM_COL32(200, 200, 204, 255);
++      Text(draw, g_fonts.row, ImVec2(lx, mid - lsize.y * 0.5f), lc, row.label.c_str());
++      if (i + 1 < rows.size() && int(i) + 1 < first_ + visible) {
 +        draw->AddLine(ImVec2(x0 + pad, ry + row_h), ImVec2(x0 + W - pad, ry + row_h), kLine, 1.0f);
 +      }
 +      const float right = x0 + W - pad;
@@ -18088,14 +20253,22 @@ index 0000000..19edd97
 +          Text(draw, g_fonts.small, ImVec2(a.x + 25.0f * u, mid - ls.y * 0.5f), kText, label);
 +          break;
 +        }
-+        case Row::Kind::kInfo: {
++        case Row::Kind::kInfo:
++        case Row::Kind::kEntry: {
 +          const ImVec2 is = TextSize(g_fonts.body, row.info.c_str());
-+          Text(draw, g_fonts.body, ImVec2(right - is.x, mid - is.y * 0.5f), kText, row.info.c_str());
++          const ImU32 vc = row.kind == Row::Kind::kEntry ? (row.earned ? kGood : kDim) : kText;
++          Text(draw, g_fonts.body, ImVec2(right - is.x, mid - is.y * 0.5f), vc, row.info.c_str());
 +          break;
 +        }
 +      }
 +    }
-+    y = rows_top + float(rows.size()) * row_h + 26.0f * u;
++    if (int(rows.size()) > visible) {  // v00.71: where the list is
++      const std::string where = fmt::format("{}-{} of {}", first_ + 1,
++                                            std::min(int(rows.size()), first_ + visible), rows.size());
++      const ImVec2 ws = TextSize(g_fonts.small, where.c_str());
++      Text(draw, g_fonts.small, ImVec2(x0 + W - pad - ws.x, rows_top - ws.y - 4.0f * u), kFaint, where.c_str());
++    }
++    y = rows_top + float(std::min(int(rows.size()), visible)) * row_h + 26.0f * u;
 +
 +    // The selected row's description.
 +    if (selected_ >= 0 && selected_ < int(rows.size())) {
@@ -18111,7 +20284,7 @@ index 0000000..19edd97
 +        y += ts.y + 16.0f * u;
 +      }
 +      Text(draw, g_fonts.body, ImVec2(x0 + pad, y), kDim, row.help.c_str(), W - pad * 2.0f);
-+    } else if (tab_ == 3) {
++    } else if (tab_ == kAboutTab) {
 +      Text(draw, g_fonts.body, ImVec2(x0 + pad, y), kDim,
 +           "A port of VasilkovND/mp3-nx done the MGR way: the game's code converted to x86-64 ahead of time, its "
 +           "graphics drawn by the Xenos emulation on the PS4's GPU. Your game data stays on your console.",
@@ -18223,6 +20396,52 @@ index 0000000..19edd97
 +    Text(draw, g_fonts.body, ImVec2(a.x + 28.0f * u, a.y + (h - s.y) * 0.5f), WithAlpha(kText, alpha), text);
 +  }
 +
++  // v00.71: the achievement pop-up: slides down at the top centre, 5 s, then the next one.
++  bool PopupActive() const { return !popups_.empty(); }
++  void DrawPopup(ImGuiIO& io, float dt) {
++    if (popups_.empty()) return;
++    constexpr float kShow = 5.0f;
++    popup_t_ += dt;
++    if (popup_t_ >= kShow) {
++      popups_.pop_front();
++      popup_t_ = 0.0f;
++      return;
++    }
++    const auto& p = popups_.front();
++    const float in = std::clamp(popup_t_ / 0.35f, 0.0f, 1.0f), out = std::clamp((kShow - popup_t_) / 0.4f, 0.0f, 1.0f);
++    const float alpha = std::min(in, out);
++    const float u = io.DisplaySize.y / 720.0f;
++    ImDrawList* draw = ImGui::GetForegroundDrawList();
++    const char* head = "ACHIEVEMENT UNLOCKED";
++    const std::string score = fmt::format("{} G", p.gamerscore);
++    const ImVec2 hs = TextSize(g_fonts.small, head), ns = TextSize(g_fonts.row, p.name.c_str()),
++                 ss = TextSize(g_fonts.small, score.c_str());
++    const float icon = 44.0f * u, padx = 16.0f * u;
++    const float w = std::max(320.0f * u, icon + padx * 3.0f + std::max(hs.x + ss.x + 16.0f * u, ns.x));
++    const float h = 66.0f * u;
++    const float x = (io.DisplaySize.x - w) * 0.5f;
++    const float y = 26.0f * u - (1.0f - EaseOut(in)) * (h + 30.0f * u);
++    draw->AddRectFilled(ImVec2(x, y), ImVec2(x + w, y + h), WithAlpha(IM_COL32(12, 12, 15, 238), alpha), 8.0f * u);
++    draw->AddRect(ImVec2(x, y), ImVec2(x + w, y + h), WithAlpha(IM_COL32(255, 255, 255, 28), alpha), 8.0f * u, 0, 1.0f);
++    const ImU32 tier = TierColour(p.gamerscore);
++    const ImVec2 ic(x + padx + icon * 0.5f, y + h * 0.5f);
++    draw->AddCircleFilled(ic, icon * 0.5f, WithAlpha(IM_COL32(255, 255, 255, 14), alpha), 32);
++    draw->AddCircle(ic, icon * 0.5f, WithAlpha(tier, alpha * 0.8f), 32, 1.5f * u);
++    DrawTrophy(draw, ic, icon * 0.27f, WithAlpha(tier, alpha));
++    const float tx = x + padx * 2.0f + icon;
++    Text(draw, g_fonts.small, ImVec2(tx, y + 12.0f * u), WithAlpha(tier, alpha), head);
++    Text(draw, g_fonts.small, ImVec2(x + w - padx - ss.x, y + 12.0f * u), WithAlpha(kDim, alpha), score.c_str());
++    Text(draw, g_fonts.row, ImVec2(tx, y + h - 14.0f * u - ns.y), WithAlpha(kText, alpha), p.name.c_str());
++  }
++
++  struct Popup {
++    std::string name;
++    uint32_t gamerscore = 0;
++  };
++  std::deque<Popup> popups_;
++  float popup_t_ = 0.0f;
++  int first_ = 0;  // the first row drawn (the list scrolls)
++
 +  // While the buttons that closed the menu are held: an empty window keeps the navigation focus (so the game's pad
 +  // stays neutral) until they are released.
 +  void HoldFocus() {
@@ -18247,11 +20466,36 @@ index 0000000..19edd97
 +  float toast_left_ = 0.0f;
 +};
 +
++// v00.52: whether disc 2 is there for the story's second half (mp3_ps4_app.h's DiscFolder, read the same way).
++std::string DiscsText() {
++  std::error_code ec;
++  const std::string flag = rex::cvar::Query<std::string>("mp3_game2");
++  const bool two = (!flag.empty() && std::filesystem::exists(flag, ec)) ||
++                   std::filesystem::is_regular_file("/app0/game2/common/disc2.txt", ec) ||
++                   std::filesystem::is_regular_file(
++                       std::filesystem::path(ps4_diag_data_dir()) / "game2" / "common" / "disc2.txt", ec);
++  return two ? "1 and 2" : "1 only: the story stops at the end of chapter 6";
++}
++
 +// UI thread: the dialog for the menu (made when it is first needed).
 +QuickMenu& Dialog() {
 +  if (!g_state.dialog) g_state.dialog = new QuickMenu(g_state.drawer);
 +  return *g_state.dialog;
 +}
++
++}  // namespace (reopened below)
++
++void ShowAchievement(const std::string& name, uint32_t gamerscore) {
++  if (!g_state.context) return;
++  g_state.context->CallInUIThreadDeferred([name, gamerscore] {
++    if (!g_state.drawer) return;
++    Dialog().PushAchievement(name, gamerscore);
++    g_animating = true;
++    g_state.drawer->RequestRepaint();
++  });
++}
++
++namespace {
 +
 +void Open() {
 +  if (!g_state.drawer) return;
@@ -18331,6 +20575,7 @@ index 0000000..19edd97
 +}
 +
 +void NoteSwap() {
++  mp3::detail::Apply();  // v00.55: the VIDEO tab's detail settings, at every swap
 +  const uint32_t n = g_swaps.load(std::memory_order_relaxed);
 +  const uint64_t now = NowNs();
 +  g_swap_ns[n % kRing].store(now, std::memory_order_relaxed);
@@ -18371,10 +20616,10 @@ index 0000000..19edd97
 +}  // namespace mp3::menu
 diff --git a/mp3/ps4/mp3_ps4_menu.h b/mp3/ps4/mp3_ps4_menu.h
 new file mode 100644
-index 0000000..94b68e9
+index 0000000..3c12b2e
 --- /dev/null
 +++ b/mp3/ps4/mp3_ps4_menu.h
-@@ -0,0 +1,33 @@
+@@ -0,0 +1,36 @@
 +// mp3-ps4 - the L3+R3 quick menu and the frame counter (mp3_ps4_menu.cpp).
 +
 +#pragma once
@@ -18400,6 +20645,9 @@ index 0000000..94b68e9
 +
 +// The game's swap callback (mp3_ps4_fps.cpp), on the GPU thread: a frame for the counter, and L3+R3.
 +void NoteSwap();
++
++// v00.71: an achievement's unlock pop-up (any thread; queued, shown one after another).
++void ShowAchievement(const std::string& name, uint32_t gamerscore);
 +
 +// The game's swaps so far (any thread).
 +uint32_t SwapCount();
@@ -19925,10 +22173,10 @@ index 99033c8..0a16b05 100644
          "${RENUT_IMGUI_DIR}/imgui.cpp"
          "${RENUT_IMGUI_DIR}/imgui_draw.cpp"
 diff --git a/mp3/renut/src/renut_engine/gpu/render/draw.cpp b/mp3/renut/src/renut_engine/gpu/render/draw.cpp
-index dfede8e..a5cf88b 100644
+index dfede8e..b438c80 100644
 --- a/mp3/renut/src/renut_engine/gpu/render/draw.cpp
 +++ b/mp3/renut/src/renut_engine/gpu/render/draw.cpp
-@@ -76,6 +76,20 @@ REXCVAR_DEFINE_BOOL(sa2_renut_chain_reuse, true, "SA2/Renderer",
+@@ -76,6 +76,34 @@ REXCVAR_DEFINE_BOOL(sa2_renut_chain_reuse, true, "SA2/Renderer",
                      "draw's pipeline key when nothing the key is made from changed (the device's render state chunks, "
                      "the shaders, the declaration, the targets, the primitive) instead of making it again")
      .lifecycle(rex::cvar::Lifecycle::kInitOnly);
@@ -19941,6 +22189,20 @@ index dfede8e..a5cf88b 100644
 +                    "Diagnostic: Max Payne 3's HDR chain to the log - the tonemap's constants and textures "
 +                    "([tonemap]), the HDR resolves' exponents ([hdr-resolve], [hdr]), the values read back and "
 +                    "loaded as constants ([gpu-load]), and every draw of one frame at 60, 120 and 240 s ([mp3draw])");
++// mp3-ps4 (v00.65): MakeKey. The base lighting everywhere: the black light-volume areas (see the light test).
++REXCVAR_DEFINE_BOOL(mp3_renut_lighting_fix, true, "Renut",
++                    "Max Payne 3's base lighting (ambient and sun) drawn without its stencil test: some places went "
++                    "black at some camera angles under Renut (only point lights' circles lit). Off: the game's test");
++// mp3-ps4 (v00.64): MakeKey, the light test.
++REXCVAR_DEFINE_INT32(mp3_renut_light_test, 0, "Renut",
++                     "Diagnostic: Max Payne 3's black light-volume areas. 1 = the base lighting (F9927F3D) without its "
++                     "stencil test, 2 = the light-volume marking passes leave stencil bit 0 alone, 3 = both. Live")
++    .range(0, 3);
++// mp3-ps4 (v00.63): DrawStateLocked, the shadow test.
++REXCVAR_DEFINE_INT32(mp3_renut_shadow_test, 0, "Renut",
++                     "Diagnostic: Max Payne 3's shadow-map casters not drawn (the maps keep their clear): 0 off, 1 all, "
++                     "2 the 256x256 maps only, 3 the 512x512 maps only. Live")
++    .range(0, 3);
 +// mp3-ps4 (v00.43): ResolveStateLocked.
 +REXCVAR_DEFINE_BOOL(mp3_renut_msaa_twin, true, "Renut",
 +                    "A 4x resolve of the EDRAM a single-sample target of twice the size wrote last reads that target, "
@@ -19949,7 +22211,7 @@ index dfede8e..a5cf88b 100644
  REXCVAR_DEFINE_BOOL(sa2_renut_chain_reuse_verify, false, "SA2/Renderer",
                      "Tests (sa2_renut_chain_reuse): the key is made anyway and compared with the one taken; a "
                      "difference is logged and the made one used")
-@@ -459,6 +473,8 @@ std::vector<u32> g_indices;  // scratch for index reads
+@@ -459,6 +487,8 @@ std::vector<u32> g_indices;  // scratch for index reads
  
  // SetTilesLocked / SetReplayPredicationLocked.
  std::vector<ClearRect> g_tiles;
@@ -19958,7 +22220,7 @@ index dfede8e..a5cf88b 100644
  u32 g_replay_predication = ~0u;
  
  // A vertex stream as a draw reads it: guest vertices through a host layout.
-@@ -2123,6 +2139,10 @@ void FillTextures(const GuestDevice &device, u32 fetch_mask, SharedConstants &sc
+@@ -2123,6 +2153,10 @@ void FillTextures(const GuestDevice &device, u32 fetch_mask, SharedConstants &sc
      // shader_common.h), with the fetch constant's filter between layers and
      // its Z address mode.
      u32 index = binding.slot | binding.scale.code << kResolutionScaleShift;
@@ -19969,7 +22231,32 @@ index dfede8e..a5cf88b 100644
      if (binding.stacked) {
        index |= kStackedTextureBit;
        if (fetch.VolumeMagFilter() != TextureFilter::Point ||
-@@ -4088,6 +4108,101 @@ bool DrawsWithoutPixelShader(const GuestDevice &device, const Targets &t, const
+@@ -3160,6 +3194,24 @@ PipelineKey MakeKey(const GuestDevice &device, const ShaderRecord *vs, const Sha
+     key.depth_control = (key.depth_control & ~0x70u) | 0x30u;
+   if ((raster_override & 256) && key.color_mask && ((key.depth_control >> 4) & 7) == 6)
+     key.depth_control = (key.depth_control & ~0x70u) | 0x50u;
++  // mp3-ps4 v00.65: the lighting fix (mp3_renut_lighting_fix, on by default).
++  // v00.68: every variant of the pass (one pixel shader per area): its full-screen vertex shader, a stencil test
++  // that only reads (EQUAL, write mask 0).
++  if (REXCVAR_GET(mp3_renut_lighting_fix) && (key.depth_control & 1u) &&
++      ((ps && ps->hash == 0xF9927F3DDDBE117Aull) ||
++       (vs && vs->hash == 0x761A2506F75DEA4Cull && ((key.depth_control >> 8) & 7u) == 2u &&
++        ((key.stencil_ref_mask >> 16) & 0xFFu) == 0u)))
++    key.depth_control &= ~1u;
++  // mp3-ps4 v00.64: the light test (mp3_renut_light_test).
++  if (const int32_t light_test = REXCVAR_GET(mp3_renut_light_test)) {
++    if ((light_test & 1) && ps && ps->hash == 0xF9927F3DDDBE117Aull)
++      key.depth_control &= ~1u;
++    // A marking pass: no pixel shader, no colour, two-sided stencil (0x80) with its test on (1).
++    if ((light_test & 2) && !ps && !key.color_mask && (key.depth_control & 0x81u) == 0x81u) {
++      key.stencil_ref_mask &= ~(1u << 16);
++      key.stencil_ref_mask_bf &= ~(1u << 16);
++    }
++  }
+   key.alpha_to_coverage = (u32(cp.ColorControl) >> 4) & 1;
+   if (primitive == kRectangleList) {
+     if (State().rectangle_list_gs)
+@@ -4088,6 +4140,107 @@ bool DrawsWithoutPixelShader(const GuestDevice &device, const Targets &t, const
    return ((color_control >> 4) & 1) == 0;  // alpha to coverage, as MakeKey's
  }
  
@@ -20052,12 +22339,18 @@ index dfede8e..a5cf88b 100644
 +  if (frame >= g_mp3_drawlog_from && frame < g_mp3_drawlog_until && g_mp3_drawlog_lines < 3000) {
 +    ++g_mp3_drawlog_lines;
 +    RGPU_INFO("[mp3draw] frame {} #{}: vs {:016X} ps {:016X} prim {} {} {} into {}x{} format {} ({} targets{}); "
-+              "c0 {} c88 {} c137 {}",
++              "c0 {} c88 {} c137 {}; mode {:X} depth {:08X} stencil {:06X} bf {:06X} clip {:08X} blend {:08X} "
++              "mask {:X}",
 +              frame, g_mp3_drawlog_lines, vs ? vs->hash : 0, ps ? ps->hash : 0, call.primitive,
 +              geometry.indexed ? geometry.index_count : geometry.vertex_count,
 +              geometry.indexed ? "indices" : "vertices", c0 ? c0->width : 0, c0 ? c0->height : 0,
 +              c0 ? int(c0->format) : -1, targets.color_count, targets.depth ? ", depth" : "",
-+              Mp3Constant(dev, 0), Mp3Constant(dev, 88), Mp3Constant(dev, 137));
++              Mp3Constant(dev, 0), Mp3Constant(dev, 88), Mp3Constant(dev, 137),
++              // v00.61: the raster state (the lights that go dark with the camera inside them)
++              u32(dev.m_ControlPacket.ModeControl), u32(dev.m_ControlPacket.DepthControl),
++              u32(dev.m_ValuesPacket.StencilRefMask) & 0xFFFFFF, u32(dev.m_ValuesPacket.StencilRefMaskBF) & 0xFFFFFF,
++              u32(dev.m_ControlPacket.ClipControl), u32(dev.m_ControlPacket.BlendControl0),
++              u32(dev.m_ValuesPacket.ColorMask) & 0xFFFF);
 +    Mp3TextureSlots(device, texture_mask, sc, "[mp3draw]");
 +  }
 +}
@@ -20071,7 +22364,23 @@ index dfede8e..a5cf88b 100644
  // banjo-nx (2026-10-18, matching RenderDoc captures of Ryujinx to the game's shaders): banjo_renut_diag_draw_log_s
  // seconds after the first draw, every draw of the next two frames: its shaders, counts, target and state, in order.
  void DrawLog(const DrawCall &call, const Geometry &geometry, const ShaderRecord *vs, const ShaderRecord *ps,
-@@ -4937,6 +5052,8 @@ bool DrawStateLocked(const u8 *device_state, const DrawCall &call, const ReplayC
+@@ -4351,6 +4504,15 @@ bool DrawStateLocked(const u8 *device_state, const DrawCall &call, const ReplayC
+     }
+   }
+ 
++  // mp3-ps4 v00.63: the shadow test (mp3_renut_shadow_test): a caster into a shadow map is not drawn.
++  if (const int32_t shadow_test = REXCVAR_GET(mp3_renut_shadow_test);
++      shadow_test && ps && ps->hash == 0x50F32F31F1688E2Eull && targets.color_count && targets.colors[0] &&
++      int(targets.colors[0]->format) == 26) {
++    const bool small = targets.colors[0]->width <= 256;
++    if (shadow_test == 1 || (shadow_test == 2 && small) || (shadow_test == 3 && !small))
++      return true;
++  }
++
+   // banjo-nx (banjo_gpu_depth_only): before anything of the pixel shader is set up.
+   if (ps && DrawsWithoutPixelShader(device, targets, *ps)) {
+     ps = nullptr;
+@@ -4937,6 +5099,8 @@ bool DrawStateLocked(const u8 *device_state, const DrawCall &call, const ReplayC
        gpu_profile::Mark(s, label);
      gpu_profile::CountDraw(s, label);
    }
@@ -20080,7 +22389,7 @@ index dfede8e..a5cf88b 100644
    // sa2-nx (2026-10-20, sa2_renut_lean_diagnostics): the draw log's check once, not a call per draw.
    static const bool draw_log = !REXCVAR_GET(sa2_renut_lean_diagnostics) ||
                                 REXCVAR_GET(banjo_renut_diag_draw_log_s) > 0;
-@@ -4979,8 +5096,13 @@ bool DrawStateLocked(const u8 *device_state, const DrawCall &call, const ReplayC
+@@ -4979,8 +5143,13 @@ bool DrawStateLocked(const u8 *device_state, const DrawCall &call, const ReplayC
  #endif
    // banjo-nx (2026-10-19, banjo_renut_resolve_skip): the targets this draw can write.
    for (u32 i = 0; i < targets.color_count && i < key.color_count; ++i)
@@ -20095,7 +22404,7 @@ index dfede8e..a5cf88b 100644
    if (targets.depth) {
      const u32 dc = key.depth_control;
      const bool depth_writes = (dc & 2) && (dc & 4);
-@@ -5005,6 +5127,185 @@ bool DrawStateLocked(const u8 *device_state, const DrawCall &call, const ReplayC
+@@ -5005,6 +5174,185 @@ bool DrawStateLocked(const u8 *device_state, const DrawCall &call, const ReplayC
    return true;
  }
  
@@ -20281,7 +22590,7 @@ index dfede8e..a5cf88b 100644
  namespace detail {
  
  void ReleaseCacheCopiesLocked(uint32_t slot) {
-@@ -5012,6 +5313,7 @@ void ReleaseCacheCopiesLocked(uint32_t slot) {
+@@ -5012,6 +5360,7 @@ void ReleaseCacheCopiesLocked(uint32_t slot) {
  }
  
  void CompleteMemExportsLocked(uint32_t slot) {
@@ -20289,7 +22598,7 @@ index dfede8e..a5cf88b 100644
    SlotExports &exports = g_exports[slot];
    if (exports.pending.empty())
      return;
-@@ -5192,6 +5494,7 @@ void ClearTargets(const Targets &t, u32 flags, const plume::RenderRect &rect, co
+@@ -5192,6 +5541,7 @@ void ClearTargets(const Targets &t, u32 flags, const plume::RenderRect &rect, co
      if (!(flags & (1u << i)))
        continue;
      ++t.colors[i]->writes;  // banjo-nx (banjo_renut_resolve_skip)
@@ -20297,7 +22606,7 @@ index dfede8e..a5cf88b 100644
      cmd->clearColor(i, clear_color, &host_rect, 1);
      ColorAliasesLocked(t.colors[i], found);
      for (HostSurface *alias : found) {
-@@ -5218,6 +5521,7 @@ void ClearTargets(const Targets &t, u32 flags, const plume::RenderRect &rect, co
+@@ -5218,6 +5568,7 @@ void ClearTargets(const Targets &t, u32 flags, const plume::RenderRect &rect, co
        continue;
      const plume::RenderRect alias_host = ScaleRect(alias_rect, a.scale);
      ++alias->writes;  // banjo-nx (banjo_renut_resolve_skip)
@@ -20305,7 +22614,7 @@ index dfede8e..a5cf88b 100644
      cmd->clearColor(0, clear_color, &alias_host, 1);
    }
  }
-@@ -5769,13 +6073,55 @@ void ResolveStateLocked(const u8 *device_state, u32 flags, const ClearRect *sour
+@@ -5769,13 +6120,55 @@ void ResolveStateLocked(const u8 *device_state, u32 flags, const ClearRect *sour
        }
      } else if (HostTexture *dest = GetResolveTextureLocked(dest_texture_va, surface->format,
                                                             surface->scale, dest_format)) {
@@ -20362,7 +22671,7 @@ index dfede8e..a5cf88b 100644
        if (fits && banjo::renut_gpu::ResolveSkipOn() && dest->resolve_signature == sig) {
          // banjo-nx (2026-10-19, banjo_renut_resolve_skip): the same resolve of an unchanged source is in dest already.
          banjo::renut_gpu::CountSkippedResolve(false);
-@@ -5795,7 +6141,33 @@ void ResolveStateLocked(const u8 *device_state, u32 flags, const ClearRect *sour
+@@ -5795,7 +6188,33 @@ void ResolveStateLocked(const u8 *device_state, u32 flags, const ClearRect *sour
                                            int32_t(host_x) + (rect.right - rect.left),
                                            int32_t(host_y) + (rect.bottom - rect.top));
          const bool multisampled = surface->samples != plume::RenderSampleCount::COUNT_1;
@@ -20397,7 +22706,7 @@ index dfede8e..a5cf88b 100644
            // A destination with host levels takes it through a single-level
            // target (ResolveStagingLocked): plume's Vulkan resolve writes every
            // level of its destination (D3D12's writes level 0 only, and
-@@ -5840,6 +6212,8 @@ void ResolveStateLocked(const u8 *device_state, u32 flags, const ClearRect *sour
+@@ -5840,6 +6259,8 @@ void ResolveStateLocked(const u8 *device_state, u32 flags, const ClearRect *sour
            g_bound.layout = false;
            g_bound.viewport_set = false;
          }
@@ -21170,6 +23479,352 @@ new mode 100755
 diff --git a/mp3/tools/patch_local_regs.py b/mp3/tools/patch_local_regs.py
 old mode 100644
 new mode 100755
+index e2036a9..64ddc7f
+--- a/mp3/tools/patch_local_regs.py
++++ b/mp3/tools/patch_local_regs.py
+@@ -83,6 +83,15 @@ ARGS = mask([f"r{i}" for i in range(3, 11)] + [f"f{i}" for i in range(1, 14)] +
+ ABI_REF = ARGS | mask(["r1", "r2", "r13", "lr", "xer"])
+ ABI_MOD = ALL & ~NONVOL & ~mask(["r1", "r13"])
+ TRAP_REF = mask(["r3", "r4"])
++FASTARGS = __import__("os").environ.get("PLR_FASTARGS", "1") == "1" and __import__("os").environ.get("PLR_CHECK") != "1"
++FAST_GPRS = [f"r{i}" for i in range(3, 11)]
++# mp3-ps4 v00.68 (LRSAVE): an indirect call's target is a guest function, which reads lr only to save it.
++LRSAVE = __import__("os").environ.get("PLR_LRSAVE", "1") == "1"
++ABI_REF_INDIRECT = ABI_REF & ~mask(["lr"]) if LRSAVE else ABI_REF
++TERNKILL = __import__("os").environ.get("PLR_TERNKILL", "1") == "1"
++# One statement that assigns a whole register (its right-hand side may select with ?:).
++WHOLE_ASSIGN = re.compile(r"^ctx\.(?:r\d+|f\d+)\.(?:u64|s64|f64) = [^;{}]*;$")
++LR_SAVE_COPY = re.compile(r"^ctx\.r\d+\.u64 = ctx\.lr;$")
+ CHECK = os.environ.get("PLR_CHECK") == "1"
+ # Imports that look at the whole register state (a context for a crash report or an exception): this function's
+ # registers are all written back before them (the callers' non-volatiles may be stale there).
+@@ -211,6 +220,7 @@ class Func:
+         # For each open brace: whether what is inside may not run (opened by an if/else/switch line), and its line.
+         cond_stack = []
+         skips = []  # (line opening a conditional block, line closing it): the path that does not run the block
++        prologue = True  # LRSAVE: before any label, call, goto or condition
+         for i, line in enumerate(body):
+             lm = LABEL.match(line)
+             if lm:
+@@ -232,8 +242,15 @@ class Func:
+                         use |= b
+                 # x = x + 1: the read comes first. A write that may not happen (in an if, in a conditional block)
+                 # replaces nothing for certain.
+-                if any(c for c, _ in cond_stack) or re.search(r"\b(?:if|else|switch|case|default|for|while|do)\b|\?", code):
++                if any(c for c, _ in cond_stack) or re.search(r"\b(?:if|else|switch|case|default|for|while|do)\b", code):
+                     kill = 0
++                elif "?" in code and not (TERNKILL and WHOLE_ASSIGN.match(code.strip())):
++                    kill = 0
++                if lm or GOTO.search(code) or "(ctx, base)" in code or INDIRECT in code or \
++                        re.search(r"\b(?:if|else|switch|case|for|while|do)\b", code):
++                    prologue = False
++                if LRSAVE and prologue and LR_SAVE_COPY.match(code.strip()):
++                    use &= ~(1 << BIT["lr"])
+                 self.use[i], self.kill[i], self.wr[i] = use, kill, wr
+                 stripped = OCC.sub("", code)
+                 stripped = KEEP.sub("", stripped)
+@@ -311,6 +328,7 @@ class Func:
+             self.used |= self.use[i] | self.wr[i]
+             self.written |= self.wr[i]
+         self.reach = self._reach()
++        self.sp_keep = False
+         self.pres, self.save_lines, self.restore_lines = self._preserved()
+ 
+     def _reach(self):
+@@ -431,6 +449,20 @@ class Func:
+                         if new != cur:
+                             states[s] = new
+                             changed = True
++        # mp3-ps4 v00.67 (SPKEEP): r1 back at its entry value at every reachable return (and the end).
++        self.sp_keep = True
++        reached = False
++        for i in range(self.start, n):
++            if out[i] is TOP:
++                continue
++            ends = self.returns[i] or any(s >= n for s in self.succ[i])
++            if ends:
++                reached = True
++                if out[i].get("r1") != 0:
++                    self.sp_keep = False
++                    break
++        if not reached:
++            self.sp_keep = False
+         # Saves in the straight-line prefix (before any label, branch or call).
+         saves = {}       # slot -> reg
+         save_lines = {}  # line -> reg
+@@ -585,6 +617,8 @@ def summarize(f):
+         "start": f.start,
+         "written": f.written,
+         "pres": f.pres,
++        "sp_keep": f.sp_keep,
++        "used": f.used,
+     }
+ 
+ 
+@@ -610,7 +644,7 @@ def call_ref_mod(kind, target, ref, mod, hooked, defined):
+         # A jump table's out-of-range path: dispatched like a tail call through a pointer.
+         return ABI_REF, ABI_MOD
+     if kind == "i":
+-        return ABI_REF, ABI_MOD
++        return ABI_REF_INDIRECT, ABI_MOD
+     # direct
+     if target.startswith("__imp__"):
+         inner = target[len("__imp__"):]
+@@ -722,6 +756,81 @@ def fixpoint(summ, hooked):
+     return ref, mod
+ 
+ 
++def compute_must(s, must, hooked, defined):
++    """The registers replaced on every path to every return (see MUSTMOD in the docstring of make_plr_must.py)."""
++    nodes = s["nodes"]
++    n = len(nodes)
++    start = s["start"]
++    if start >= n:
++        return 0
++    TOP = None
++    din = [TOP] * n
++    din[start] = 0
++    work = [start]
++    at_ret = TOP
++    while work:
++        i = work.pop()
++        cur = din[i]
++        use, kill, call, succ, tail, ret = nodes[i]
++        o = cur | kill
++        tail_must = 0
++        if call:
++            for kind, target in call:
++                if kind != "d":
++                    continue
++                t = target[len("__imp__"):] if target.startswith("__imp__") else target
++                if t in defined and t not in hooked and must.get(t) is not None:
++                    if tail:
++                        tail_must |= must[t]
++                    else:
++                        o |= must[t]
++        if ret or tail:
++            r = o | tail_must
++            at_ret = r if at_ret is TOP else at_ret & r
++        for t in succ:
++            if t >= n:
++                at_ret = o if at_ret is TOP else at_ret & o
++                continue
++            if din[t] is TOP:
++                din[t] = o
++                work.append(t)
++            elif din[t] & ~o:
++                din[t] &= o
++                work.append(t)
++    if at_ret is TOP:
++        return 0
++    return at_ret & ~s["pres"]
++
++
++def fixpoint_must(summ, hooked):
++    """MUST for every function: a least fixpoint from 0 (a callee's MUST only adds), so recursion gives nothing."""
++    defined = set(summ)
++    callers = {}
++    for name, s in summ.items():
++        if s is None:
++            continue
++        for use, kill, call, succ, tail, ret in s["nodes"]:
++            if call:
++                for kind, target in call:
++                    if kind == "d":
++                        t = target[len("__imp__"):] if target.startswith("__imp__") else target
++                        callers.setdefault(t, set()).add(name)
++    must = {name: (0 if s is not None else None) for name, s in summ.items()}
++    work = [name for name, s in summ.items() if s is not None]
++    inwork = set(work)
++    while work:
++        name = work.pop()
++        inwork.discard(name)
++        new = compute_must(summ[name], must, hooked, defined)
++        if new & ~must[name]:
++            must[name] |= new
++            for c in callers.get(name, ()):
++                if c not in inwork and summ.get(c) is not None:
++                    inwork.add(c)
++                    work.append(c)
++    return must
++
++
+ # What native code may read in ctx after calling a guest function (thread entries, callbacks, the stack cut), and what
+ # every function's return keeps exact on top of what its callers read after the call.
+ RESULT_FLOOR = mask(["r1", "r3", "r4", "r13", "f1", "f2", "v2", "xer"])
+@@ -806,7 +915,7 @@ def ctype(r):
+     return "PPCRegister"
+ 
+ 
+-def rewrite(f, ref, mod, liveout, hooked, defined, sites=None):
++def rewrite(f, ref, mod, liveout, hooked, defined, sites=None, must=None, spkeep=None, fast=None):
+     body, n = f.body, f.n
+     if not f.used:
+         return None
+@@ -856,8 +965,19 @@ def rewrite(f, ref, mod, liveout, hooked, defined, sites=None):
+     dropped = {i for i, r in f.save_lines.items() if strip >> BIT[r] & 1}
+     dropped |= {i for i, r in f.restore_lines.items() if strip >> BIT[r] & 1}
+ 
+-    # Forward may-dirty dataflow.
++    fast = fast or {}
++    own_args = fast.get(f.name, [])
++
++    def fast_of(kind, target):
++        """FASTARGS: the fast entry's argument registers for a direct call to it, else None."""
++        if kind != "d" or not target:
++            return None
++        t = target[len("__imp__"):] if target.startswith("__imp__") else target
++        return fast.get(t)
++
++    # Forward may-dirty dataflow. (FASTARGS: the fast entry's arguments are not in ctx: dirty from the start.)
+     din = [0] * (n + 1)
++    din[f.start] = mask(own_args)
+     seen = [False] * (n + 1)
+     seen[f.start] = True
+     work = [f.start]
+@@ -872,7 +992,8 @@ def rewrite(f, ref, mod, liveout, hooked, defined, sites=None):
+             if f.tail[i]:
+                 cur = 0
+             else:
+-                cur &= ~(r | m)
++                fa = fast_of(kind, target)
++                cur &= ~((r & ~mask(fa)) | m) if fa else ~(r | m)
+         for s in f.succ[i]:
+             nd = din[s] | cur
+             if nd != din[s] or not seen[s]:
+@@ -896,7 +1017,8 @@ def rewrite(f, ref, mod, liveout, hooked, defined, sites=None):
+         return "".join(f"ctx.{x}.u64 = 0x{pv:X}ull; " for x in regs)
+ 
+     out = body[:f.start]
+-    out.extend(f"\t{ctype(r)} L_{r} = ctx.{r};" for r in names)
++    out.extend((f"\tPPCRegister L_{r}; L_{r}.u64 = a_{r};" if r in own_args else f"\t{ctype(r)} L_{r} = ctx.{r};")
++               for r in names)
+     sub = lambda m: "L_" + m.group(1)
+     for i in range(f.start, n):
+         line = body[i]
+@@ -930,8 +1052,23 @@ def rewrite(f, ref, mod, liveout, hooked, defined, sites=None):
+                     # after the call writes nothing back: everything it changes is read back here).
+                     return "{ " + flush(here & (r | at_return), names) + text + reload(m & f.used, names) + " }"
+                 fm = here & (r | (m & live_out[i]))
++                if must is not None and kind == "d" and not CHECK:
++                    t = target[len("__imp__"):] if target.startswith("__imp__") else target
++                    if t in defined and t not in hooked and must.get(t):
++                        fm &= ~(must[t] & ~r)
++                fa = fast_of(kind, target) if not tail else None
++                if fa:
++                    t = target[len("__imp__"):] if target.startswith("__imp__") else target
++                    fm &= ~mask(fa)
++                    text = (f"__fast__{t}(ctx, base" +
++                            "".join(f", L_{x}.u64" if x in names else f", ctx.{x}.u64" for x in fa) + ");")
++                back = m & f.used
++                if spkeep and kind == "d" and not CHECK:
++                    t = target[len("__imp__"):] if target.startswith("__imp__") else target
++                    if t in defined and t not in hooked and t in spkeep:
++                        back &= ~(1 << BIT["r1"])
+                 if not CHECK:
+-                    return "{ " + flush(fm, names) + text + reload(m & f.used, names) + " }"
++                    return "{ " + flush(fm, names) + text + reload(back, names) + " }"
+                 # PLR_CHECK=1: the registers not read back must come back unchanged (MOD), and the dirty ones not
+                 # written back get a poison value the callee must not use (REF).
+                 # Each site has a number (sites[0], the file's base, plus a count): the poison's low word is
+@@ -976,24 +1113,43 @@ def rewrite(f, ref, mod, liveout, hooked, defined, sites=None):
+ 
+ 
+ def phase3(args):
+-    path, helpers, ref, mod, liveout, hooked, defined = args
++    path, helpers, ref, mod, liveout, hooked, defined, must, spkeep, fast = args
+     lines, funcs = parse_file(path, helpers)
+     m = re.search(r"mp3_recomp\.(\d+)\.cpp$", path)
+     sites = {"base": (int(m.group(1)) if m else 255) << 16, "list": []}
+     out = []
+     last = 0
+     done = skipped = 0
++    fast_here = 0
+     for name, a, b, f in funcs:
+-        out.extend(lines[last:a + 1])
+         new = None
+         if f is not None and f.ok:
+-            new = rewrite(f, ref, mod, liveout, hooked, defined, sites)
++            new = rewrite(f, ref, mod, liveout, hooked, defined, sites, must, spkeep, fast)
+             done += 1
+         elif f is not None:
+             skipped += 1
++        args_f = fast.get(name) if new is not None else None
++        if args_f:
++            fast_here += 1
++            out.extend(lines[last:a])
++            params = "".join(f", uint64_t a_{x}" for x in args_f)
++            out.append(f'extern "C" void __fast__{name}([[maybe_unused]] PPCContext& __restrict ctx, uint8_t* base{params}) {{')
++            out.extend(new)
++            out.append("}")
++            out.append(f"DEFINE_REX_FUNC({name}) {{")
++            out.append("\tREX_FUNC_PROLOGUE();")
++            out.append(f"\t__fast__{name}(ctx, base" + "".join(f", ctx.{x}.u64" for x in args_f) + ");")
++            last = b  # its closing brace comes next
++            continue
++        out.extend(lines[last:a + 1])
+         out.extend(new if new is not None else lines[a + 1:b])
+         last = b
+     out.extend(lines[last:])
++    if fast:
++        for k, l in enumerate(out):
++            if l.startswith("#include"):
++                out.insert(k + 1, '#include "mp3_fast.h"')
++                break
+     open(path, "w", encoding="utf-8", errors="surrogateescape").write("\n".join(out))
+     return done, skipped, sites["list"]
+ 
+@@ -1020,6 +1176,41 @@ def main(argv):
+         defined = set(summ)
+         native = hooked
+         liveout = fixpoint_liveout(summ, ref, mod, hooked, defined, native)
++        must = fixpoint_must(summ, hooked) if os.environ.get("PLR_MUST", "1") == "1" else {}
++        nmust = sum(1 for v in must.values() if v)
++        fast = {}
++        if FASTARGS:
++            # Every function any of the port's other native code names (Renut's D3D hooks: mp3/renut) keeps its ctx
++            # entry for every caller: its sub_ symbol may be replaced by native code.
++            named = set()
++            here = os.path.dirname(os.path.abspath(__file__))
++            for d in [os.path.join(here, "..", "renut")] + os.environ.get("PLR_EXTRA_HOOK_DIRS", "").split(":"):
++                if not d or not os.path.isdir(d):
++                    continue
++                for root, _, fs in os.walk(d):
++                    for fn in fs:
++                        if fn.endswith((".cpp", ".h", ".hpp", ".inc", ".c")):
++                            text = open(os.path.join(root, fn), encoding="utf-8", errors="replace").read()
++                            named.update(re.findall(r"\bsub_[0-9A-F]{8}\b", text))
++            print(f"patch_local_regs: FASTARGS: {len(named)} functions named in native sources keep the ctx entry",
++                  file=sys.stderr)
++            for name, s in summ.items():
++                if s is None or name in hooked or name in named:
++                    continue
++                a = [x for x in FAST_GPRS if ref[name] >> BIT[x] & 1 and s["used"] >> BIT[x] & 1]
++                if a:
++                    fast[name] = a
++            hdr = os.path.join(os.path.dirname(os.path.abspath(files[0])), "mp3_fast.h")
++            with open(hdr, "w") as fo:
++                fo.write("// Written by patch_local_regs.py (FASTARGS): the guest functions' fast entries.\n#pragma once\n")
++                for name, a in sorted(fast.items()):
++                    fo.write(f'extern "C" void __fast__{name}(PPCContext& __restrict, uint8_t*' +
++                             ", uint64_t" * len(a) + ");\n")
++            print(f"patch_local_regs: FASTARGS: {len(fast)} functions take their arguments by value", file=sys.stderr)
++        spkeep = ({k for k, s in summ.items() if s is not None and s.get("sp_keep")}
++                  if os.environ.get("PLR_SPKEEP", "1") == "1" else set())
++        print(f"patch_local_regs: SPKEEP: {len(spkeep)} functions give r1 back as they got it", file=sys.stderr)
++        print(f"patch_local_regs: MUST: {nmust} functions replace registers on every path", file=sys.stderr)
+         if os.environ.get("PLR_DUMP"):
+             import pickle
+             pickle.dump({"ref": ref, "mod": mod, "liveout": liveout,
+@@ -1027,7 +1218,7 @@ def main(argv):
+                         open(os.environ["PLR_DUMP"], "wb"))
+         done = skipped = 0
+         site_list = []
+-        for d, s, sl in ex.map(phase3, [(p, helpers, ref, mod, liveout, hooked, defined) for p in files]):
++        for d, s, sl in ex.map(phase3, [(p, helpers, ref, mod, liveout, hooked, defined, must, spkeep, fast) for p in files]):
+             done += d
+             skipped += s
+             site_list.extend(sl)
 diff --git a/mp3/tools/patch_phys_base.py b/mp3/tools/patch_phys_base.py
 new file mode 100755
 index 0000000..31bb27e

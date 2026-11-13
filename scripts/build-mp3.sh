@@ -165,8 +165,10 @@ pkg)
     # package (god/), and TU6's disc001 files (update/), to the console's /data/MP3.
     # MP3_PKG_GAME=1 (v00.51): the one-file package. $GAME goes in as game/ (the disc's dashboard extras left out, as
     # upload-data.py leaves them) and TU6's disc001 files (MP3_UPDATE, default ~/mp3-build/stage-tu/update) as
-    # update/; the app reads them from /app0 before /data/MP3 (mp3_ps4_app.h). Such a package holds your game: it goes
-    # to your own console and nowhere else.
+    # update/; the app reads them from /app0 before /data/MP3 (mp3_ps4_app.h). Disc 2 (v00.52; MP3_GAME2, default
+    # ~/mp3-build/game2) goes in as game2/ and TU6's disc002 files (MP3_UPDATE2, default ~/mp3-build/stage-tu2/update)
+    # as update2/: the story asks for disc 2 at the end of chapter 6. Such a package holds your game: it goes to your
+    # own console and nowhere else.
     VERSION="${MP3_VERSION:-00.00}"
     B="${MP3_APP_BUILD:-$MP3/build-app$([ "${MP3_RENUT:-0}" = 1 ] && echo -renut)}"
     EBOOT="$B/mp3_eboot/eboot.bin"
@@ -180,16 +182,31 @@ pkg)
     [ -f "$HERE/sce_sys/pic1.png" ] && cp "$HERE/sce_sys/pic1.png" "$STAGE/sce_sys/"
     if [ "${MP3_PKG_GAME:-0}" = 1 ]; then
         TU="${MP3_UPDATE:-$MP3/stage-tu/update}"
+        GAME2="${MP3_GAME2:-$MP3/game2}"
+        TU2="${MP3_UPDATE2:-$MP3/stage-tu2/update}"
         [ -f "$GAME/default.xex" ] || { echo "no $GAME/default.xex" >&2; exit 1; }
         [ -f "$TU/default.xexp" ] || { echo "no $TU/default.xexp" >&2; exit 1; }
-        mkdir -p "$STAGE/game"
-        for entry in "$GAME"/*; do
-            case "$(basename "$entry")" in '$SystemUpdate' | nxeart) continue ;; esac
-            # hard links where the stage shares the game's disk: 7.6 GB not copied
-            cp -al "$entry" "$STAGE/game/" 2>/dev/null || cp -a "$entry" "$STAGE/game/"
-        done
+        stage_disc() {  # stage_disc <disc folder> <its name in the package>
+            mkdir -p "$STAGE/$2"
+            for entry in "$1"/*; do
+                case "$(basename "$entry")" in '$SystemUpdate' | nxeart) continue ;; esac
+                # hard links where the stage shares the game's disk: gigabytes not copied
+                cp -al "$entry" "$STAGE/$2/" 2>/dev/null || cp -a "$entry" "$STAGE/$2/"
+            done
+        }
+        stage_disc "$GAME" game
         cp -al "$TU" "$STAGE/update" 2>/dev/null || cp -a "$TU" "$STAGE/update"
-        echo "game in the package: game/ $(du -sh "$STAGE/game" | cut -f1), update/ $(du -sh "$STAGE/update" | cut -f1)"
+        if [ -f "$GAME2/common/disc2.txt" ]; then
+            stage_disc "$GAME2" game2
+            if [ -f "$TU2/default.xexp" ]; then
+                cp -al "$TU2" "$STAGE/update2" 2>/dev/null || cp -a "$TU2" "$STAGE/update2"
+            else
+                echo "warning: no $TU2/default.xexp: disc 2 without its Title Update 6 files" >&2
+            fi
+        else
+            echo "warning: no disc 2 in $GAME2: this package's story stops at the end of chapter 6" >&2
+        fi
+        echo "game in the package: $(cd "$STAGE" && du -sh game update game2 update2 2>/dev/null | tr '\t\n' '  ')"
     fi
     PKG="$(bash "$PS4_KIT/scripts/make-pkg.sh" "$STAGE" MAXP00003 "Max Payne 3" "$VERSION" MP3 "$PSB/out" | tail -1)"
     mkdir -p "$HERE/out" "$MP3/oelf"

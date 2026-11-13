@@ -91,8 +91,29 @@ instructions until v00.47 took it once per base register.
 
 Tried without a measurable gain: floating the light threads over free cores, raising RAGE's task workers (their
 waits are 2-7 % of the main thread), `-O2`/`-Os`, and a denser function order (v00.50; a fight's frame rate varies
-more from run to run than the layout moved it). Left to try: a liveness-based trim of the context traffic around
-calls (what each caller reads after a call), and profile-guided optimisation.
+more from run to run than the layout moved it). Left to try: profile-guided optimisation.
+
+v02.00 (v00.58-v00.70): the game's critical sections are inlined with `__sync` builtins (`xboxkrnl_rtl.cpp`; the
+structure is packed, so no `__atomic` calls), their spin reading a volatile with a pause between tries: locks went
+from 3.4 % of the main thread to 0.1 %. `mp3/tools/patch_local_regs.py`, the pass that keeps guest registers in C++
+locals, gained five trims of the context traffic around calls:
+
+- **MUSTMOD**: a register written on every path of a function needn't be loaded from the context on entry.
+- **SPKEEP**: `r1` isn't reloaded after a direct call (callees give it back unchanged).
+- **LRSAVE**: a prologue's copy of the link register isn't a read of it; indirect calls don't count `lr` as read.
+- **TERNKILL**: an assignment through `?:` that writes the register on both sides ends its life.
+- **FASTARGS**: the hottest functions (`hot_functions.txt`) get a `__fast__sub_X` entry taking `r3`-`r10` by value,
+  and `DEFINE_REX_FUNC`'s wrapper calls it; functions Renut hooks (every `sub_` named under `mp3/renut`) are left
+  out, as a hook replaces the plain entry only (v00.69 froze at boot with them in).
+
+The 120 hottest functions are about 8 % smaller, with 14 % fewer context loads and 20 % fewer stores; a fight's
+frame rate moved within its run-to-run swing. The main thread is the game's world update (49 %: the entity update
+25 %, physics 19 %) with no single hot spot.
+
+The quick menu's detail settings (`mp3/ps4/mp3_ps4_detail.cpp`) set the game's own parameters (`noptfx`,
+`disableBlendshapes`, `ped.lod.distance.high`, `car.lod.distance.*`, the visual settings' `farClipMultiplier`, which
+only applies with the camera height's start, so that is set too). Each gains about 1 fps in busy fights. Cloth
+(`noclothupdate`) is forced on: with it off the characters' bodies broke apart.
 
 ## Diagnostics
 
@@ -111,3 +132,60 @@ calls (what each caller reads after a call), and profile-guided optimisation.
 The app reads `game/` and `update/` from its package (`/app0`) when the package holds them, and from `/data/MP3`
 otherwise (`mp3_ps4_app.h`, `PackagedFolder`). `/app0` is read-only: the settings, logs, caches and saves always go
 to `/data/MP3`.
+
+## Two discs
+
+The two discs hold the same names at their roots (`common.rpf`, `xbox360.rpf`, `audio*.rpf`, `xbox360/`) with
+different contents, and only 123 of their files share a name; each tells itself apart by `common/disc1.txt` or
+`common/disc2.txt`. Title Update 6 has a folder for each disc (`disc001/`, `disc002/`), with its own `update.rpf`.
+At the end of chapter 6 the game calls `XamSwapDisc(2, event, prompt)` (through its wrapper `sub_82FE7B48`) and,
+when that returns 0, waits on the event without a timeout; the console sets it once the disc is in. The SDK's stub
+returned 0 and never set it: the game stood still there.
+
+v00.52: `XamSwapDisc` runs a handler the app registers (`rex/kernel/xam/disc.h`) and sets the event when it
+succeeds. MP3's handler (`Mp3App::SwapDisc`) builds a `HostPathDevice` on disc 2's folder (`game2/`, in the package
+or `/data/MP3`; `mp3_game2`) and puts it in place of the one at `\Device\Harddisk0\Partition1`, the device behind
+`game:` and `d:`, with `VirtualFileSystem::ReplaceDevice`: the same place in the device order, as a device registered
+again would come after the catch-all `\Device\Harddisk0` one, which would then take its paths. The device taken out
+is parked, alive (the files the game still holds open on it keep working), and put back when the game asks for disc
+1 again. Title Update 6's disc002 files (`update2/`) go in place of `update:` the same way. The PS4 read cache
+(`host_path_file.cpp`) is keyed by the file on the host since then: keyed by the path inside the device, disc 2's
+`xbox360.rpf` would have been served disc 1's blocks. The game keeps running disc 1's executable, as the console
+does after a swap.
+
+## PS4 Pro
+
+ps4-kit's GNM winsys describes the GPU to RADV as the base PS4's (Liverpool: two shader engines, eight render
+back-ends, its tiling tables). A package that declares the Pro's own mode (`param.sfo` attribute `0x800000`,
+`SFO_ATTRIBUTE` in ps4-kit's `make-pkg.sh`) gets the Pro's whole GPU, whose layout differs; this one doesn't. Boost
+Mode (Settings > System) keeps the base layout and raises the clocks: the CPU from 1.6 to 2.13 GHz. The app measures
+the clock its cores run at (`ps4_kit_cpu_mhz`: chains of dependent register additions timed with the monotonic
+clock; the TSC keeps its own rate) and shows it in the log and the quick menu.
+
+## The black places (v02.00)
+
+Some places (the rooftops of chapter 1 among them) went black at some camera angles and came back at others, with
+only the small lights' circles lit. The game's deferred lighting draws the G-buffer with stencil references `0x81`,
+`0x80` and `0x00`, marks the light volumes (two-sided increment and decrement on depth fail), draws the lights where
+the stencil isn't `0xFF`, and draws the base lighting pass (vertex shader `761A2506F75DEA4C`, a pixel shader of its
+own in each area) with the stencil test EQUAL `0x01`, read mask `0x01`, write mask 0. At those angles bit 0 was clear
+where the scene was, and the base pass drew nothing. What clears it is not found yet: not the light volumes'
+markings. `mp3_renut_lighting_fix` (the VIDEO tab's Lighting fix, on by default) drops the stencil test of that pass
+(`MakeKey` in Renut's `draw.cpp`), which draws the base lighting everywhere the depth test lets it.
+
+## The menu freeze (v02.00)
+
+Since v00.54 a thread that is terminated leaves through a `siglongjmp` from its signal handler. A thread waiting on
+it joined it while holding the handle's mutex, and the exiting thread's tail took that mutex again: both waited for
+good, often in the main menu. `threading_posix.cpp`: `post_execution` joins only a thread nobody claimed
+(`join_claimed_`), and a thread back from the jump clears its thread-locals and returns at once.
+
+## Achievements
+
+The SDK's `AchievementManager` reads the game's catalog (51 achievements, 1,125 G: names, descriptions, gamerscore,
+flags) from the `XDBF` resource of `default.xex`, and keeps the unlocks in `<user data>/achievements/<title>.toml`
+(`/data/MP3/mp3/achievements/5454086B.toml`). The game unlocks through `XGIUserWriteAchievements` (message
+`0x000B0008`, sent by `sub_8306F170`). `mp3/ps4/mp3_ps4_achievements.cpp` listens to the manager's notifications
+(the SDK's own notification turned off, `logros_aviso_en_pantalla`), logs `[achievements] unlocked` and hands each
+one to the quick menu's pop-up; the ACHIEVEMENTS tab lists the catalog with the unlock state. An achievement whose
+flags lack `0x8` (show unachieved) is secret until earned.
